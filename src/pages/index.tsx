@@ -1,7 +1,12 @@
+import { useReactiveVar } from '@apollo/client';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import { isLoggedInVar } from '../apollo';
 
 const Home: NextPage = () => {
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+
   return (
     <div>
       <Head>
@@ -10,6 +15,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>H1</h1>
+      <Link href="/login">
+        <a>Login</a>
+      </Link>
+      {isLoggedIn ? <div>Login</div> : <div>Logout</div>}
       <div>Home</div>
     </div>
   );
