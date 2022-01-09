@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { isLoggedInVar } from '../../apollo';
+import PageTitle from '../../component/common/PageTitle';
 
 const Login: NextPage = () => {
   const LOGIN_MUTATION = gql`
@@ -29,6 +30,7 @@ const Login: NextPage = () => {
   };
   return (
     <div>
+      <PageTitle title="로그인" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('email', {
