@@ -2,7 +2,8 @@
   "name": "welcoming-frontend",
   "private": true,
   "scripts": {
-    "dev": "lsof -P -i :3000 |grep LISTEN |awk '{print $2}' |xargs kill -9 & next dev",
+    "dev": "lsof -P -i :3000 |grep LISTEN |awk '{print $2}' |xargs kill -9 & yarn apollo:codegen & next dev",
+    "apollo:codegen": "rimraf src/__generated__ & apollo client:codegen src/__generated__ --target=typescript --outputFlat",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
