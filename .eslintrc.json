@@ -26,7 +26,7 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
-  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"],
+  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*", "apollo.config.js"],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
