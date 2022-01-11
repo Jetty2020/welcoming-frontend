@@ -1,32 +1,65 @@
-import { gql, useReactiveVar } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import { NextPage } from 'next';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { isLoggedInVar } from '../../apollo';
-import PageTitle from '../../component/common/PageTitle';
+import PageTitle from '../../components/common/PageTitle';
+import { LoginInput } from '../../__generated__/globalTypes';
+import {
+  loginMutation,
+  loginMutationVariables,
+} from '../../__generated__/loginMutation';
+
+const LOGIN_MUTATION = gql`
+  mutation loginMutation($loginInput: LoginInput!) {
+    login(input: $loginInput) {
+      ok
+      token
+      error
+    }
+  }
+`;
 
 const Login: NextPage = () => {
-  const LOGIN_MUTATION = gql`
-    mutation loginMutation($email: String!, $password: String!) {
-      login(input: { email: $email, password: $password }) {
-        ok
-        token
-        error
-      }
-    }
-  `;
+  const router = useRouter();
 
   const {
     register,
     getValues,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<LoginInput>({
     mode: 'onChange',
   });
+  const onCompleted = (data: loginMutation) => {
+    const {
+      login: { ok, token },
+    } = data;
+    console.log(data);
+    if (ok && token) {
+      // localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+      // authTokenVar(token);
+      // isLoggedInVar(true);
+      router.push('/');
+    }
+  };
+  const [loginMutation, { data: loginMutationResult, loading }] = useMutation<
+    loginMutation,
+    loginMutationVariables
+  >(LOGIN_MUTATION, {
+    onCompleted,
+  });
   const onSubmit = () => {
-    const { email, password } = getValues();
-    console.log(email, password, errors);
+    if (!loading) {
+      const { email, password } = getValues();
+      loginMutation({
+        variables: {
+          loginInput: {
+            email,
+            password,
+          },
+        },
+      });
+    }
   };
   return (
     <div>
