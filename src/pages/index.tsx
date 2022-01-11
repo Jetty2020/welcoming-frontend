@@ -2,7 +2,7 @@ import { useReactiveVar } from '@apollo/client';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { isLoggedInVar } from '../apollo';
-import PageTitle from '../component/common/PageTitle';
+import PageTitle from '../components/common/PageTitle';
 
 const Home: NextPage = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
