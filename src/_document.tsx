@@ -16,10 +16,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta
+          {/* <meta
             property="og:url"
             content="https://futurama-fan-site.vercel.app/"
-          />
+          /> */}
           <meta property="og:title" content="Welcoming site" />
           <meta property="og:description" content="Enjoy home decorating" />
           <meta property="og:image" content="/vercel.svg" />
