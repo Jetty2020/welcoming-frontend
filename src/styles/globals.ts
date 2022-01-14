@@ -4,13 +4,34 @@ declare module '@emotion/react' {
   export interface Theme {
     colors: {
       primary: string;
+      white: string;
+      black: string;
+    };
+    mediaQuery: {
+      mobile: string;
+      tablet: string;
+      laptop: string;
+      desktop: string;
     };
   }
 }
 
 export const theme = {
   colors: {
-    primary: '#34C5EF',
+    primary: '#35c5f0',
+    black: '#000000',
+    red: '#f77f77',
+    grey: '#9e9e9e',
+    lightGrey: '#eeeeee',
+    deepGrey: '#757575',
+    darkGrey: '#656e75',
+    white: '#ffffff',
+  },
+  mediaQuery: {
+    mobile: '375px',
+    tablet: '768px',
+    laptop: '1024px',
+    desktop: '1600px',
   },
 };
 
