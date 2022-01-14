@@ -1,5 +1,19 @@
 import { css } from '@emotion/react';
 
+declare module '@emotion/react' {
+  export interface Theme {
+    colors: {
+      primary: string;
+    };
+  }
+}
+
+export const theme = {
+  colors: {
+    primary: '#34C5EF',
+  },
+};
+
 export const GlobalStyles = css`
   /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
