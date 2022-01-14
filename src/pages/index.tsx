@@ -1,4 +1,5 @@
 import { useReactiveVar } from '@apollo/client';
+import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { isLoggedInVar } from '../apollo';
@@ -15,9 +16,16 @@ const Home: NextPage = () => {
         <a>Login</a>
       </Link>
       {isLoggedIn ? <div>Login</div> : <div>Logout</div>}
-      <div>Home</div>
+      <Text>Home</Text>
     </div>
   );
 };
 
 export default Home;
+
+const Text = styled.p`
+  color: ${({ theme }) => theme.colors.primary};
+  @media (min-width: ${({ theme }) => theme.mediaQuery.mobile}) {
+    color: ${({ theme }) => theme.colors.red};
+  }
+`;
