@@ -4,8 +4,13 @@ declare module '@emotion/react' {
   export interface Theme {
     colors: {
       primary: string;
-      white: string;
       black: string;
+      red: string;
+      grey: string;
+      lightGrey: string;
+      deepGrey: string;
+      darkGrey: string;
+      white: string;
     };
     mediaQuery: {
       mobile: string;
