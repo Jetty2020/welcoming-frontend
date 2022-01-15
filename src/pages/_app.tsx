@@ -9,7 +9,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <CustomThemeProvider>
-        <Global styles={GlobalStyles} />
         <Component {...pageProps} />
       </CustomThemeProvider>
     </ApolloProvider>
