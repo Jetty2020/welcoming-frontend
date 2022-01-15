@@ -161,13 +161,6 @@ export const GlobalStyles = (theme: Theme) => css`
     -webkit-box-orient: vertical;
     padding-bottom: 3px;
   }
-  .multi6-ellipsis {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    padding-bottom: 3px;
-  }
   body {
     background: ${theme.bg.bodyBg};
     color: ${theme.text.bodyText};
