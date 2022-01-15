@@ -1,16 +1,17 @@
 import { ApolloProvider } from '@apollo/client';
-import { Global, ThemeProvider } from '@emotion/react';
+import { Global } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import client from '../apollo';
-import { GlobalStyles, theme } from '../styles/globals';
+import { GlobalStyles } from '../styles/globals';
+import { CustomThemeProvider } from '../styles/CustomThemeProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
+      <CustomThemeProvider>
         <Global styles={GlobalStyles} />
         <Component {...pageProps} />
-      </ThemeProvider>
+      </CustomThemeProvider>
     </ApolloProvider>
   );
 }
