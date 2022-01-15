@@ -12,10 +12,12 @@ declare module '@emotion/react' {
   export interface ThemeMode {
     bg: {
       primary: string;
+      bodyBg: string;
       darkBtn: string;
     };
     text: {
       primary: string;
+      bodyText: string;
       darkBtn: string;
     };
   }
@@ -36,20 +38,24 @@ interface ThemeGroup {
 const light: ThemeMode = {
   bg: {
     primary: '#35c5f0',
+    bodyBg: '#ffffff',
     darkBtn: '#eeeeee',
   },
   text: {
     primary: '#35c5f0',
+    bodyText: '#000000',
     darkBtn: '#000000',
   },
 };
 const dark: ThemeMode = {
   bg: {
     primary: '#050505',
+    bodyBg: '#1e1f21',
     darkBtn: '#757575',
   },
   text: {
     primary: '#fbfbfc',
+    bodyText: '#d9d9d9',
     darkBtn: '#ffffff',
   },
 };

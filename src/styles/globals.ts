@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 
-export const GlobalStyles = css`
+export const GlobalStyles = (theme: Theme) => css`
   /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -167,6 +167,10 @@ export const GlobalStyles = css`
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     padding-bottom: 3px;
+  }
+  body {
+    background: ${theme.bg.bodyBg};
+    color: ${theme.text.bodyText};
   }
 `;
 
