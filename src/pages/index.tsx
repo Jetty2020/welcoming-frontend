@@ -24,8 +24,8 @@ const Home: NextPage = () => {
 export default Home;
 
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.text.primary};
   @media (min-width: ${({ theme }) => theme.mediaQuery.mobile}) {
-    color: ${({ theme }) => theme.colors.red};
+    color: ${({ theme }) => theme.text.primary};
   }
 `;
