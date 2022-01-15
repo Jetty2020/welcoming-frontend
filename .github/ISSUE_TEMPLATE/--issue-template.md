@@ -2,7 +2,7 @@
 name: "✨ Issue Template"
 about: 이슈 생성 템플릿
 title: ''
-labels: ''
+labels: 'Status : 추가 기능 구현'
 assignees: ''
 
 ---
@@ -14,10 +14,7 @@ assignees: ''
 - [ ] New Feature
 - [ ] Bug Fix
 - [ ] CI / CD
-- [ ] Setup
-
-## 제목
-- 제목 작성
+- [ ] Set Up
 
 ## 설명
 - 어떤 기능인지 설명을 작성
