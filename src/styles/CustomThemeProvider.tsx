@@ -1,6 +1,7 @@
-import { ThemeProvider } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
+import { GlobalStyles } from './globals';
 import { mode } from './theme';
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
@@ -25,6 +26,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
 
   const body = (
     <ThemeProvider theme={theme}>
+      <Global styles={GlobalStyles(theme)} />
       {children}
       <DarkModeBtn type="button" onClick={toggleTheme}>
         {dark ? '다크 모드' : '라이트 모드'}
