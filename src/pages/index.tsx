@@ -1,21 +1,42 @@
-import { useReactiveVar } from '@apollo/client';
-import styled from '@emotion/styled';
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import { isLoggedInVar } from '../apollo';
+import styled from '@emotion/styled';
+import { gql, useQuery } from '@apollo/client';
 import PageTitle from '../components/common/PageTitle';
+import {
+  getTodayDealPostQuery,
+  getTodayDealPostQueryVariables,
+} from '../__generated__/getTodayDealPostQuery';
 
 const Home: NextPage = () => {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const TODAYDEAL_QUERY = gql`
+    query getTodayDealPostQuery($todayDealInput: GetTodayDealPostInput!) {
+      getTodayDealPost(input: $todayDealInput) {
+        ok
+        error
+        posts {
+          id
+          title
+          ori_price
+          selling_price
+        }
+      }
+    }
+  `;
 
+  const { data, loading } = useQuery<
+    getTodayDealPostQuery,
+    getTodayDealPostQueryVariables
+  >(TODAYDEAL_QUERY, {
+    variables: {
+      todayDealInput: {
+        postNum: 4,
+      },
+    },
+  });
+  console.log(data, loading);
   return (
     <div>
       <PageTitle title="홈" />
-      <h1>H1</h1>
-      <Link href="/login">
-        <a>Login</a>
-      </Link>
-      {isLoggedIn ? <div>Login</div> : <div>Logout</div>}
       <Text>Home</Text>
     </div>
   );
