@@ -10,7 +10,10 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
   const [dark, setDark] = useState(false);
   useEffect(() => {
     setMounted(true);
-    if (window.localStorage.getItem('welcoming-theme') === 'dark') {
+    if (
+      window.localStorage.getItem('welcoming-theme') === 'dark' ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
       setDark(true);
     }
   }, []);
