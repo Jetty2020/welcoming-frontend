@@ -6,6 +6,14 @@ import {
   getTodayDealPostQuery,
   getTodayDealPostQueryVariables,
 } from '../__generated__/getTodayDealPostQuery';
+import {
+  getEventsQuery,
+  getEventsQueryVariables,
+} from '../__generated__/getEventsQuery';
+import {
+  getAllPostsQuery,
+  getAllPostsQueryVariables,
+} from '../__generated__/getAllPostsQuery';
 
 const Home: NextPage = () => {
   const TODAYDEAL_QUERY = gql`
@@ -22,8 +30,36 @@ const Home: NextPage = () => {
       }
     }
   `;
+  const EVENT_QUERY = gql`
+    query getEventsQuery($getEventsInput: GetEventsInput!) {
+      getEvents(input: $getEventsInput) {
+        ok
+        error
+        events {
+          id
+          carouselImg
+          carouselTitle
+        }
+      }
+    }
+  `;
 
-  const { data, loading } = useQuery<
+  const GETALLPOSTS_QUERY = gql`
+    query getAllPostsQuery($getAllPostsInput: AllPostsInput!) {
+      getAllPosts(input: $getAllPostsInput) {
+        ok
+        error
+        posts {
+          id
+          title
+          ori_price
+          selling_price
+        }
+      }
+    }
+  `;
+
+  const { data: todayDealData, loading: todayDealLoading } = useQuery<
     getTodayDealPostQuery,
     getTodayDealPostQueryVariables
   >(TODAYDEAL_QUERY, {
@@ -33,7 +69,32 @@ const Home: NextPage = () => {
       },
     },
   });
-  console.log(data, loading);
+
+  const { data: evnetsData, loading: evnetsLoading } = useQuery<
+    getEventsQuery,
+    getEventsQueryVariables
+  >(EVENT_QUERY, {
+    variables: {
+      getEventsInput: {
+        eventNum: 6,
+      },
+    },
+  });
+
+  const { data: allPostsData, loading: allPostsLoading } = useQuery<
+    getAllPostsQuery,
+    getAllPostsQueryVariables
+  >(GETALLPOSTS_QUERY, {
+    variables: {
+      getAllPostsInput: {
+        order: 0,
+        page: 1,
+      },
+    },
+  });
+  console.log(evnetsData?.getEvents, evnetsLoading);
+  console.log(todayDealData?.getTodayDealPost, todayDealLoading);
+  console.log(allPostsData?.getAllPosts, allPostsLoading);
   return (
     <div>
       <PageTitle title="홈" />
