@@ -59,8 +59,14 @@ const dark: ThemeMode = {
     darkBtn: '#ffffff',
   },
 };
+interface MEDIA {
+  mobile: string;
+  tablet: string;
+  laptop: string;
+  desktop: string;
+}
 
-const mediaQuery = {
+export const mediaQuery: MEDIA = {
   mobile: '375px',
   tablet: '768px',
   laptop: '1024px',
