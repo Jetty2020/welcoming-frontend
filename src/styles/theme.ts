@@ -57,6 +57,12 @@ const dark: ThemeMode = {
     darkBtn: '#ffffff',
   },
 };
+interface MEDIA {
+  mobile: string;
+  tablet: string;
+  laptop: string;
+  desktop: string;
+}
 
 const mediaQuery = {
   tablet: '768px',
