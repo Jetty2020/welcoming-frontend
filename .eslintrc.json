@@ -98,6 +98,12 @@
     "react/no-unescaped-entities": "off",
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
