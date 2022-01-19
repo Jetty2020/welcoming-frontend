@@ -2,7 +2,7 @@
   "name": "welcoming-frontend",
   "private": true,
   "scripts": {
-    "dev": "yarn apollo:codegen & next dev",
+    "dev": "next dev",
     "apollo:codegen": "rimraf src/__generated__ & apollo client:codegen src/__generated__ --target=typescript --outputFlat",
     "port": "lsof -P -i :3000 |grep LISTEN |awk '{print $2}' |xargs kill -9",
     "build": "next build",
