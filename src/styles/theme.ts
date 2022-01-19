@@ -48,7 +48,7 @@ const light: ThemeMode = {
 const dark: ThemeMode = {
   bg: {
     primary: '#ff8a3d',
-    bodyBg: '#1e1f21',
+    bodyBg: '#212121',
     darkBtn: '#757575',
   },
   text: {
