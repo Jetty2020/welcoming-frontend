@@ -1,4 +1,4 @@
-// primary: '#35c5f0',
+// primary: '#ff8a3d',
 // black: '#000000',
 // red: '#f77f77',
 // grey: '#9e9e9e',
@@ -37,24 +37,24 @@ interface ThemeGroup {
 
 const light: ThemeMode = {
   bg: {
-    primary: '#35c5f0',
+    primary: '#ff8a3d',
     bodyBg: '#ffffff',
     darkBtn: '#eeeeee',
   },
   text: {
-    primary: '#35c5f0',
+    primary: '#ff8a3d',
     bodyText: '#000000',
     darkBtn: '#000000',
   },
 };
 const dark: ThemeMode = {
   bg: {
-    primary: '#050505',
-    bodyBg: '#1e1f21',
+    primary: '#ff8a3d',
+    bodyBg: '#212121',
     darkBtn: '#757575',
   },
   text: {
-    primary: '#fbfbfc',
+    primary: '#ff8a3d',
     bodyText: '#d9d9d9',
     darkBtn: '#ffffff',
   },
