@@ -1,34 +1,125 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏕 어서와 우리집
 
-## Getting Started
+## 목차
+1. [프로젝트 개요](#-프로젝트-개요)
+2. [기술 스택](#-기술-스택)
+3. [요구사항](#-요구사항))
+4. [라이센스](#-라이센스)
 
-First, run the development server:
+## 📎 프로젝트 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- 어서와 우리집은 쇼핑몰을 구현하는 프로젝트입니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 프로젝트 기간
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 2021.12.31 ~
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### 프로젝트 팀 멤버
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Jetty2020"
+        ><img
+          src="https://avatars.githubusercontent.com/u/59543469?v=4"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>박정훈</b></sub></a
+      ><br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/Bori-github"
+        ><img
+          src="https://avatars.githubusercontent.com/u/85009583?s=400&u=3daabd83ea515e8b69e506ecba079570f4001077&v=4"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>이보리</b></sub></a
+      ><br />
+    </td>
+  </tr>
+</table>
 
-## Learn More
+## 📎 기술 스택
 
-To learn more about Next.js, take a look at the following resources:
+### 프론트엔드
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- React
+- Next.js
+- TypeScript
+- Emotion
+- Apollo
+- GraphQL
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 백엔드
 
-## Deploy on Vercel
+- Node.js
+- NestJS
+- PostgreSQL
+- TypeORM
+- Apollo
+- GraphQL
+- AWS S3
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📎 요구사항
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 상품 등록
+  - 특정 권한 (Admin)을 가진 유저는 상품 등록이 가능하여야 합니다.
+  - 상품 등록에는 Editor를 붙입니다.
+    - CKEditor 등
+  - 상품을 등록하면 바로 목록에 노출됩니다.
+- 상품 목록 노출
+  - 상품은 카테고리별 필터가 가능해야합니다.
+    - 상품의 카테고리는 20가지 정도로 구성해야 합니다.
+    - 카테고리를 조합했을 때 조회가 가능해야 합니다.
+  - 상품은 검색이 가능해야합니다.
+    - 검색하였을 때에는 검색 결과에 맞는 아이템만 보여주어야 합니다.
+    - 검색어에 맞는 아이템을 강조해주세요.
+  - 상품은 25개씩 한번에 보여주며 페이지네이션을 지원해야합니다.
+    - (가능하다면) 상품 목록을 무한 스크롤로 구현해주세요.
+- 상품 상세 노출
+- 상품별 댓글 노출
+  - 댓글은 25개씩 한번에 보여주며 페이지네이션을 지원해야합니다.
+  - 댓글에는 대댓글이 가능하며, 대댓글은 최대 1번까지만 Depth를 지원합니다.
+  - 댓글에는 이미지 삽입이 가능하여야 합니다.
+- 회원
+  - 로그인
+  - 로그아웃
+  - 회원가입
+  - 회원탈퇴
+  - 아이디 찾기
+  - 비밀번호 찾기
+- 위시리스트
+  - 상품 위시리스트가 존재하여 등록할 수 있어야 합니다.
+  - 위시리스트에 등록 가능한 갯수에 제한은 없습니다.
+- 장바구니
+  - 장바구니에 아이템을 25개까지 담을 수 있습니다.
+  - 해당 계정과 장바구니는 연동되어야 합니다.
+- 결제
+  - 주소 등을 입력받아 결제받는 페이지를 구현합니다.
+    - 주소 검색에는 주소 검색 API (다음)를 사용해주세요.
+  - 지역별로 배송비 주문 로직을 추가해주세요
+    - 일반 배송비는 2,500원
+    - 도서산간지방 (제주, 울릉도)은 10,000원
+    - 장바구니가 특정 금액 (50,000원)을 넘어서는 경우에는 무료 배송
+  - 결제가 이루어지지 않을 경우에는 장바구니를 초기화하지 않습니다.
+  - 결제 버튼을 눌렀을 때에는 결제에 포함된 데이터만 보여줄 수 있어야 합니다.
+- (공통) 네비게이션
+  - 네비게이션에서는 페이지간 이동, 유저 정보 노출 등이 가능해야합니다.
+- 기획전
+  - 쇼핑몰에서 자주 쓰이는 기획전 페이지를 구현해주세요
+    (예시: 추가 예정)
+  - 기획전은 최대 갯수가 존재하지 않으며, 공유하기가 가능하여야 합니다.
+    (카카오톡 공유하기 / 페이스북 공유하기 / 네이버 공유하기 등)
+
+### 필수 구현 사항
+
+- 모든 페이지는 공유하기가 가능해야 합니다.
+- 로그인은 유저가 브라우저를 종료해도 유지되어야 합니다.
+- 모든 페이지는 반응형을 지원해야 합니다.
+- 모든 페이지는 접근성을 준수해야 합니다.
+- 모든 페이지는 검색이 가능하여야 합니다. (SEO)
+- 모든 Form은 유효성 검사가 되어야합니다.
+
+## 📝 라이센스
+
+This project is [MIT](https://github.com/Jetty2020/welcoming-frontend/blob/develop/LICENSE) licensed.
