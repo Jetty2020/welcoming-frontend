@@ -7,8 +7,7 @@ export const Carousel = () => {
   const transTime = 0.5;
   const [xPos, setX] = useState<number>(-100);
   const [btnDis, setBtnDis] = useState<boolean>(false);
-  const [trans, setTrans] = useState<string>(`${transTime}s ease`);
-
+  const [trans, setTrans] = useState<string>('none');
   const prevImg = () => {
     setBtnDis(true);
     setTrans(`${transTime}s ease`);
@@ -19,6 +18,7 @@ export const Carousel = () => {
         setTrans('none');
         setX(dataLength * -100);
       }
+      setTrans('none');
     }, transTime * 1000);
   };
   const nextImg = () => {
@@ -31,23 +31,21 @@ export const Carousel = () => {
         setTrans('none');
         setX(-100);
       }
+      setTrans('none');
     }, transTime * 1000);
   };
   const data = [
     {
-      deImg: 'https://welcoming-2022.s3.amazonaws.com/16424112974921.webp',
-      moImg:
-        'https://welcoming-2022.s3.amazonaws.com/1642426904309mobile1.jpeg',
+      deImg: 'https://welcoming-2022.s3.amazonaws.com/16430327323051.jpg',
+      moImg: 'https://welcoming-2022.s3.amazonaws.com/16430328647101m.jpg',
     },
     {
-      deImg: 'https://welcoming-2022.s3.amazonaws.com/16424291927202.webp',
-      moImg:
-        'https://welcoming-2022.s3.amazonaws.com/1642429256688mobile2.jpeg',
+      deImg: 'https://welcoming-2022.s3.amazonaws.com/16430328768812.jpg',
+      moImg: 'https://welcoming-2022.s3.amazonaws.com/16430328983252m.jpg',
     },
     {
-      deImg: 'https://welcoming-2022.s3.amazonaws.com/16424292935023.webp',
-      moImg:
-        'https://welcoming-2022.s3.amazonaws.com/1642429314381mobile3.jpeg',
+      deImg: 'https://welcoming-2022.s3.amazonaws.com/16430329130963.jpg',
+      moImg: 'https://welcoming-2022.s3.amazonaws.com/16430329305543m.jpg',
     },
   ];
   return (
@@ -103,12 +101,9 @@ const InnerContainer = styled.div`
 `;
 const CarouselImg = styled.img`
   width: 100vw;
+  height: 100vh;
   @media (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
-    height: 270px;
     object-fit: cover;
     object-position: center;
-  }
-  @media (min-width: ${({ theme }) => theme.mediaQuery.laptop}) {
-    height: 380px;
   }
 `;
