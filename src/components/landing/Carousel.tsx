@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { mediaQuery } from 'src/styles/theme';
 import ChevronLeft from 'public/icon/chevron-left.svg';
 import ChevronRight from 'public/icon/chevron-right.svg';
@@ -58,6 +58,12 @@ export const Carousel = () => {
       setTrans('none');
     }, transTime * 1000);
   };
+
+  useEffect(() => {
+    const auto = setTimeout(nextImg, 5000);
+    return () => clearTimeout(auto);
+  }, [xPos]);
+
   return (
     <CarouselCon>
       <InnerContainer
