@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { mediaQuery } from 'src/styles/theme';
 import ChevronLeft from 'public/icon/chevron-left.svg';
 import ChevronRight from 'public/icon/chevron-right.svg';
@@ -22,21 +22,25 @@ const data = [
 export const Carousel = () => {
   const dataLength = data.length;
   const transTime = 0.5;
-  const [xPos, setX] = useState<number>(-100);
+  const [xPos, setX] = useState<number>(-1);
   const [btnDis, setBtnDis] = useState<boolean>(false);
   const [trans, setTrans] = useState<string>('none');
   const [imgPage, setImgPage] = useState<number>(1);
   const prevImg = () => {
     setBtnDis(true);
     setTrans(`${transTime}s ease`);
-    setX((curr) => curr + 100);
+    if (xPos !== Math.round(xPos)) {
+      setX((curr) => Math.round(curr));
+    } else {
+      setX((curr) => curr + 1);
+    }
     setTimeout(() => {
       setBtnDis(false);
-      if (xPos === -100) {
+      if (xPos >= -1) {
         setTrans('none');
-        setX(dataLength * -100);
+        setX(-dataLength);
         setImgPage(data.length);
-      } else {
+      } else if (Math.floor(startX) + 2 === Math.round(xPos)) {
         setImgPage((curr) => curr - 1);
       }
       setTrans('none');
@@ -45,30 +49,88 @@ export const Carousel = () => {
   const nextImg = () => {
     setBtnDis(true);
     setTrans(`${transTime}s ease`);
-    setX((curr) => curr - 100);
+    if (xPos !== Math.round(xPos)) {
+      setX((curr) => Math.round(curr));
+    } else {
+      setX((curr) => curr - 1);
+    }
     setTimeout(() => {
       setBtnDis(false);
-      if (xPos === dataLength * -100) {
+      if (xPos <= -dataLength) {
         setTrans('none');
-        setX(-100);
+        setX(-1);
         setImgPage(1);
-      } else {
+      } else if (Math.floor(startX) === Math.round(xPos)) {
         setImgPage((curr) => curr + 1);
       }
       setTrans('none');
     }, transTime * 1000);
   };
 
-  useEffect(() => {
-    const auto = setTimeout(nextImg, 5000);
-    return () => clearTimeout(auto);
-  }, [xPos]);
+  // useEffect(() => {
+  //   const auto = setTimeout(nextImg, 5000);
+  //   return () => clearTimeout(auto);
+  // }, [xPos]);
+
+  // drag
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState<number>(0);
+
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDrag(true);
+    setStartX(xPos - e.pageX / window.innerWidth);
+  };
+
+  const onMouseEnd = () => {
+    if (Math.round(xPos) > xPos) {
+      prevImg();
+    } else if (Math.round(xPos) < xPos) {
+      nextImg();
+    }
+    setIsDrag(false);
+  };
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDrag) {
+      setX(+(startX + e.pageX / window.innerWidth).toFixed(2));
+    }
+  };
+
+  // mobile
+  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsDrag(true);
+    setStartX(xPos - e.touches[0].pageX / window.innerWidth);
+  };
+
+  const onTouchEnd = () => {
+    if (Math.round(xPos) > xPos) {
+      prevImg();
+    } else if (Math.round(xPos) < xPos) {
+      nextImg();
+    }
+    setIsDrag(false);
+  };
+
+  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isDrag) {
+      setX(+(startX + e.touches[0].pageX / window.innerWidth).toFixed(2));
+    }
+  };
 
   return (
     <CarouselCon>
       <InnerContainer
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseEnd}
+        onMouseLeave={onMouseEnd}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchEnd}
         style={{
-          transform: `translatex(${xPos}vw)`,
+          transform: `translatex(${xPos * 100}vw)`,
           transition: `${trans}`,
         }}
       >
@@ -112,12 +174,11 @@ export const Carousel = () => {
 };
 
 const CarouselCon = styled.div`
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 `;
 const InnerContainer = styled.div`
   display: flex;
-  width: 100vw;
 `;
 const CarouselImg = styled.img`
   width: 100vw;
