@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { mediaQuery } from 'src/styles/theme';
 import ChevronLeft from 'public/icon/chevron-left.svg';
 import ChevronRight from 'public/icon/chevron-right.svg';
@@ -66,11 +66,6 @@ export const Carousel = () => {
       setTrans('none');
     }, transTime * 1000);
   };
-
-  // useEffect(() => {
-  //   const auto = setTimeout(nextImg, 5000);
-  //   return () => clearTimeout(auto);
-  // }, [xPos]);
 
   // drag
   const [isDrag, setIsDrag] = useState(false);
