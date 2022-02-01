@@ -134,7 +134,7 @@ export const Carousel = () => {
             media={`(min-width:${mediaQuery.tablet})`}
             srcSet={data[data.length - 1].deImg}
           />
-          <CarouselImg srcSet={data[data.length - 1].moImg} alt="carouselImg" />
+          <CarouselImg src={data[data.length - 1].moImg} alt="carouselImg" />
         </picture>
         {data.map((ele) => {
           return (
@@ -143,7 +143,7 @@ export const Carousel = () => {
                 media={`(min-width:${mediaQuery.tablet})`}
                 srcSet={ele.deImg}
               />
-              <CarouselImg srcSet={ele.moImg} alt="carouselImg" />
+              <CarouselImg src={ele.moImg} alt="carouselImg" />
             </picture>
           );
         })}
@@ -152,7 +152,7 @@ export const Carousel = () => {
             media={`(min-width:${mediaQuery.tablet})`}
             srcSet={data[0].deImg}
           />
-          <CarouselImg srcSet={data[0].moImg} alt="carouselImg" />
+          <CarouselImg src={data[0].moImg} alt="carouselImg" />
         </picture>
       </InnerContainer>
       <PrevBtn type="button" onClick={prevImg} disabled={btnDis}>
