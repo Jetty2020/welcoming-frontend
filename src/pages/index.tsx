@@ -97,11 +97,13 @@ const Home: NextPage = () => {
   console.log(todayDealData?.getTodayDealPost, todayDealLoading);
   console.log(allPostsData?.getAllPosts, allPostsLoading);
   return (
-    <div>
+    <>
       <PageTitle title="홈" />
-      <Carousel />
-      <Text>Home</Text>
-    </div>
+      <main>
+        <Carousel />
+        <Text>Home</Text>
+      </main>
+    </>
   );
 };
 

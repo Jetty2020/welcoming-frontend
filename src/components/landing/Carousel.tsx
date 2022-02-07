@@ -71,7 +71,7 @@ export const Carousel = () => {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState<number>(0);
 
-  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseDown = (e: React.MouseEvent<HTMLUListElement>) => {
     e.preventDefault();
     setIsDrag(true);
     setStartX(xPos - e.pageX / window.innerWidth);
@@ -86,14 +86,14 @@ export const Carousel = () => {
     setIsDrag(false);
   };
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
     if (isDrag) {
       setX(+(startX + e.pageX / window.innerWidth).toFixed(2));
     }
   };
 
   // mobile
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchStart = (e: React.TouchEvent<HTMLUListElement>) => {
     setIsDrag(true);
     setStartX(xPos - e.touches[0].pageX / window.innerWidth);
   };
@@ -107,7 +107,7 @@ export const Carousel = () => {
     setIsDrag(false);
   };
 
-  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchMove = (e: React.TouchEvent<HTMLUListElement>) => {
     if (isDrag) {
       setX(+(startX + e.touches[0].pageX / window.innerWidth).toFixed(2));
     }
@@ -115,6 +115,7 @@ export const Carousel = () => {
 
   return (
     <CarouselCon>
+      <h2 className="sr-only">이벤트 슬라이드</h2>
       <InnerContainer
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
@@ -129,31 +130,37 @@ export const Carousel = () => {
           transition: `${trans}`,
         }}
       >
-        <picture>
-          <source
-            media={`(min-width:${mediaQuery.tablet})`}
-            srcSet={data[data.length - 1].deImg}
-          />
-          <CarouselImg src={data[data.length - 1].moImg} alt="carouselImg" />
-        </picture>
+        <li>
+          <picture>
+            <source
+              media={`(min-width:${mediaQuery.tablet})`}
+              srcSet={data[data.length - 1].deImg}
+            />
+            <CarouselImg src={data[data.length - 1].moImg} alt="carouselImg" />
+          </picture>
+        </li>
         {data.map((ele) => {
           return (
-            <picture key={`${ele.deImg.slice(-20, -10)}-img`}>
-              <source
-                media={`(min-width:${mediaQuery.tablet})`}
-                srcSet={ele.deImg}
-              />
-              <CarouselImg src={ele.moImg} alt="carouselImg" />
-            </picture>
+            <li key={`${ele.deImg.slice(-20, -10)}-img`}>
+              <picture>
+                <source
+                  media={`(min-width:${mediaQuery.tablet})`}
+                  srcSet={ele.deImg}
+                />
+                <CarouselImg src={ele.moImg} alt="carouselImg" />
+              </picture>
+            </li>
           );
         })}
-        <picture>
-          <source
-            media={`(min-width:${mediaQuery.tablet})`}
-            srcSet={data[0].deImg}
-          />
-          <CarouselImg src={data[0].moImg} alt="carouselImg" />
-        </picture>
+        <li>
+          <picture>
+            <source
+              media={`(min-width:${mediaQuery.tablet})`}
+              srcSet={data[0].deImg}
+            />
+            <CarouselImg src={data[0].moImg} alt="carouselImg" />
+          </picture>
+        </li>
       </InnerContainer>
       <PrevBtn type="button" onClick={prevImg} disabled={btnDis}>
         <ChevronLeft />
@@ -168,11 +175,11 @@ export const Carousel = () => {
   );
 };
 
-const CarouselCon = styled.div`
+const CarouselCon = styled.section`
   overflow-x: hidden;
   position: relative;
 `;
-const InnerContainer = styled.div`
+const InnerContainer = styled.ul`
   display: flex;
 `;
 const CarouselImg = styled.img`
