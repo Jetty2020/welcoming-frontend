@@ -40,7 +40,10 @@ export const Carousel = () => {
         setTrans('none');
         setX(-dataLength);
         setImgPage(data.length);
-      } else {
+      } else if (
+        Math.floor(startX) + 2 === Math.round(xPos) ||
+        xPos === Math.round(xPos)
+      ) {
         setImgPage((curr) => curr - 1);
       }
       setTrans('none');
@@ -60,7 +63,10 @@ export const Carousel = () => {
         setTrans('none');
         setX(-1);
         setImgPage(1);
-      } else {
+      } else if (
+        Math.floor(startX) === Math.round(xPos) ||
+        xPos === Math.round(xPos)
+      ) {
         setImgPage((curr) => curr + 1);
       }
       setTrans('none');
