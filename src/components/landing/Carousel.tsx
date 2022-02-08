@@ -137,35 +137,35 @@ export const Carousel = () => {
         }}
       >
         <li>
-          <picture>
+          <CarouselPic>
             <source
               media={`(min-width:${mediaQuery.tablet})`}
               srcSet={data[data.length - 1].deImg}
             />
             <CarouselImg src={data[data.length - 1].moImg} alt="carouselImg" />
-          </picture>
+          </CarouselPic>
         </li>
         {data.map((ele) => {
           return (
             <li key={`${ele.deImg.slice(-20, -10)}-img`}>
-              <picture>
+              <CarouselPic>
                 <source
                   media={`(min-width:${mediaQuery.tablet})`}
                   srcSet={ele.deImg}
                 />
                 <CarouselImg src={ele.moImg} alt="carouselImg" />
-              </picture>
+              </CarouselPic>
             </li>
           );
         })}
         <li>
-          <picture>
+          <CarouselPic>
             <source
               media={`(min-width:${mediaQuery.tablet})`}
               srcSet={data[0].deImg}
             />
             <CarouselImg src={data[0].moImg} alt="carouselImg" />
-          </picture>
+          </CarouselPic>
         </li>
       </InnerContainer>
       <PrevBtn type="button" onClick={prevImg} disabled={btnDis}>
@@ -187,6 +187,10 @@ const CarouselCon = styled.section`
 `;
 const InnerContainer = styled.ul`
   display: flex;
+`;
+const CarouselPic = styled.picture`
+  display: block;
+  height: 100vh;
 `;
 const CarouselImg = styled.img`
   width: 100vw;
