@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ const LOGIN_MUTATION = gql`
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const theme = useTheme();
   const {
     register,
     getValues,
@@ -53,19 +55,19 @@ const Login: NextPage = () => {
   >(LOGIN_MUTATION, {
     onCompleted,
   });
-  const onSubmit = () => {
-    if (!loading) {
-      const { email, password } = getValues();
-      loginMutation({
-        variables: {
-          loginInput: {
-            email,
-            password,
-          },
-        },
-      });
-    }
-  };
+  // const onSubmit = () => {
+  //   if (!loading) {
+  //     const { email, password } = getValues();
+  //     loginMutation({
+  //       variables: {
+  //         loginInput: {
+  //           email,
+  //           password,
+  //         },
+  //       },
+  //     });
+  //   }
+  // };
   return (
     <>
       <PageTitle title="로그인" />
@@ -78,9 +80,9 @@ const Login: NextPage = () => {
       <SectionLogin>
         <h2 className="sr-only">로그인</h2>
         <Contlogo>
-          <img src="/logo/logo-color2.png" alt="어서와 우리집 로고" />
+          <img src={theme.logo} alt="어서와 우리집 로고" />
         </Contlogo>
-        <FormLogin onSubmit={handleSubmit(onSubmit)}>
+        <FormLogin>
           <Label htmlFor="email">
             <Input
               id="email"
@@ -92,7 +94,6 @@ const Login: NextPage = () => {
               })}
             />
           </Label>
-          {/* {errors && <div>{errors}</div>} */}
           <Label htmlFor="password">
             <Input
               type="password"
@@ -102,6 +103,7 @@ const Login: NextPage = () => {
               })}
             />
           </Label>
+          <Error>이메일 또는 비밀번호가 일치하지 않습니다.</Error>
           <BtnLogin type="submit">로그인</BtnLogin>
         </FormLogin>
         <ListLink>
@@ -139,7 +141,6 @@ const SectionLogin = styled.section`
   min-height: 100vh;
   margin-top: 50px;
   padding: 30px;
-  /* background-color: rgba(0, 0, 0, 0.4); */
 `;
 const Contlogo = styled.div`
   width: 200px;
@@ -160,6 +161,10 @@ const Label = styled.label`
     margin-top: -1px;
     border-radius: 0 0 5px 5px;
   }
+
+  &.error {
+    border-color: #ff003e;
+  }
 `;
 const Input = styled.input`
   width: 100%;
@@ -170,6 +175,23 @@ const Input = styled.input`
 
   &::placeholder {
     color: #dbdbdb;
+  }
+`;
+const Error = styled.span`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: #ff003e;
+  font-size: 14px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: -2px 5px 0 0;
+    background: url('/emoji-frown.svg') no-repeat;
+    background-size: 100%;
   }
 `;
 const BtnLogin = styled.button`
