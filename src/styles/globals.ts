@@ -130,6 +130,7 @@ export const GlobalStyles = (theme: Theme) => css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  /* Add reset style */
   a {
     color: inherit;
     text-decoration: none;
@@ -138,7 +139,12 @@ export const GlobalStyles = (theme: Theme) => css`
     border: 0;
     background: none;
     color: inherit;
+    font-family: inherit;
     cursor: pointer;
+  }
+  img {
+    display: block;
+    width: 100%;
   }
   .sr-only {
     position: absolute;
@@ -164,6 +170,7 @@ export const GlobalStyles = (theme: Theme) => css`
   body {
     background: ${theme.bg.bodyBg};
     color: ${theme.text.bodyText};
+    font-family: 'Pretendard-400';
   }
 `;
 
