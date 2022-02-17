@@ -20,7 +20,6 @@ declare module '@emotion/react' {
       bodyText: string;
       darkBtn: string;
     };
-    logo: string;
   }
   export interface Theme extends ThemeMode {
     mediaQuery: {
@@ -44,8 +43,8 @@ const light: ThemeMode = {
     bodyText: '#000000',
     darkBtn: '#000000',
   },
-  logo: '/logo/logo-color2.png',
 };
+
 const dark: ThemeMode = {
   bg: {
     primary: '#ff8a3d',
@@ -57,7 +56,6 @@ const dark: ThemeMode = {
     bodyText: '#d9d9d9',
     darkBtn: '#ffffff',
   },
-  logo: '/logo/logo-color1.png',
 };
 
 const mediaQuery = {
