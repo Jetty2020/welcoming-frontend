@@ -24,10 +24,7 @@ declare module '@emotion/react' {
   }
   export interface Theme extends ThemeMode {
     mediaQuery: {
-      mobile: string;
       tablet: string;
-      laptop: string;
-      desktop: string;
     };
   }
 }
@@ -64,10 +61,7 @@ const dark: ThemeMode = {
 };
 
 const mediaQuery = {
-  mobile: '375px',
   tablet: '768px',
-  laptop: '1024px',
-  desktop: '1600px',
 };
 
 export const mode: ThemeGroup = {
