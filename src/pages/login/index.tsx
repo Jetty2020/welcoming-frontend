@@ -136,6 +136,12 @@ const Login: NextPage = () => {
           </li>
         </ListLink>
       </SectionLogin>
+      <FooterLogin>
+        <Link href="/" passHref>
+          <a>© &nbsp;welcoming, Co., Ltd.</a>
+        </Link>
+        . All Rights Reserved
+      </FooterLogin>
     </MainLogin>
   );
 };
@@ -144,10 +150,12 @@ export default Login;
 
 const MainLogin = styled.main`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 `;
+
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -175,9 +183,14 @@ const BtnClose = styled.button`
 `;
 
 const SectionLogin = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   max-width: 300px;
   padding: 30px;
+  margin: 50px 0;
+  flex-grow: 1;
 `;
 
 const Contlogo = styled.div`
@@ -256,4 +269,9 @@ const ListLink = styled.ul`
   & li {
     margin: 0 10px;
   }
+`;
+
+const FooterLogin = styled.footer`
+  padding: 30px 0;
+  font-size: 14px;
 `;
