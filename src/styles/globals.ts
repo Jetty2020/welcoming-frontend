@@ -136,6 +136,7 @@ export const GlobalStyles = (theme: Theme) => css`
     text-decoration: none;
   }
   button {
+    padding: 0;
     border: 0;
     background: none;
     color: inherit;
