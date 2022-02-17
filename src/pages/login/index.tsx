@@ -14,6 +14,7 @@ import {
   loginMutationVariables,
 } from '../../__generated__/loginMutation';
 import { Close } from '../../../public/icons';
+import { pxToRem } from '../utils/pxToRem';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -164,7 +165,7 @@ const Header = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  height: 50px;
+  height: ${pxToRem(50)};
   background-color: ${({ theme }) => theme.bg.bodyBg};
   color: ${({ theme }) => theme.text.bodyText};
 `;
@@ -172,13 +173,13 @@ const Header = styled.header`
 const BtnClose = styled.button`
   position: absolute;
   top: 50%;
-  left: 15px;
+  left: ${pxToRem(15)};
   transform: translateY(-50%);
   font-size: 0;
 
   & svg {
-    width: 20px;
-    height: 20px;
+    width: ${pxToRem(20)};
+    height: ${pxToRem(20)};
   }
 `;
 
@@ -187,15 +188,15 @@ const SectionLogin = styled.section`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: 300px;
-  padding: 30px;
-  margin: 50px 0;
+  max-width: ${pxToRem(300)};
+  padding: ${pxToRem(30)};
+  margin: ${pxToRem(50)} 0;
   flex-grow: 1;
 `;
 
 const Contlogo = styled.div`
-  width: 200px;
-  margin: 0 auto 50px;
+  width: ${pxToRem(200)};
+  margin: 0 auto ${pxToRem(50)};
 `;
 
 const FormLogin = styled.form`
@@ -209,10 +210,10 @@ const Label = styled.label`
 
 const InputSyle = styled.input`
   width: 100%;
-  padding: 15px;
+  padding: ${pxToRem(15)};
   box-sizing: border-box;
   border: 1px solid #dbdbdb;
-  font-size: 16px;
+  font-size: ${pxToRem(16)};
 
   &::placeholder {
     color: #dbdbdb;
@@ -223,38 +224,38 @@ const InputSyle = styled.input`
 `;
 
 const InputEmail = styled(InputSyle)`
-  border-radius: 5px 5px 0 0;
+  border-radius: ${pxToRem(5)} ${pxToRem(5)} 0 0;
 `;
 
 const InputPassword = styled(InputSyle)`
   margin-top: -1px;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 ${pxToRem(5)} ${pxToRem(5)};
 `;
 
 const Error = styled.span`
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: ${pxToRem(10)};
   color: #ff003e;
-  font-size: 14px;
+  font-size: ${pxToRem(14)};
 
   &::before {
     content: '';
     display: inline-block;
-    width: 14px;
-    height: 14px;
-    margin: -2px 5px 0 0;
+    width: ${pxToRem(14)};
+    height: ${pxToRem(14)};
+    margin: ${pxToRem(-2)} ${pxToRem(5)} 0 0;
     background: url('/icons/emoji-frown.svg') no-repeat;
     background-size: 100%;
   }
 `;
 
 const BtnLogin = styled.button`
-  margin: 20px 0;
-  padding: 15px;
-  border-radius: 5px;
+  margin: ${pxToRem(20)} 0;
+  padding: ${pxToRem(15)};
+  border-radius: ${pxToRem(5)};
   background-color: ${({ theme }) => theme.bg.primary};
-  font-size: 16px;
+  font-size: ${pxToRem(16)};
 
   &:disabled {
     background-color: ${({ theme }) => theme.bg.darkBtn};
@@ -267,11 +268,11 @@ const ListLink = styled.ul`
   justify-content: center;
 
   & li {
-    margin: 0 10px;
+    margin: 0 ${pxToRem(10)};
   }
 `;
 
 const FooterLogin = styled.footer`
-  padding: 30px 0;
-  font-size: 14px;
+  padding: ${pxToRem(30)} 0;
+  font-size: ${pxToRem(14)};
 `;
