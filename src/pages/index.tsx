@@ -1,23 +1,109 @@
-import { useReactiveVar } from '@apollo/client';
-import styled from '@emotion/styled';
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import { isLoggedInVar } from '../apollo';
+import styled from '@emotion/styled';
+import { gql, useQuery } from '@apollo/client';
 import PageTitle from '../components/common/PageTitle';
+import {
+  getTodayDealPostQuery,
+  getTodayDealPostQueryVariables,
+} from '../__generated__/getTodayDealPostQuery';
+import {
+  getEventsQuery,
+  getEventsQueryVariables,
+} from '../__generated__/getEventsQuery';
+import {
+  getAllPostsQuery,
+  getAllPostsQueryVariables,
+} from '../__generated__/getAllPostsQuery';
+import { Carousel } from '../components/landing/Carousel';
 
 const Home: NextPage = () => {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const TODAYDEAL_QUERY = gql`
+    query getTodayDealPostQuery($todayDealInput: GetTodayDealPostInput!) {
+      getTodayDealPost(input: $todayDealInput) {
+        ok
+        error
+        posts {
+          id
+          title
+          ori_price
+          selling_price
+        }
+      }
+    }
+  `;
+  const EVENT_QUERY = gql`
+    query getEventsQuery($getEventsInput: GetEventsInput!) {
+      getEvents(input: $getEventsInput) {
+        ok
+        error
+        events {
+          id
+          carouselImg
+          carouselTitle
+        }
+      }
+    }
+  `;
 
+  const GETALLPOSTS_QUERY = gql`
+    query getAllPostsQuery($getAllPostsInput: AllPostsInput!) {
+      getAllPosts(input: $getAllPostsInput) {
+        ok
+        error
+        posts {
+          id
+          title
+          ori_price
+          selling_price
+        }
+      }
+    }
+  `;
+
+  const { data: todayDealData, loading: todayDealLoading } = useQuery<
+    getTodayDealPostQuery,
+    getTodayDealPostQueryVariables
+  >(TODAYDEAL_QUERY, {
+    variables: {
+      todayDealInput: {
+        postNum: 4,
+      },
+    },
+  });
+
+  const { data: evnetsData, loading: evnetsLoading } = useQuery<
+    getEventsQuery,
+    getEventsQueryVariables
+  >(EVENT_QUERY, {
+    variables: {
+      getEventsInput: {
+        eventNum: 6,
+      },
+    },
+  });
+
+  const { data: allPostsData, loading: allPostsLoading } = useQuery<
+    getAllPostsQuery,
+    getAllPostsQueryVariables
+  >(GETALLPOSTS_QUERY, {
+    variables: {
+      getAllPostsInput: {
+        order: 0,
+        page: 1,
+      },
+    },
+  });
+  console.log(evnetsData?.getEvents, evnetsLoading);
+  console.log(todayDealData?.getTodayDealPost, todayDealLoading);
+  console.log(allPostsData?.getAllPosts, allPostsLoading);
   return (
-    <div>
+    <>
       <PageTitle title="홈" />
-      <h1>H1</h1>
-      <Link href="/login">
-        <a>Login</a>
-      </Link>
-      {isLoggedIn ? <div>Login</div> : <div>Logout</div>}
-      <Text>Home</Text>
-    </div>
+      <main>
+        <Carousel />
+        <Text>Home</Text>
+      </main>
+    </>
   );
 };
 
