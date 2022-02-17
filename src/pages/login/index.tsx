@@ -90,7 +90,7 @@ const Login: NextPage = () => {
       <SectionLogin>
         <h2 className="sr-only">로그인</h2>
         <Contlogo>
-          <img src={theme.logo} alt="어서와 우리집 로고" />
+          <img src="/logo/logo_txt.png" alt="어서와 우리집 로고" />
         </Contlogo>
         <FormLogin onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">
