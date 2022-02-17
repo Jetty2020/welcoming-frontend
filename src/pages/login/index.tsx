@@ -1,5 +1,4 @@
 import { gql, useMutation } from '@apollo/client';
-import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import Cookies from 'js-cookie';
 import { NextPage } from 'next';
@@ -28,7 +27,8 @@ const LOGIN_MUTATION = gql`
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const theme = useTheme();
+  const [loginError, setLoginError] = useState(false);
+
   const {
     register,
     getValues,
@@ -51,6 +51,7 @@ const Login: NextPage = () => {
       setLoginError(true);
     }
   };
+
   const [loginMutation, { loading }] = useMutation<
     loginMutation,
     loginMutationVariables
@@ -72,13 +73,12 @@ const Login: NextPage = () => {
     }
   };
 
-  const [loginError, setLoginError] = useState(false);
   const handleChange = () => {
     setLoginError(false);
   };
 
   return (
-    <>
+    <MainLogin>
       <PageTitle title="로그인" />
       <Header>
         <BtnClose type="button" onClick={() => router.push('/')}>
@@ -136,12 +136,18 @@ const Login: NextPage = () => {
           </li>
         </ListLink>
       </SectionLogin>
-    </>
+    </MainLogin>
   );
 };
 
 export default Login;
 
+const MainLogin = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+`;
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -169,14 +175,14 @@ const BtnClose = styled.button`
 `;
 
 const SectionLogin = styled.section`
-  min-height: 100vh;
-  margin-top: 50px;
+  width: 100%;
+  max-width: 300px;
   padding: 30px;
 `;
 
 const Contlogo = styled.div`
   width: 200px;
-  margin: 50px auto;
+  margin: 0 auto 50px;
 `;
 
 const FormLogin = styled.form`
