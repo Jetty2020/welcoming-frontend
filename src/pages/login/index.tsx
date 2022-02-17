@@ -81,7 +81,7 @@ const Login: NextPage = () => {
     <>
       <PageTitle title="로그인" />
       <Header>
-        <BtnClose type="button">
+        <BtnClose type="button" onClick={() => router.push('/')}>
           <Close />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
