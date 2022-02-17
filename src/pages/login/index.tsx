@@ -102,7 +102,7 @@ const Login: NextPage = () => {
                 required: true,
                 onChange: handleChange,
               })}
-              data-loginError={loginError}
+              data-login-error={loginError}
             />
           </Label>
           <Label htmlFor="password">
@@ -113,7 +113,7 @@ const Login: NextPage = () => {
                 required: true,
                 onChange: handleChange,
               })}
-              data-loginError={loginError}
+              data-login-error={loginError}
             />
           </Label>
           {loginError && (
@@ -198,7 +198,7 @@ const InputSyle = styled.input`
   &::placeholder {
     color: #dbdbdb;
   }
-  &[data-loginError='true'] {
+  &[data-login-error='true'] {
     border-color: #ff003e;
   }
 `;
