@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import { mediaQuery } from '@styles/theme';
-import ChevronLeft from 'public/icon/chevron-left.svg';
-import ChevronRight from 'public/icon/chevron-right.svg';
+import { ChevronLeft, ChevronRight } from 'public/icons';
 
 const data = [
   {
