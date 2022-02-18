@@ -1,19 +1,19 @@
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import { gql, useQuery } from '@apollo/client';
-import PageTitle from '../components/common/PageTitle';
+import PageTitle from '@components/common/PageTitle';
 import {
   getTodayDealPostQuery,
   getTodayDealPostQueryVariables,
-} from '../__generated__/getTodayDealPostQuery';
+} from '@generated//getTodayDealPostQuery';
 import {
   getEventsQuery,
   getEventsQueryVariables,
-} from '../__generated__/getEventsQuery';
+} from '@generated//getEventsQuery';
 import {
   getAllPostsQuery,
   getAllPostsQueryVariables,
-} from '../__generated__/getAllPostsQuery';
+} from '@generated//getAllPostsQuery';
 import { Carousel } from '../components/landing/Carousel';
 
 const Home: NextPage = () => {

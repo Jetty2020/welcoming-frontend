@@ -6,15 +6,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { authTokenVar, isLoggedInVar } from '../../../apollo';
-import PageTitle from '../../../components/common/PageTitle';
-import { LoginInput } from '../../../__generated__/globalTypes';
+import { Close } from 'public/icons';
+import { pxToRem } from 'src/utils/pxToRem';
+import PageTitle from '@components/common/PageTitle';
+import { authTokenVar, isLoggedInVar } from '@apollo';
+import { LoginInput } from '@generated/globalTypes';
 import {
   loginMutation,
   loginMutationVariables,
-} from '../../../__generated__/loginMutation';
-import { Close } from '../../../../public/icons';
-import { pxToRem } from '../../utils/pxToRem';
+} from '@generated/loginMutation';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
