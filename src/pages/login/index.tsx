@@ -166,8 +166,8 @@ const Header = styled.header`
   right: 0;
   left: 0;
   height: ${pxToRem(50)};
-  background-color: ${({ theme }) => theme.bg.bodyBg};
-  color: ${({ theme }) => theme.text.bodyText};
+  background-color: ${({ theme }) => theme.background.header};
+  color: ${({ theme }) => theme.text.default};
 `;
 
 const BtnClose = styled.button`
@@ -212,14 +212,14 @@ const InputSyle = styled.input`
   width: 100%;
   padding: ${pxToRem(15)};
   box-sizing: border-box;
-  border: 1px solid #dbdbdb;
+  border: ${({ theme }) => theme.input.border};
   font-size: ${pxToRem(16)};
 
   &::placeholder {
-    color: #dbdbdb;
+    color: ${({ theme }) => theme.input.placeholder};
   }
   &[data-login-error='true'] {
-    border-color: #ff003e;
+    border-color: ${({ theme }) => theme.input.error};
   }
 `;
 
@@ -236,7 +236,8 @@ const Error = styled.span`
   display: flex;
   align-items: center;
   margin-top: ${pxToRem(10)};
-  color: #ff003e;
+  color: ${({ theme }) => theme.input.error};
+  ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
 
   &::before {
@@ -254,11 +255,12 @@ const BtnLogin = styled.button`
   margin: ${pxToRem(20)} 0;
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
-  background-color: ${({ theme }) => theme.bg.primary};
+  color: ${({ theme }) => theme.button.text};
+  background-color: ${({ theme }) => theme.button.background};
   font-size: ${pxToRem(16)};
 
   &:disabled {
-    background-color: ${({ theme }) => theme.bg.darkBtn};
+    background-color: ${({ theme }) => theme.button.disabled};
   }
 `;
 
