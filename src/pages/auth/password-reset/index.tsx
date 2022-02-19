@@ -1,17 +1,23 @@
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useRef, useState } from 'react';
 import { ChevronLeft } from 'public/icons';
 import { pxToRem } from '@utils/pxToRem';
-import Link from 'next/link';
+import { EmailForm } from '@components/password-reset/emailForm';
+import { CheckCodeForm } from '@components/password-reset/checkCodeForm';
 
 const PasswordReset: NextPage = () => {
   const router = useRouter();
+  const [codeForm, setCodeForm] = useState(false);
+  const email = useRef('');
+  const code = useRef(Math.floor(Math.random() * 1000000));
 
   return (
     <MainPasswordReset>
       <Header>
-        <BtnClose type="button" onClick={() => router.push('/')}>
+        <BtnClose type="button" onClick={() => router.push('/auth/login')}>
           <ChevronLeft />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
@@ -19,33 +25,13 @@ const PasswordReset: NextPage = () => {
       </Header>
       <SectionPasswordReset>
         <h2 className="sr-only">비밀번호 재설정</h2>
-        <Form>
-          <TextPasswordReset>
-            가입한 이메일 주소를 입력해주세요.
-          </TextPasswordReset>
-          <Label htmlFor="email">
-            <Input type="email" id="email" placeholder="이메일" />
-          </Label>
-          <Error>등록된 이메일 주소가 아닙니다.</Error>
-          <BtnEmail type="submit">이메일로 인증코드 받기</BtnEmail>
-        </Form>
-        <Form>
-          <Label htmlFor="verification">
-            <Input
-              type="text"
-              id="verification"
-              placeholder="인증코드 6자리 입력"
-            />
-            <Timer>00:00</Timer>
-          </Label>
-          <Error>올바른 인증코드가 아닙니다.</Error>
-          <Error>인증코드가 만료되었습니다.</Error>
-          <TextResend>
-            인증코드를 받지 못하셨나요?
-            <BtnResend type="button">인증코드 재전송하기</BtnResend>
-          </TextResend>
-          <BtnEmail type="submit">인증번호 확인</BtnEmail>
-        </Form>
+        <EmailForm
+          code={code.current}
+          email={email}
+          codeForm={codeForm}
+          setCodeForm={setCodeForm}
+        />
+        {codeForm && <CheckCodeForm code={code.current} email={email} />}
       </SectionPasswordReset>
       <FooterPasswordReset>
         <Link href="/" passHref>
@@ -102,90 +88,6 @@ const SectionPasswordReset = styled.section`
   margin-top: ${pxToRem(50)};
   box-sizing: border-box;
   flex: 1;
-`;
-
-const TextPasswordReset = styled.p`
-  margin-bottom: ${pxToRem(12)};
-  color: ${({ theme }) => theme.text.bodyText};
-  font-size: ${pxToRem(14)};
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #dbdbdb;
-  border-radius: ${pxToRem(5)};
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: ${pxToRem(15)};
-  box-sizing: border-box;
-  border: 0;
-  font-size: ${pxToRem(16)};
-
-  &::placeholder {
-    color: #dbdbdb;
-  }
-  /* &[data-login-error='true'] {
-    border-color: #ff003e;
-  } */
-`;
-
-const Error = styled.span`
-  display: flex;
-  align-items: center;
-  margin-top: ${pxToRem(10)};
-  color: #ff003e;
-  font-size: ${pxToRem(14)};
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: ${pxToRem(14)};
-    height: ${pxToRem(14)};
-    margin: ${pxToRem(-2)} ${pxToRem(5)} 0 0;
-    background: url('/icons/emoji-frown.svg') no-repeat;
-    background-size: 100%;
-  }
-`;
-
-const Timer = styled.span`
-  position: absolute;
-  top: 50%;
-  right: ${pxToRem(15)};
-  transform: translateY(-50%);
-  color: #ff003e;
-  font-size: ${pxToRem(14)};
-`;
-
-const BtnEmail = styled.button`
-  margin: ${pxToRem(20)} 0;
-  padding: ${pxToRem(15)};
-  border-radius: ${pxToRem(5)};
-  background-color: ${({ theme }) => theme.bg.primary};
-  font-size: ${pxToRem(16)};
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.bg.darkBtn};
-  }
-`;
-
-const TextResend = styled.div`
-  margin-top: ${pxToRem(10)};
-  color: #828c94;
-  font-size: ${pxToRem(13)};
-`;
-
-const BtnResend = styled.button`
-  margin-left: ${pxToRem(5)};
-  font-size: ${pxToRem(13)};
-  text-decoration: underline;
 `;
 
 const FooterPasswordReset = styled.footer`

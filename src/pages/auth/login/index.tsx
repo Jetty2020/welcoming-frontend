@@ -126,7 +126,7 @@ const Login: NextPage = () => {
         </FormLogin>
         <ListLink>
           <li>
-            <Link href="/" passHref>
+            <Link href="/auth/password-reset" passHref>
               <a>비밀번호 재설정</a>
             </Link>
           </li>
