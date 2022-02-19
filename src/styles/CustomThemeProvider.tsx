@@ -56,7 +56,7 @@ const DarkModeBtn = styled.button`
   height: 40px;
   padding: 0 25px;
   border-radius: 20px;
-  background: ${({ theme }) => theme.bg.darkBtn};
-  color: ${({ theme }) => theme.text.darkBtn};
+  background: ${({ theme }) => theme.toggleMode.background};
+  color: ${({ theme }) => theme.toggleMode.text};
   font-weight: 600;
 `;
