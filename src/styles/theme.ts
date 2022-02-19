@@ -1,74 +1,124 @@
-// primary: '#ff8a3d',
-// black: '#000000',
-// red: '#f77f77',
-// grey: '#9e9e9e',
-// lightGrey: '#eeeeee',
-// deepGrey: '#757575',
-// darkGrey: '#656e75',
-
 import { Theme, ThemeMode } from '@emotion/react';
+import {
+  GRAY_900,
+  GRAY_800,
+  GRAY_400,
+  GRAY_300,
+  GRAY_50,
+  WHITE,
+  PRIMARY_900,
+  ERROR,
+} from 'src/constants/colors';
 
 declare module '@emotion/react' {
   export interface ThemeMode {
-    bg: {
+    background: {
+      default: string;
+      header: string;
       primary: string;
-      bodyBg: string;
-      darkBtn: string;
     };
     text: {
+      default: string;
       primary: string;
-      bodyText: string;
-      darkBtn: string;
+    };
+    toggleMode: {
+      background: string;
+      text: string;
     };
   }
   export interface Theme extends ThemeMode {
+    button: {
+      background: string;
+      disabled: string;
+      text: string;
+    };
+    input: {
+      background: string;
+      border: string;
+      error: string;
+      placeholder: string;
+      text: string;
+    };
     mediaQuery: {
       tablet: string;
     };
   }
 }
+
+interface BUTTON {
+  background: string;
+  disabled: string;
+  text: string;
+}
+
+interface INPUT {
+  background: string;
+  border: string;
+  error: string;
+  placeholder: string;
+  text: string;
+}
+
+interface MEDIA {
+  tablet: string;
+}
+
 interface ThemeGroup {
   light: Theme;
   dark: Theme;
 }
 
 const light: ThemeMode = {
-  bg: {
-    primary: '#ff8a3d',
-    bodyBg: '#ffffff',
-    darkBtn: '#eeeeee',
+  background: {
+    default: `${GRAY_50}`,
+    header: `${WHITE}`,
+    primary: `${PRIMARY_900}`,
   },
   text: {
-    primary: '#ff8a3d',
-    bodyText: '#000000',
-    darkBtn: '#000000',
+    default: `${GRAY_900}`,
+    primary: `${PRIMARY_900}`,
+  },
+  toggleMode: {
+    background: `${GRAY_50}`,
+    text: `${GRAY_900}`,
   },
 };
 
 const dark: ThemeMode = {
-  bg: {
-    primary: '#ff8a3d',
-    bodyBg: '#212121',
-    darkBtn: '#757575',
+  background: {
+    default: `${GRAY_800}`,
+    header: `${GRAY_900}`,
+    primary: `${PRIMARY_900}`,
   },
   text: {
-    primary: '#ff8a3d',
-    bodyText: '#d9d9d9',
-    darkBtn: '#ffffff',
+    default: `${GRAY_50}`,
+    primary: `${PRIMARY_900}`,
+  },
+  toggleMode: {
+    background: `${GRAY_900}`,
+    text: `${GRAY_50}`,
   },
 };
-interface MEDIA {
-  mobile: string;
-  tablet: string;
-  laptop: string;
-  desktop: string;
-}
+
+export const button: BUTTON = {
+  background: `${PRIMARY_900}`,
+  disabled: `${GRAY_300}`,
+  text: `${GRAY_50}`,
+};
+
+export const input: INPUT = {
+  background: 'transparent',
+  border: `1px solid ${GRAY_400}`,
+  error: `${ERROR}`,
+  placeholder: `${GRAY_400}`,
+  text: `${GRAY_900}`,
+};
 
 const mediaQuery = {
   tablet: '768px',
 };
 
 export const mode: ThemeGroup = {
-  light: { ...light, mediaQuery },
-  dark: { ...dark, mediaQuery },
+  light: { ...light, button, input, mediaQuery },
+  dark: { ...dark, button, input, mediaQuery },
 };
