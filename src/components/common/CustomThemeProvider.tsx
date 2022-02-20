@@ -1,8 +1,8 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
-import { GlobalStyles } from './globals';
-import { mode } from './theme';
+import { GlobalStyles } from '../../styles/globals';
+import { mode } from '../../styles/theme';
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
   const [mounted, setMounted] = useState(false);
