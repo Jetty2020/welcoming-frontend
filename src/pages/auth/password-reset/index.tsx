@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'public/icons';
 import { pxToRem } from '@utils/pxToRem';
 import { EmailForm } from '@components/password-reset/emailForm';
 import { CheckCodeForm } from '@components/password-reset/checkCodeForm';
 import { genCode } from '@utils/genCode';
+import { AuthFooter } from '@components/common/auth/Footer';
 
 const PasswordReset: NextPage = () => {
   const router = useRouter();
@@ -34,12 +34,7 @@ const PasswordReset: NextPage = () => {
         />
         {codeForm && <CheckCodeForm code={code.current} email={email} />}
       </SectionPasswordReset>
-      <FooterPasswordReset>
-        <Link href="/" passHref>
-          <a>© &nbsp;welcoming, Co., Ltd.</a>
-        </Link>
-        . All Rights Reserved
-      </FooterPasswordReset>
+      <AuthFooter />
     </MainPasswordReset>
   );
 };
@@ -89,9 +84,4 @@ const SectionPasswordReset = styled.section`
   margin-top: ${pxToRem(50)};
   box-sizing: border-box;
   flex: 1;
-`;
-
-const FooterPasswordReset = styled.footer`
-  padding: ${pxToRem(30)} 0;
-  font-size: ${pxToRem(14)};
 `;
