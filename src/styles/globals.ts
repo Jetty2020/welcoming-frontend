@@ -169,8 +169,8 @@ export const GlobalStyles = (theme: Theme) => css`
     padding-bottom: 3px;
   }
   body {
-    background: ${theme.bg.bodyBg};
-    color: ${theme.text.bodyText};
+    background: ${theme.background.default};
+    color: ${theme.text.default};
     font-family: 'Pretendard-400';
   }
 `;

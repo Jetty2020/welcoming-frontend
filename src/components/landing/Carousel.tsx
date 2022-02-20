@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import { mediaQuery } from '@styles/theme';
 import { ChevronLeft, ChevronRight } from 'public/icons';
+import { WHITE } from 'src/constants/colors';
 
 const data = [
   {
@@ -174,7 +175,9 @@ export const Carousel = () => {
         <ChevronRight />
       </NextBtn>
       <PageIndex>
-        {imgPage} <PageSpan>/</PageSpan> {data.length}
+        {imgPage}
+        <PageSpan>/</PageSpan>
+        {data.length}
       </PageIndex>
     </CarouselCon>
   );
@@ -184,61 +187,61 @@ const CarouselCon = styled.section`
   overflow-x: hidden;
   position: relative;
 `;
+
 const InnerContainer = styled.ul`
   display: flex;
 `;
+
 const CarouselPic = styled.picture`
   display: block;
   height: 100vh;
 `;
+
 const CarouselImg = styled.img`
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  object-position: center;
 `;
+
 const CarouselBtn = styled.button`
   position: absolute;
-  top: 50vh;
+  top: 50%;
   border-radius: 50%;
-  background: #0000006a;
+  background-color: rgba(0, 0, 0, 0.4);
   transform: translateY(-50%);
+  transition: background 0.3s ease;
+
   & svg {
-    fill: #fff;
+    fill: ${WHITE};
     width: 20px;
   }
   &:hover {
-    background: #00000094;
-    transition: 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 `;
+
 const PrevBtn = styled(CarouselBtn)`
   left: 20px;
-  padding: 15px 16px 15px 14px;
+  padding: 15px 16px 13px 13px;
 `;
+
 const NextBtn = styled(CarouselBtn)`
   right: 20px;
-  padding: 15px 14px 15px 16px;
+  padding: 15px 13px 13px 16px;
 `;
+
 const PageIndex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   bottom: 100px;
   right: 30px;
-  box-sizing: border-box;
-  width: 60px;
-  height: 30px;
-  padding-top: 3px;
-  border-radius: 15px;
-  background: #0000006a;
-  line-height: 30px;
-  color: #fff;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: ${WHITE};
   font-weight: 500;
+  text-align: center;
 `;
 
 const PageSpan = styled.span`
-  line-height: 30px;
   margin: 0 5px;
 `;
