@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
-import { CustomThemeProvider } from '@components/common/CustomThemeProvider';
+import { CustomThemeProvider } from '@components/common/DarkMode/CustomThemeProvider';
 import client from '../apollo';
 
 function MyApp({ Component, pageProps }: AppProps) {
