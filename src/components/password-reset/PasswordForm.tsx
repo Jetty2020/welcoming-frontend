@@ -108,9 +108,9 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
         </Error>
       )}
       {errorMsg && <Error>{errorMsg}</Error>}
-      <Button type="submit" disabled={!isValid}>
+      <BtnPwReset type="submit" disabled={!isValid}>
         비밀번호 재설정
-      </Button>
+      </BtnPwReset>
     </Form>
   );
 };
@@ -122,19 +122,22 @@ const Form = styled.form`
 
 const TextPasswordReset = styled.p`
   margin-bottom: ${pxToRem(12)};
-  color: ${({ theme }) => theme.text.bodyText};
+  color: ${({ theme }) => theme.text.default};
   font-size: ${pxToRem(14)};
 `;
 
 const Label = styled.label`
   overflow: hidden;
   position: relative;
-  margin-bottom: ${pxToRem(20)};
-  border: 1px solid #dbdbdb;
+  border: ${({ theme }) => theme.input.border};
   border-radius: ${pxToRem(5)};
 
+  & + p {
+    margin-top: ${pxToRem(20)};
+  }
+
   &[data-form-error='true'] {
-    border-color: #ff003e;
+    border-color: ${({ theme }) => theme.input.error};
   }
 `;
 
@@ -146,13 +149,13 @@ const Input = styled.input`
   font-size: ${pxToRem(16)};
 
   &::placeholder {
-    color: #dbdbdb;
+    color: ${({ theme }) => theme.input.placeholder};
   }
 `;
 
 const Error = styled.span`
-  margin: ${pxToRem(-10)} 0 ${pxToRem(10)};
-  color: #ff003e;
+  margin-top: ${pxToRem(10)};
+  color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
   line-height: 1.4;
 
@@ -161,20 +164,22 @@ const Error = styled.span`
     display: inline-block;
     min-width: ${pxToRem(14)};
     height: ${pxToRem(14)};
-    margin-right: ${pxToRem(5)};
+    margin: 0 ${pxToRem(5)} ${pxToRem(-2)} 0;
     background: url('/icons/emoji-frown.svg') no-repeat;
     background-size: 100%;
   }
 `;
 
-const Button = styled.button`
+const BtnPwReset = styled.button`
+  margin: ${pxToRem(20)} 0;
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
-  background-color: ${({ theme }) => theme.bg.primary};
+  background-color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme }) => theme.button.text};
   font-size: ${pxToRem(16)};
 
   &:disabled {
-    background-color: ${({ theme }) => theme.bg.darkBtn};
+    background-color: ${({ theme }) => theme.button.disabled};
     cursor: not-allowed;
   }
 `;
