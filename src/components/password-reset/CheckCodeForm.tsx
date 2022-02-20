@@ -8,6 +8,7 @@ import {
   sendEmailMutationVariables,
 } from '@generated/sendEmailMutation';
 import { genCode } from '@utils/genCode';
+import { GRAY_500 } from 'src/constants/colors';
 import { SEND_EMAIL_MUTATION } from './EmailForm';
 
 interface CheckCodeFormProps {
@@ -126,9 +127,9 @@ export const CheckCodeForm = ({
           인증코드 재전송하기
         </BtnResend>
       </TextResend>
-      <BtnEmail type="submit" disabled={disabledBtn}>
+      <BtnVerification type="submit" disabled={disabledBtn}>
         인증번호 확인
-      </BtnEmail>
+      </BtnVerification>
     </Form>
   );
 };
@@ -141,11 +142,11 @@ const Form = styled.form`
 const Label = styled.label`
   overflow: hidden;
   position: relative;
-  border: 1px solid #dbdbdb;
+  border: ${({ theme }) => theme.input.border};
   border-radius: ${pxToRem(5)};
 
   &[data-form-error='true'] {
-    border-color: #ff003e;
+    border-color: ${({ theme }) => theme.input.error};
   }
 `;
 
@@ -157,23 +158,22 @@ const Input = styled.input`
   font-size: ${pxToRem(16)};
 
   &::placeholder {
-    color: #dbdbdb;
+    color: ${({ theme }) => theme.input.placeholder};
   }
 `;
 
 const Error = styled.span`
-  display: flex;
-  align-items: center;
   margin-top: ${pxToRem(10)};
-  color: #ff003e;
+  color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
+  line-height: 1.4;
 
   &::before {
     content: '';
     display: inline-block;
-    width: ${pxToRem(14)};
+    min-width: ${pxToRem(14)};
     height: ${pxToRem(14)};
-    margin: ${pxToRem(-2)} ${pxToRem(5)} 0 0;
+    margin: 0 ${pxToRem(5)} ${pxToRem(-2)} 0;
     background: url('/icons/emoji-frown.svg') no-repeat;
     background-size: 100%;
   }
@@ -184,30 +184,32 @@ const Timer = styled.span`
   top: 50%;
   right: ${pxToRem(15)};
   transform: translateY(-50%);
-  color: #ff003e;
+  color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
 `;
+
 const TimerBox = styled.span`
   display: inline-block;
   width: 20px;
   text-align: center;
 `;
 
-const BtnEmail = styled.button`
+const BtnVerification = styled.button`
   margin: ${pxToRem(20)} 0;
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
-  background-color: ${({ theme }) => theme.bg.primary};
+  background-color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme }) => theme.button.text};
   font-size: ${pxToRem(16)};
 
   &:disabled {
-    background-color: ${({ theme }) => theme.bg.darkBtn};
+    background-color: ${({ theme }) => theme.button.disabled};
   }
 `;
 
 const TextResend = styled.div`
   margin-top: ${pxToRem(10)};
-  color: #828c94;
+  color: ${GRAY_500};
   font-size: ${pxToRem(13)};
 `;
 

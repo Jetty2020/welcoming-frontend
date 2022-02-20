@@ -33,7 +33,6 @@ declare module '@emotion/react' {
       text: string;
     };
     input: {
-      background: string;
       border: string;
       error: string;
       placeholder: string;
@@ -52,7 +51,6 @@ interface BUTTON {
 }
 
 interface INPUT {
-  background: string;
   border: string;
   error: string;
   placeholder: string;
@@ -107,7 +105,6 @@ export const button: BUTTON = {
 };
 
 export const input: INPUT = {
-  background: 'transparent',
   border: `1px solid ${GRAY_400}`,
   error: `${ERROR}`,
   placeholder: `${GRAY_400}`,

@@ -229,19 +229,17 @@ const InputPassword = styled(InputSyle)`
 `;
 
 const Error = styled.span`
-  display: flex;
-  align-items: center;
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
-  ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
+  line-height: 1.4;
 
   &::before {
     content: '';
     display: inline-block;
-    width: ${pxToRem(14)};
+    min-width: ${pxToRem(14)};
     height: ${pxToRem(14)};
-    margin: ${pxToRem(-2)} ${pxToRem(5)} 0 0;
+    margin: 0 ${pxToRem(5)} ${pxToRem(-2)} 0;
     background: url('/icons/emoji-frown.svg') no-repeat;
     background-size: 100%;
   }
