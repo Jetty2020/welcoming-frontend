@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { mediaQuery } from '@styles/theme';
 import { ChevronLeft, ChevronRight } from 'public/icons';
 import { WHITE } from 'src/constants/colors';
+import { pxToRem } from '@utils/pxToRem';
 
 const data = [
   {
@@ -212,8 +213,9 @@ const CarouselBtn = styled.button`
   transition: background 0.3s ease;
 
   & svg {
+    width: ${pxToRem(20)};
     fill: ${WHITE};
-    width: 20px;
+    vertical-align: middle;
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);
@@ -221,27 +223,26 @@ const CarouselBtn = styled.button`
 `;
 
 const PrevBtn = styled(CarouselBtn)`
-  left: 20px;
-  padding: 15px 16px 13px 13px;
+  left: ${pxToRem(20)};
+  padding: ${pxToRem(15)} ${pxToRem(17)} ${pxToRem(15)} ${pxToRem(13)};
 `;
 
 const NextBtn = styled(CarouselBtn)`
-  right: 20px;
-  padding: 15px 13px 13px 16px;
+  right: ${pxToRem(20)};
+  padding: ${pxToRem(15)} ${pxToRem(13)} ${pxToRem(15)} ${pxToRem(17)};
 `;
 
 const PageIndex = styled.div`
   position: absolute;
-  bottom: 100px;
-  right: 30px;
-  padding: 8px 15px;
-  border-radius: 20px;
+  bottom: ${pxToRem(100)};
+  right: ${pxToRem(30)};
+  padding: ${pxToRem(5)} ${pxToRem(10)};
+  border-radius: ${pxToRem(20)};
   background-color: rgba(0, 0, 0, 0.4);
   color: ${WHITE};
-  font-weight: 500;
   text-align: center;
 `;
 
 const PageSpan = styled.span`
-  margin: 0 5px;
+  margin: 0 ${pxToRem(3)};
 `;
