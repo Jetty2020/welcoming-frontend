@@ -21,10 +21,12 @@ const StyledButton = styled.button`
   right: ${pxToRem(30)};
   padding: ${pxToRem(12)};
   border-radius: 50%;
+  box-shadow: 0 0 ${pxToRem(5)} rgba(0, 0, 0, 0.1);
   background: ${({ theme }) => theme.toggleMode.background};
   color: ${({ theme }) => theme.toggleMode.text};
 
   & svg {
     width: ${pxToRem(20)};
+    vertical-align: middle;
   }
 `;
