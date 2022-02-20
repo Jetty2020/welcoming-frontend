@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import styled from '@emotion/styled';
 import { gql, useQuery } from '@apollo/client';
 import PageTitle from '@components/common/PageTitle';
 import {
@@ -101,17 +100,9 @@ const Home: NextPage = () => {
       <PageTitle title="홈" />
       <main>
         <Carousel />
-        <Text>Home</Text>
       </main>
     </>
   );
 };
 
 export default Home;
-
-const Text = styled.p`
-  color: ${({ theme }) => theme.text.primary};
-  @media (min-width: ${({ theme }) => theme.mediaQuery.mobile}) {
-    color: ${({ theme }) => theme.text.primary};
-  }
-`;
