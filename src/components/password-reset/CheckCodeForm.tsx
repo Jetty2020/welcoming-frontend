@@ -8,7 +8,7 @@ import {
   sendEmailMutationVariables,
 } from '@generated/sendEmailMutation';
 import { genCode } from '@utils/genCode';
-import { SEND_EMAIL_MUTATION } from './EmailFor';
+import { SEND_EMAIL_MUTATION } from './EmailForm';
 
 interface CheckCodeFormProps {
   code: string;
