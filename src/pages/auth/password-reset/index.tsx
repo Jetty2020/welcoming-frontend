@@ -45,7 +45,7 @@ const PasswordReset: NextPage = () => {
             )}
           </>
         ) : (
-          <PasswordForm />
+          <PasswordForm email={email} />
         )}
       </SectionPasswordReset>
       <AuthFooter />
