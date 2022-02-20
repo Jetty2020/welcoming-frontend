@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { pxToRem } from '@utils/pxToRem';
@@ -9,15 +8,19 @@ import {
   sendEmailMutationVariables,
 } from '@generated/sendEmailMutation';
 import { genCode } from '@utils/genCode';
-import { SEND_EMAIL_MUTATION } from './emailForm';
+import { SEND_EMAIL_MUTATION } from './EmailForm';
 
 interface CheckCodeFormProps {
   code: string;
   email: { current: string };
+  setShowPasswordForm: (value: boolean) => void;
 }
 
-export const CheckCodeForm = ({ code, email }: CheckCodeFormProps) => {
-  const router = useRouter();
+export const CheckCodeForm = ({
+  code,
+  email,
+  setShowPasswordForm,
+}: CheckCodeFormProps) => {
   const [newCode, setNewCode] = useState(code);
   const [errorMessage, setErrorMessage] = useState('');
   const verifyTime = useRef(180);
@@ -90,7 +93,7 @@ export const CheckCodeForm = ({ code, email }: CheckCodeFormProps) => {
 
   const checkCode = () => {
     if (newCode.toString() === getValues().code) {
-      router.push('/auth/login');
+      setShowPasswordForm(true);
     } else {
       setErrorMessage('올바른 인증코드가 아닙니다.');
     }
