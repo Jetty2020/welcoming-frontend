@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { mode } from '@styles/theme';
 
 export const useDarkMode = () => {
@@ -30,9 +30,5 @@ export const useDarkMode = () => {
     }
   }, [dark]);
 
-  const toggleTheme = useCallback(() => {
-    setDark((curr) => !curr);
-  }, [dark]);
-
-  return { dark, theme, mounted, toggleTheme };
+  return { dark, theme, mounted, setDark };
 };
