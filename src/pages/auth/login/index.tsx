@@ -15,6 +15,7 @@ import {
   loginMutation,
   loginMutationVariables,
 } from '@generated/loginMutation';
+import { AuthFooter } from '@components/common/auth/Footer';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -137,12 +138,7 @@ const Login: NextPage = () => {
           </li>
         </ListLink>
       </SectionLogin>
-      <FooterLogin>
-        <Link href="/" passHref>
-          <a>© &nbsp;welcoming, Co., Ltd.</a>
-        </Link>
-        . All Rights Reserved
-      </FooterLogin>
+      <AuthFooter />
     </MainLogin>
   );
 };
@@ -270,9 +266,4 @@ const ListLink = styled.ul`
   & li {
     margin: 0 ${pxToRem(10)};
   }
-`;
-
-const FooterLogin = styled.footer`
-  padding: ${pxToRem(30)} 0;
-  font-size: ${pxToRem(14)};
 `;
