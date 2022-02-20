@@ -88,7 +88,7 @@ export const EmailForm = ({
   return (
     <Form onSubmit={handleSubmit(sendEmail)}>
       <TextPasswordReset>가입한 이메일 주소를 입력해주세요.</TextPasswordReset>
-      <Label htmlFor="email">
+      <Label htmlFor="email" data-form-error={Boolean(checkEmail)}>
         <Input
           type="text"
           id="email"
@@ -124,6 +124,10 @@ const Label = styled.label`
   position: relative;
   border: 1px solid #dbdbdb;
   border-radius: ${pxToRem(5)};
+
+  &[data-form-error='true'] {
+    border-color: #ff003e;
+  }
 `;
 
 const Input = styled.input`
@@ -136,9 +140,6 @@ const Input = styled.input`
   &::placeholder {
     color: #dbdbdb;
   }
-  /* &[data-login-error='true'] {
-    border-color: #ff003e;
-  } */
 `;
 
 const Error = styled.span`

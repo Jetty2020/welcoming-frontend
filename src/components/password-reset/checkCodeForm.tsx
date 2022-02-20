@@ -101,7 +101,7 @@ export const CheckCodeForm = ({
 
   return (
     <Form onSubmit={handleSubmit(checkCode)}>
-      <Label htmlFor="verification">
+      <Label htmlFor="verification" data-form-error={Boolean(errorMessage)}>
         <Input
           type="text"
           id="verification"
@@ -143,6 +143,10 @@ const Label = styled.label`
   position: relative;
   border: 1px solid #dbdbdb;
   border-radius: ${pxToRem(5)};
+
+  &[data-form-error='true'] {
+    border-color: #ff003e;
+  }
 `;
 
 const Input = styled.input`
@@ -155,9 +159,6 @@ const Input = styled.input`
   &::placeholder {
     color: #dbdbdb;
   }
-  /* &[data-login-error='true'] {
-    border-color: #ff003e;
-  } */
 `;
 
 const Error = styled.span`

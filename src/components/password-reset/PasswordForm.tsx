@@ -76,9 +76,12 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <TextPasswordReset>비밀번호</TextPasswordReset>
-      <Label htmlFor="password">
+      <Label
+        htmlFor="password"
+        data-form-error={Boolean(errors?.password) || Boolean(errorMsg)}
+      >
         <Input
-          type="text"
+          type="password"
           id="password"
           {...register('password', {
             required: true,
@@ -88,9 +91,9 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
         />
       </Label>
       <TextPasswordReset>비밀번호 확인</TextPasswordReset>
-      <Label htmlFor="passwordCheck">
+      <Label htmlFor="passwordCheck" data-form-error={Boolean(errorMsg)}>
         <Input
-          type="text"
+          type="password"
           id="passwordCheck"
           {...register('passwordCheck', {
             required: true,
@@ -129,6 +132,10 @@ const Label = styled.label`
   margin-bottom: ${pxToRem(20)};
   border: 1px solid #dbdbdb;
   border-radius: ${pxToRem(5)};
+
+  &[data-form-error='true'] {
+    border-color: #ff003e;
+  }
 `;
 
 const Input = styled.input`
@@ -141,9 +148,6 @@ const Input = styled.input`
   &::placeholder {
     color: #dbdbdb;
   }
-  /* &[data-login-error='true'] {
-    border-color: #ff003e;
-  } */
 `;
 
 const Error = styled.span`
