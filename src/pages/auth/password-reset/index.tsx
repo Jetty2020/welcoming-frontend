@@ -4,14 +4,16 @@ import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'public/icons';
 import { pxToRem } from '@utils/pxToRem';
-import { EmailForm } from '@components/password-reset/emailForm';
-import { CheckCodeForm } from '@components/password-reset/checkCodeForm';
+import { EmailForm } from '@components/password-reset/EmailForm';
+import { CheckCodeForm } from '@components/password-reset/CheckCodeForm';
 import { genCode } from '@utils/genCode';
 import { AuthFooter } from '@components/common/auth/Footer';
+import { PasswordForm } from '@components/password-reset/PasswordForm';
 
 const PasswordReset: NextPage = () => {
   const router = useRouter();
   const [codeForm, setCodeForm] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const email = useRef('');
   const code = useRef(genCode());
 
@@ -26,13 +28,25 @@ const PasswordReset: NextPage = () => {
       </Header>
       <SectionPasswordReset>
         <h2 className="sr-only">비밀번호 재설정</h2>
-        <EmailForm
-          code={code.current}
-          email={email}
-          codeForm={codeForm}
-          setCodeForm={setCodeForm}
-        />
-        {codeForm && <CheckCodeForm code={code.current} email={email} />}
+        {!showPasswordForm ? (
+          <>
+            <EmailForm
+              code={code.current}
+              email={email}
+              codeForm={codeForm}
+              setCodeForm={setCodeForm}
+            />
+            {codeForm && (
+              <CheckCodeForm
+                code={code.current}
+                email={email}
+                setShowPasswordForm={setShowPasswordForm}
+              />
+            )}
+          </>
+        ) : (
+          <PasswordForm />
+        )}
       </SectionPasswordReset>
       <AuthFooter />
     </MainPasswordReset>
