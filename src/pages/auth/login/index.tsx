@@ -6,15 +6,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { authTokenVar, isLoggedInVar } from '../../apollo';
-import PageTitle from '../../components/common/PageTitle';
-import { LoginInput } from '../../__generated__/globalTypes';
+import { Close } from 'public/icons';
+import { pxToRem } from 'src/utils/pxToRem';
+import PageTitle from '@components/common/PageTitle';
+import { authTokenVar, isLoggedInVar } from '@apollo';
+import { LoginInput } from '@generated/globalTypes';
 import {
   loginMutation,
   loginMutationVariables,
-} from '../../__generated__/loginMutation';
-import { Close } from '../../../public/icons';
-import { pxToRem } from '../utils/pxToRem';
+} from '@generated/loginMutation';
+import { AuthFooter } from '@components/common/auth/Footer';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -126,7 +127,7 @@ const Login: NextPage = () => {
         </FormLogin>
         <ListLink>
           <li>
-            <Link href="/" passHref>
+            <Link href="/auth/password-reset" passHref>
               <a>비밀번호 재설정</a>
             </Link>
           </li>
@@ -137,12 +138,7 @@ const Login: NextPage = () => {
           </li>
         </ListLink>
       </SectionLogin>
-      <FooterLogin>
-        <Link href="/" passHref>
-          <a>© &nbsp;welcoming, Co., Ltd.</a>
-        </Link>
-        . All Rights Reserved
-      </FooterLogin>
+      <AuthFooter />
     </MainLogin>
   );
 };
@@ -272,9 +268,4 @@ const ListLink = styled.ul`
   & li {
     margin: 0 ${pxToRem(10)};
   }
-`;
-
-const FooterLogin = styled.footer`
-  padding: ${pxToRem(30)} 0;
-  font-size: ${pxToRem(14)};
 `;
