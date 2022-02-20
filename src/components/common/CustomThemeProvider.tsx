@@ -1,38 +1,10 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useState } from 'react';
-import { GlobalStyles } from '../../styles/globals';
-import { mode } from '../../styles/theme';
+import { GlobalStyles } from '@styles/globals';
+import { useDarkMode } from '@hooks/useDarkMode';
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState(mode.light);
-  const [dark, setDark] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-    if (
-      window.localStorage.getItem('welcoming-theme') === 'dark' ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches &&
-        !window.localStorage.getItem('welcoming-theme'))
-    ) {
-      setDark(true);
-    }
-  }, []);
-  useEffect(() => {
-    window.localStorage.setItem(
-      'welcoming-theme',
-      `${dark ? 'dark' : 'light'}`,
-    );
-    if (window.localStorage.getItem('welcoming-theme') === 'dark') {
-      setTheme(mode.dark);
-    } else if (window.localStorage.getItem('welcoming-theme') === 'light') {
-      setTheme(mode.light);
-    }
-  }, [dark]);
-  const toggleTheme = useCallback(() => {
-    setDark((curr) => !curr);
-  }, [dark]);
-
+  const { dark, theme, mounted, toggleTheme } = useDarkMode();
   const body = (
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyles(theme)} />
@@ -44,7 +16,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
   );
 
   if (!mounted) {
-    return <div style={{ visibility: 'hidden' }}>{body}</div>;
+    return <HiddenDiv>{body}</HiddenDiv>;
   }
   return body;
 };
@@ -59,4 +31,8 @@ const DarkModeBtn = styled.button`
   background: ${({ theme }) => theme.toggleMode.background};
   color: ${({ theme }) => theme.toggleMode.text};
   font-weight: 600;
+`;
+
+const HiddenDiv = styled.div`
+  visibility: hidden;
 `;
