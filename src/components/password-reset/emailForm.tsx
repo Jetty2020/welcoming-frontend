@@ -9,7 +9,7 @@ import {
 } from '@generated/sendEmailMutation';
 
 interface EmailFormPros {
-  code: number;
+  code: string;
   codeForm: boolean;
   setCodeForm: (value: boolean) => void;
   email: { current: string };

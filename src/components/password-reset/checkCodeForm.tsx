@@ -8,10 +8,11 @@ import {
   sendEmailMutation,
   sendEmailMutationVariables,
 } from '@generated/sendEmailMutation';
+import { genCode } from '@utils/genCode';
 import { SEND_EMAIL_MUTATION } from './emailForm';
 
 interface CheckCodeFormProps {
-  code: number;
+  code: string;
   email: { current: string };
 }
 
@@ -45,7 +46,7 @@ export const CheckCodeForm = ({ code, email }: CheckCodeFormProps) => {
     handleSubmit,
     formState: { isValid },
   } = useForm<{
-    code: number;
+    code: string;
   }>({
     mode: 'onChange',
   });
@@ -68,14 +69,14 @@ export const CheckCodeForm = ({ code, email }: CheckCodeFormProps) => {
   });
 
   const sendEmail = () => {
-    const genCode = Math.floor(Math.random() * 1000000);
-    setNewCode(genCode);
+    const genNewCode = genCode();
+    setNewCode(genNewCode);
     if (!loading) {
       sendEmailMutation({
         variables: {
           sendEmailInput: {
             email: email.current,
-            code: genCode,
+            code: genNewCode,
           },
         },
       });
@@ -88,7 +89,7 @@ export const CheckCodeForm = ({ code, email }: CheckCodeFormProps) => {
   );
 
   const checkCode = () => {
-    if (+newCode === +getValues().code) {
+    if (newCode.toString() === getValues().code) {
       router.push('/auth/login');
     } else {
       setErrorMessage('올바른 인증코드가 아닙니다.');

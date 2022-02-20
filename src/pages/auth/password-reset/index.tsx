@@ -7,12 +7,13 @@ import { ChevronLeft } from 'public/icons';
 import { pxToRem } from '@utils/pxToRem';
 import { EmailForm } from '@components/password-reset/emailForm';
 import { CheckCodeForm } from '@components/password-reset/checkCodeForm';
+import { genCode } from '@utils/genCode';
 
 const PasswordReset: NextPage = () => {
   const router = useRouter();
   const [codeForm, setCodeForm] = useState(false);
   const email = useRef('');
-  const code = useRef(Math.floor(Math.random() * 1000000));
+  const code = useRef(genCode());
 
   return (
     <MainPasswordReset>
