@@ -4,3 +4,7 @@ export * from './chevron-left';
 export * from './chevron-right';
 export * from './dark-icon';
 export * from './light-icon';
+export * from './hamburger-menu';
+export * from './home';
+export * from './person';
+export * from './search';
