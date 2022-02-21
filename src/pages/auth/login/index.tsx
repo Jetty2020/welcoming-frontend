@@ -15,7 +15,7 @@ import {
   loginMutation,
   loginMutationVariables,
 } from '@generated/loginMutation';
-import { AuthFooter } from '@components/common/auth/Footer';
+import { AuthFooter } from '@components/auth/Footer';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {

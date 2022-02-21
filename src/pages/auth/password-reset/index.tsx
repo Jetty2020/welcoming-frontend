@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { ChevronLeft } from 'public/icons';
 import { pxToRem } from '@utils/pxToRem';
-import { EmailForm } from '@components/password-reset/EmailForm';
-import { CheckCodeForm } from '@components/password-reset/CheckCodeForm';
+import { EmailForm } from '@components/auth/password-reset/EmailForm';
+import { CheckCodeForm } from '@components/auth/password-reset/CheckCodeForm';
 import { genCode } from '@utils/genCode';
-import { AuthFooter } from '@components/common/auth/Footer';
-import { PasswordForm } from '@components/password-reset/PasswordForm';
+import { AuthFooter } from '@components/auth/Footer';
+import { PasswordForm } from '@components/auth/password-reset/PasswordForm';
 import { GRAY_900 } from '@constants/colors';
 
 const PasswordReset: NextPage = () => {
