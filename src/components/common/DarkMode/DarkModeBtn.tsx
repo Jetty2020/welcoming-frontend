@@ -1,16 +1,13 @@
+import { isDark } from '@apollo';
+import { useReactiveVar } from '@apollo/client';
 import styled from '@emotion/styled';
 import { pxToRem } from '@utils/pxToRem';
 import { DarkIcon, LightIcon } from 'public/icons';
 
-interface DarkModeBtnProps {
-  dark: boolean;
-  toggleTheme: (value: boolean) => void;
-}
-
-export const DarkModeBtn = ({ dark, toggleTheme }: DarkModeBtnProps) => {
+export const DarkModeBtn = () => {
   return (
-    <StyledButton type="button" onClick={() => toggleTheme(!dark)}>
-      {dark ? <DarkIcon /> : <LightIcon />}
+    <StyledButton type="button" onClick={() => isDark(!isDark())}>
+      {isDark() ? <DarkIcon /> : <LightIcon />}
     </StyledButton>
   );
 };
