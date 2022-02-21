@@ -1,8 +1,18 @@
 import styled from '@emotion/styled';
+import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
-import { Cart, HamburgerMenu, Home, Person, Search } from 'public/icons';
+import {
+  Cart,
+  DarkIcon,
+  HamburgerMenu,
+  Home,
+  LightIcon,
+  Person,
+  Search,
+} from 'public/icons';
 import { GRAY_900 } from '@constants/colors';
+import { isDark } from '@apollo';
 
 export const Navigation = () => {
   return (
@@ -16,14 +26,11 @@ export const Navigation = () => {
             </LinkLogo>
           </Link>
           <ListWish>
-            {/* <li>
-              <Link href="/" passHref>
-                <a>
-                  <WishList />
-                  <span className="sr-only">위시리스트</span>
-                </a>
-              </Link>
-            </li> */}
+            <li>
+              <button type="button" onClick={() => isDark(!isDark())}>
+                {useReactiveVar(isDark) ? <DarkIcon /> : <LightIcon />}
+              </button>
+            </li>
             <li>
               <Link href="/" passHref>
                 <a>
@@ -147,6 +154,11 @@ const ListWish = styled.ul`
   & svg {
     width: ${pxToRem(28)};
     fill: ${GRAY_900};
+    vertical-align: bottom;
+  }
+
+  & li:first-of-type {
+    margin-right: ${pxToRem(16)};
   }
 `;
 
