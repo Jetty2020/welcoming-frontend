@@ -2,7 +2,6 @@ import { Global, ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import { GlobalStyles } from '@styles/globals';
 import { useDarkMode } from '@hooks/useDarkMode';
-import { DarkModeBtn } from './DarkModeBtn';
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
   const { theme, mounted } = useDarkMode();
@@ -10,7 +9,6 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyles(theme)} />
       {children}
-      <DarkModeBtn />
     </ThemeProvider>
   );
 
