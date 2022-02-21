@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
 import { Cart, HamburgerMenu, Home, Person, Search } from 'public/icons';
+import { GRAY_900 } from '@constants/colors';
 
 export const Navigation = () => {
   return (
@@ -77,33 +78,33 @@ export const Navigation = () => {
         <NavList>
           <li>
             <Link href="/" passHref>
-              <a>
+              <BtnMenu>
                 <Home />홈
-              </a>
+              </BtnMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <a>
+              <BtnMenu>
                 <HamburgerMenu />
                 카테고리
-              </a>
+              </BtnMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <a>
+              <BtnMenu>
                 <Search />
                 검색
-              </a>
+              </BtnMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <a>
+              <BtnMenu>
                 <Person />
                 마이페이지
-              </a>
+              </BtnMenu>
             </Link>
           </li>
         </NavList>
@@ -118,7 +119,8 @@ const Header = styled.header`
   right: 0;
   left: 0;
   z-index: 10;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
+  background-color: rgba(255, 255, 255, 0.1);
 `;
 
 const HeaderRow = styled.div`
@@ -144,7 +146,7 @@ const ListWish = styled.ul`
 
   & svg {
     width: ${pxToRem(28)};
-    margin-left: ${pxToRem(10)};
+    fill: ${GRAY_900};
   }
 `;
 
@@ -153,14 +155,16 @@ const HeaderNav = styled.ul`
   display: flex;
 
   & li {
+    flex: 1;
     min-width: fit-content;
+    text-align: center;
   }
 `;
 
 const LinkMenu = styled.a`
   display: block;
   padding: ${pxToRem(10)};
-  background-color: rgba(0, 0, 0, 0.3);
+  color: ${GRAY_900};
 `;
 
 const NavBar = styled.nav`
@@ -170,6 +174,7 @@ const NavBar = styled.nav`
   right: 0;
   z-index: 10;
 `;
+
 const NavList = styled.ul`
   display: flex;
   background-color: ${({ theme }) => theme.background.default};
@@ -177,15 +182,14 @@ const NavList = styled.ul`
   & li {
     width: 100%;
   }
+`;
 
-  & a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: ${pxToRem(12)} 0;
-    font-size: ${pxToRem(12)};
-  }
+const BtnMenu = styled.a`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${pxToRem(12)} 0;
+  font-size: ${pxToRem(12)};
 
   & svg {
     width: ${pxToRem(22)};
