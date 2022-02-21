@@ -13,7 +13,8 @@ import {
   getAllPostsQuery,
   getAllPostsQueryVariables,
 } from '@generated//getAllPostsQuery';
-import { Carousel } from '../components/landing/Carousel';
+import { Layout } from '@components/layouts/Layout';
+import { Carousel } from '@components/landing/Carousel';
 
 const Home: NextPage = () => {
   const TODAYDEAL_QUERY = gql`
@@ -98,9 +99,11 @@ const Home: NextPage = () => {
   return (
     <>
       <PageTitle title="홈" />
-      <main>
-        <Carousel />
-      </main>
+      <Layout>
+        <main>
+          <Carousel />
+        </main>
+      </Layout>
     </>
   );
 };
