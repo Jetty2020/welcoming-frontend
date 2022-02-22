@@ -13,12 +13,9 @@ import {
 } from 'public/icons';
 import { GRAY_900 } from '@constants/colors';
 import { isDark } from '@apollo';
+import { EmotionProps } from 'src/types';
 
-interface MobileNavProps {
-  className?: string;
-}
-
-export const MobileNav = ({ className }: MobileNavProps) => {
+export const MobileNav = ({ className }: EmotionProps) => {
   return (
     <>
       <Header className={className}>
@@ -114,6 +111,10 @@ export const MobileNav = ({ className }: MobileNavProps) => {
   );
 };
 
+MobileNav.defaultProps = {
+  className: '',
+};
+
 const Header = styled.header`
   position: fixed;
   top: 0;
@@ -206,7 +207,3 @@ const BtnMenu = styled.a`
     margin-bottom: ${pxToRem(6)};
   }
 `;
-
-MobileNav.defaultProps = {
-  className: '',
-};
