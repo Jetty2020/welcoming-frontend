@@ -2,6 +2,7 @@ import { Theme, ThemeMode } from '@emotion/react';
 import {
   GRAY_900,
   GRAY_800,
+  GRAY_600,
   GRAY_400,
   GRAY_300,
   GRAY_50,
@@ -19,6 +20,7 @@ declare module '@emotion/react' {
     };
     text: {
       default: string;
+      lighter: string;
       primary: string;
     };
     toggleMode: {
@@ -74,6 +76,7 @@ const light: ThemeMode = {
   },
   text: {
     default: `${GRAY_900}`,
+    lighter: `${GRAY_600}`,
     primary: `${PRIMARY_900}`,
   },
   toggleMode: {
@@ -90,6 +93,7 @@ const dark: ThemeMode = {
   },
   text: {
     default: `${GRAY_50}`,
+    lighter: `${GRAY_400}`,
     primary: `${PRIMARY_900}`,
   },
   toggleMode: {
