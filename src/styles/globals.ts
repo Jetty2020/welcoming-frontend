@@ -1,7 +1,7 @@
 import { css, Theme } from '@emotion/react';
 
 export const GlobalStyles = (theme: Theme) => css`
-  /* http://meyerweb.com/eric/tools/css/reset/ 
+  /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -171,7 +171,7 @@ export const GlobalStyles = (theme: Theme) => css`
   body {
     background: ${theme.background.default};
     color: ${theme.text.default};
-    font-family: 'Pretendard-400';
+    font-family: 'Pretendard';
   }
 `;
 
