@@ -1,8 +1,6 @@
-interface DesktopNavProps {
-  className?: string;
-}
+import { EmotionProps } from 'src/types';
 
-export const DesktopNav = ({ className }: DesktopNavProps) => {
+export const DesktopNav = ({ className }: EmotionProps) => {
   return <div className={className}>DesktopNav</div>;
 };
 
