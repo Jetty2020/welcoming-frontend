@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
@@ -16,6 +17,7 @@ import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
 
 export const MobileNav = ({ className }: EmotionProps) => {
+  const theme = useTheme();
   const { scrollY } = useScrollY();
 
   return (
@@ -25,7 +27,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
         <HeaderRow>
           <Link href="/" passHref>
             <LinkLogo>
-              <img src="/logo/logo_txt_b.png" alt="어서와 우리집 로고" />
+              <img src={theme.header.logo} alt="어서와 우리집 로고" />
             </LinkLogo>
           </Link>
           <ListWish>
