@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { isDark } from '@apollo';
 import { useReactiveVar } from '@apollo/client';
@@ -7,6 +8,7 @@ import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
+  const theme = useTheme();
   const { scrollY } = useScrollY();
 
   return (
@@ -15,7 +17,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
       <HeaderRow>
         <Link href="/" passHref>
           <LinkLogo>
-            <img src="/logo/logo_txt.png" alt="어서와 우리집 로고" />
+            <img src={theme.header.logo} alt="어서와 우리집 로고" />
           </LinkLogo>
         </Link>
         <ListUserMenu>
@@ -113,6 +115,7 @@ const Header = styled.header`
 
   &[data-scroll='true'] {
     background-color: ${({ theme }) => theme.header.background};
+    transform: translateY(-94px);
   }
 `;
 
