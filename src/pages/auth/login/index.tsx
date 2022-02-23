@@ -162,7 +162,7 @@ const Header = styled.header`
   right: 0;
   left: 0;
   height: ${pxToRem(50)};
-  background-color: ${({ theme }) => theme.background.header};
+  background-color: ${({ theme }) => theme.header.background};
   color: ${({ theme }) => theme.text.default};
 `;
 
