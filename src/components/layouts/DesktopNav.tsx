@@ -4,7 +4,6 @@ import { isDark } from '@apollo';
 import { useReactiveVar } from '@apollo/client';
 import { Cart, DarkIcon, LightIcon, Search } from 'public/icons';
 import { EmotionProps } from 'src/types';
-import { GRAY_400 } from '@constants/colors';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   return (
@@ -57,7 +56,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
                 <LinkMenu>오늘의딜</LinkMenu>
               </Link>
             </li>
-            <li>
+            <li className="recentEvent">
               <Link href="/" passHref>
                 <LinkMenu>최신 기획전</LinkMenu>
               </Link>
@@ -105,14 +104,12 @@ const Header = styled.header`
   right: 0;
   left: 0;
   z-index: 10;
-  min-width: 850px;
   backdrop-filter: blur(2px);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: ${({ theme }) => theme.header.backgroundBlur};
 `;
 
 const HeaderRow = styled.div`
   display: flex;
-  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: center;
   padding: 10px 0;
@@ -140,6 +137,12 @@ const ListMenu = styled.ul`
 
   & li + li {
     margin-left: 30px;
+  }
+
+  & .recentEvent {
+    @media screen and (max-width: 860px) {
+      display: none;
+    }
   }
 `;
 

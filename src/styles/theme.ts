@@ -15,7 +15,6 @@ declare module '@emotion/react' {
   export interface ThemeMode {
     background: {
       default: string;
-      header: string;
       primary: string;
     };
     text: {
@@ -26,6 +25,10 @@ declare module '@emotion/react' {
     toggleMode: {
       background: string;
       text: string;
+    };
+    header: {
+      background: string;
+      backgroundBlur: string;
     };
   }
   export interface Theme extends ThemeMode {
@@ -73,7 +76,6 @@ interface ThemeGroup {
 const light: ThemeMode = {
   background: {
     default: `${GRAY_50}`,
-    header: `${WHITE}`,
     primary: `${PRIMARY_900}`,
   },
   text: {
@@ -85,12 +87,15 @@ const light: ThemeMode = {
     background: `${GRAY_50}`,
     text: `${GRAY_900}`,
   },
+  header: {
+    background: `${WHITE}`,
+    backgroundBlur: 'rgba(255, 255, 255, 0.1)',
+  },
 };
 
 const dark: ThemeMode = {
   background: {
     default: `${GRAY_800}`,
-    header: `${GRAY_900}`,
     primary: `${PRIMARY_900}`,
   },
   text: {
@@ -101,6 +106,10 @@ const dark: ThemeMode = {
   toggleMode: {
     background: `${GRAY_900}`,
     text: `${GRAY_50}`,
+  },
+  header: {
+    background: `${GRAY_900}`,
+    backgroundBlur: 'rgba(0, 0, 0, 0.1)',
   },
 };
 

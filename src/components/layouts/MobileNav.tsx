@@ -122,7 +122,7 @@ const Header = styled.header`
   left: 0;
   z-index: 10;
   backdrop-filter: blur(2px);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: ${({ theme }) => theme.header.backgroundBlur};
 `;
 
 const HeaderRow = styled.div`
@@ -148,7 +148,6 @@ const ListWish = styled.ul`
 
   & svg {
     width: ${pxToRem(28)};
-    fill: ${GRAY_900};
     vertical-align: bottom;
   }
 
@@ -175,7 +174,6 @@ const HeaderNav = styled.ul`
 const LinkMenu = styled.a`
   display: block;
   padding: ${pxToRem(10)};
-  color: ${GRAY_900};
 `;
 
 const NavBar = styled.nav`
