@@ -4,22 +4,10 @@ import { isDark } from '@apollo';
 import { useReactiveVar } from '@apollo/client';
 import { Cart, DarkIcon, LightIcon, Search } from 'public/icons';
 import { EmotionProps } from 'src/types';
-import { useEffect, useState } from 'react';
+import { useScrollY } from '@hooks/useScrollY';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
-  const [scrollY, setScrollY] = useState<number>(0);
-
-  useEffect(() => {
-    let mounted = true;
-    window.addEventListener('scroll', () => {
-      if (mounted) {
-        setScrollY(window.pageYOffset);
-      }
-    });
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const { scrollY } = useScrollY();
 
   return (
     <Header className={className} data-scroll={scrollY > 10}>
