@@ -11,14 +11,16 @@ import {
   Person,
   Search,
 } from 'public/icons';
-import { GRAY_900 } from '@constants/colors';
 import { isDark } from '@apollo';
 import { EmotionProps } from 'src/types';
+import { useScrollY } from '@hooks/useScrollY';
 
 export const MobileNav = ({ className }: EmotionProps) => {
+  const { scrollY } = useScrollY();
+
   return (
     <>
-      <Header className={className}>
+      <Header className={className} data-scroll={scrollY > 10}>
         <h1 className="sr-only">어서와 우리집</h1>
         <HeaderRow>
           <Link href="/" passHref>
@@ -123,6 +125,11 @@ const Header = styled.header`
   z-index: 10;
   backdrop-filter: blur(2px);
   background-color: ${({ theme }) => theme.header.backgroundBlur};
+  transition: all 0.5s ease;
+
+  &[data-scroll='true'] {
+    background-color: ${({ theme }) => theme.header.background};
+  }
 `;
 
 const HeaderRow = styled.div`
