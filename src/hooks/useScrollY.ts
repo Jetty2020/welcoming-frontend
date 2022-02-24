@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useScrollY = () => {
-  const [scrollY, setScrollY] = useState<number>(0);
+  const [isScroll, setIsScroll] = useState<boolean>(false);
 
   useEffect(() => {
     let mounted = true;
     window.addEventListener('scroll', () => {
       if (mounted) {
-        setScrollY(window.pageYOffset);
+        if (window.pageYOffset > 10) {
+          setIsScroll(true);
+        } else {
+          setIsScroll(false);
+        }
       }
     });
     return () => {
@@ -15,5 +19,5 @@ export const useScrollY = () => {
     };
   }, []);
 
-  return { scrollY };
+  return { isScroll };
 };
