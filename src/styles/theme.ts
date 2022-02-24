@@ -1,4 +1,5 @@
 import { Theme, ThemeMode } from '@emotion/react';
+import { pxToRem } from '@utils/pxToRem';
 import {
   GRAY_900,
   GRAY_800,
