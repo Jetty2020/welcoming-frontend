@@ -131,12 +131,12 @@ const HeaderRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${pxToRem(10)} 0;
 `;
 
 const LinkLogo = styled.a`
   display: block;
   width: ${pxToRem(200)};
+  margin: ${pxToRem(10)} 0;
 `;
 
 const ListUserMenu = styled.ul`
@@ -144,7 +144,7 @@ const ListUserMenu = styled.ul`
   align-items: center;
   position: absolute;
   top: ${pxToRem(20)};
-  right: ${pxToRem(10)};
+  right: ${pxToRem(15)};
   font-size: ${pxToRem(14)};
   font-weight: 600;
 
@@ -155,15 +155,23 @@ const ListUserMenu = styled.ul`
 
 const ListMenu = styled.ul`
   display: flex;
-  padding: ${pxToRem(10)} ${pxToRem(30)} ${pxToRem(10)} 0;
   font-size: ${pxToRem(18)};
   font-weight: 600;
 
-  & li + li {
-    margin-left: ${pxToRem(30)};
+  & a {
+    display: block;
+    padding: ${pxToRem(15)} ${pxToRem(10)} ${pxToRem(12)};
+    box-sizing: border-box;
+    border-bottom: ${pxToRem(3)} solid transparent;
+    transition: border-color 0.3s;
   }
 
-  & .recentEvent {
+  & a:hover,
+  & a:active {
+    border-color: ${({ theme }) => theme.text.default};
+  }
+
+  & li.recentEvent {
     @media screen and (max-width: ${pxToRem(860)}) {
       display: none;
     }
@@ -181,7 +189,7 @@ const ListBtns = styled.ul`
 const LabelSearch = styled.label`
   display: flex;
   align-items: center;
-  margin-right: ${pxToRem(15)};
+  margin: 0 ${pxToRem(15)} 0 ${pxToRem(30)};
   padding: 0 ${pxToRem(15)};
   border-radius: ${pxToRem(30)};
   background-color: ${({ theme }) => theme.input.background};
