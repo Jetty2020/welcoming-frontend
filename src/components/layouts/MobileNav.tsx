@@ -18,11 +18,11 @@ import { useScrollY } from '@hooks/useScrollY';
 
 export const MobileNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
-  const { scrollY } = useScrollY();
+  const { isScroll } = useScrollY();
 
   return (
     <>
-      <Header className={className} data-scroll={scrollY > 10}>
+      <Header className={className} data-scroll={isScroll}>
         <h1 className="sr-only">어서와 우리집</h1>
         <HeaderRow>
           <Link href="/" passHref>

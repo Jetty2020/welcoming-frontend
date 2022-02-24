@@ -9,10 +9,10 @@ import { useScrollY } from '@hooks/useScrollY';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
-  const { scrollY } = useScrollY();
+  const { isScroll } = useScrollY();
 
   return (
-    <Header className={className} data-scroll={scrollY > 10}>
+    <Header className={className} data-scroll={isScroll}>
       <h1 className="sr-only">어서와 우리집</h1>
       <HeaderRow>
         <Link href="/" passHref>
@@ -43,32 +43,32 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           <ListMenu>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>스토어홈</LinkMenu>
+                <a>스토어홈</a>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>카테고리</LinkMenu>
+                <a>카테고리</a>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>베스트</LinkMenu>
+                <a>베스트</a>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>오늘의딜</LinkMenu>
+                <a>오늘의딜</a>
               </Link>
             </li>
             <li className="recentEvent">
               <Link href="/" passHref>
-                <LinkMenu>최신 기획전</LinkMenu>
+                <a>최신 기획전</a>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>기획전</LinkMenu>
+                <a>기획전</a>
               </Link>
             </li>
           </ListMenu>
@@ -156,8 +156,6 @@ const ListMenu = styled.ul`
     }
   }
 `;
-
-const LinkMenu = styled.a``;
 
 const ListBtns = styled.ul`
   display: flex;
