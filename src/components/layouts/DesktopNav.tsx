@@ -9,10 +9,10 @@ import { useScrollY } from '@hooks/useScrollY';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
-  const { isScroll } = useScrollY();
+  const { isScroll, isUpward } = useScrollY();
 
   return (
-    <Header className={className} data-scroll={isScroll}>
+    <Header className={className} data-scroll={isScroll} data-upward={isUpward}>
       <h1 className="sr-only">어서와 우리집</h1>
       <HeaderRow>
         <Link href="/" passHref>
@@ -115,6 +115,9 @@ const Header = styled.header`
 
   &[data-scroll='true'] {
     background-color: ${({ theme }) => theme.header.background};
+  }
+
+  &[data-upward='false'] {
     transform: translateY(-94px);
   }
 `;
