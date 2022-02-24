@@ -182,7 +182,15 @@ const HeaderNav = styled.ul`
 
 const LinkMenu = styled.a`
   display: block;
-  padding: ${pxToRem(10)};
+  margin: 0 ${pxToRem(10)};
+  padding: ${pxToRem(10)} 0 ${pxToRem(7)};
+  border-bottom: ${pxToRem(3)} solid transparent;
+  font-size: ${pxToRem(15)};
+  font-weight: 600;
+
+  &.active {
+    border-color: ${({ theme }) => theme.text.default};
+  }
 `;
 
 const NavBar = styled.nav`
