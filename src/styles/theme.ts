@@ -1,4 +1,5 @@
 import { Theme, ThemeMode } from '@emotion/react';
+import { pxToRem } from '@utils/pxToRem';
 import {
   GRAY_900,
   GRAY_800,
@@ -131,7 +132,7 @@ export const input: INPUT = {
 };
 
 export const mediaQuery: MEDIA = {
-  tablet: '768px',
+  tablet: `${pxToRem(768)}`,
 };
 
 export const mode: ThemeGroup = {
