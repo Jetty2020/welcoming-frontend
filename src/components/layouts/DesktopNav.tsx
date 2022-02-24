@@ -6,6 +6,8 @@ import { useReactiveVar } from '@apollo/client';
 import { Cart, DarkIcon, LightIcon, Search } from 'public/icons';
 import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
+import { GRAY_900 } from '@constants/colors';
+import { pxToRem } from '@utils/pxToRem';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
@@ -43,7 +45,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           <ListMenu>
             <li>
               <Link href="/" passHref>
-                <a>스토어홈</a>
+                <a>홈</a>
               </Link>
             </li>
             <li>
@@ -58,7 +60,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
             </li>
             <li>
               <Link href="/" passHref>
-                <a>오늘의딜</a>
+                <a>웰컴딜</a>
               </Link>
             </li>
             <li className="recentEvent">
@@ -109,11 +111,11 @@ const Header = styled.header`
   right: 0;
   left: 0;
   z-index: 10;
-  padding-top: 10px;
+  padding-top: ${pxToRem(10)};
   backdrop-filter: blur(2px);
   background-color: ${({ theme }) => theme.header.backgroundBlur};
   transition: all 0.5s ease;
-  transform: translateY(-104px);
+  transform: translateY(${pxToRem(-104)});
 
   &[data-scroll='true'] {
     background-color: ${({ theme }) => theme.header.background};
@@ -129,36 +131,40 @@ const HeaderRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0;
+  padding: ${pxToRem(10)} 0;
 `;
 
 const LinkLogo = styled.a`
   display: block;
-  width: 200px;
+  width: ${pxToRem(200)};
 `;
 
 const ListUserMenu = styled.ul`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: ${pxToRem(20)};
+  right: ${pxToRem(10)};
+  font-size: ${pxToRem(14)};
+  font-weight: 600;
 
   & li + li {
-    margin-left: 15px;
+    margin-left: ${pxToRem(15)};
   }
 `;
 
 const ListMenu = styled.ul`
   display: flex;
-  padding: 10px 30px 10px 0;
+  padding: ${pxToRem(10)} ${pxToRem(30)} ${pxToRem(10)} 0;
+  font-size: ${pxToRem(18)};
+  font-weight: 600;
 
   & li + li {
-    margin-left: 30px;
+    margin-left: ${pxToRem(30)};
   }
 
   & .recentEvent {
-    @media screen and (max-width: 860px) {
+    @media screen and (max-width: ${pxToRem(860)}) {
       display: none;
     }
   }
@@ -168,20 +174,20 @@ const ListBtns = styled.ul`
   display: flex;
 
   & li {
-    width: 20px;
+    width: ${pxToRem(20)};
   }
 `;
 
 const LabelSearch = styled.label`
   display: flex;
   align-items: center;
-  margin-right: 15px;
-  padding: 0 15px;
-  border-radius: 30px;
+  margin-right: ${pxToRem(15)};
+  padding: 0 ${pxToRem(15)};
+  border-radius: ${pxToRem(30)};
   background-color: ${({ theme }) => theme.input.background};
 
   & input {
-    padding: 10px 0;
+    padding: ${pxToRem(10)} 0;
     border: 0;
     background: none;
   }
@@ -192,10 +198,14 @@ const LabelSearch = styled.label`
 `;
 
 const BtnSearch = styled.button`
-  width: 18px;
+  width: ${pxToRem(18)};
+
+  & svg {
+    fill: ${GRAY_900};
+  }
 `;
 
 const BtnDarkMode = styled.button`
-  width: 20px;
-  margin-left: 15px;
+  width: ${pxToRem(20)};
+  margin-left: ${pxToRem(15)};
 `;
