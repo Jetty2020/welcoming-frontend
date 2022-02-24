@@ -109,16 +109,19 @@ const Header = styled.header`
   right: 0;
   left: 0;
   z-index: 10;
+  padding-top: 10px;
   backdrop-filter: blur(2px);
   background-color: ${({ theme }) => theme.header.backgroundBlur};
   transition: all 0.5s ease;
+  transform: translateY(-104px);
 
   &[data-scroll='true'] {
     background-color: ${({ theme }) => theme.header.background};
   }
 
-  &[data-upward='false'] {
-    transform: translateY(-94px);
+  &[data-upward='true'],
+  &:hover {
+    transform: translateY(0);
   }
 `;
 
@@ -138,6 +141,7 @@ const ListUserMenu = styled.ul`
   display: flex;
   align-items: center;
   position: absolute;
+  top: 20px;
   right: 10px;
 
   & li + li {
