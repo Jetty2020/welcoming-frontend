@@ -50,7 +50,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
           <HeaderNav>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>스토어홈</LinkMenu>
+                <LinkMenu>홈</LinkMenu>
               </Link>
             </li>
             <li>
@@ -60,7 +60,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
             </li>
             <li>
               <Link href="/" passHref>
-                <LinkMenu>오늘의딜</LinkMenu>
+                <LinkMenu>웰컴딜</LinkMenu>
               </Link>
             </li>
             <li>
@@ -153,19 +153,19 @@ const ListWish = styled.ul`
   display: flex;
   align-items: center;
   position: absolute;
-  right: ${pxToRem(20)};
+  right: ${pxToRem(26)};
 
   & svg {
-    width: ${pxToRem(28)};
+    width: ${pxToRem(22)};
     vertical-align: bottom;
   }
 
   & button svg {
-    width: ${pxToRem(24)};
+    width: ${pxToRem(20)};
   }
 
   & li + li {
-    margin-left: ${pxToRem(16)};
+    margin-left: ${pxToRem(20)};
   }
 `;
 
