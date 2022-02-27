@@ -1,7 +1,9 @@
 import { Theme, ThemeMode } from '@emotion/react';
+import { pxToRem } from '@utils/pxToRem';
 import {
   GRAY_900,
   GRAY_800,
+  GRAY_600,
   GRAY_400,
   GRAY_300,
   GRAY_50,
@@ -14,16 +16,21 @@ declare module '@emotion/react' {
   export interface ThemeMode {
     background: {
       default: string;
-      header: string;
       primary: string;
     };
     text: {
       default: string;
+      lighter: string;
       primary: string;
     };
     toggleMode: {
       background: string;
       text: string;
+    };
+    header: {
+      background: string;
+      backgroundBlur: string;
+      logo: string;
     };
   }
   export interface Theme extends ThemeMode {
@@ -33,6 +40,7 @@ declare module '@emotion/react' {
       text: string;
     };
     input: {
+      background: string;
       border: string;
       error: string;
       placeholder: string;
@@ -51,6 +59,7 @@ interface BUTTON {
 }
 
 interface INPUT {
+  background: string;
   border: string;
   error: string;
   placeholder: string;
@@ -69,32 +78,42 @@ interface ThemeGroup {
 const light: ThemeMode = {
   background: {
     default: `${GRAY_50}`,
-    header: `${WHITE}`,
     primary: `${PRIMARY_900}`,
   },
   text: {
     default: `${GRAY_900}`,
+    lighter: `${GRAY_600}`,
     primary: `${PRIMARY_900}`,
   },
   toggleMode: {
     background: `${GRAY_50}`,
     text: `${GRAY_900}`,
   },
+  header: {
+    background: `${WHITE}`,
+    backgroundBlur: 'rgba(255, 255, 255, 0.1)',
+    logo: '/logo/logo.png',
+  },
 };
 
 const dark: ThemeMode = {
   background: {
     default: `${GRAY_800}`,
-    header: `${GRAY_900}`,
     primary: `${PRIMARY_900}`,
   },
   text: {
     default: `${GRAY_50}`,
+    lighter: `${GRAY_400}`,
     primary: `${PRIMARY_900}`,
   },
   toggleMode: {
     background: `${GRAY_900}`,
     text: `${GRAY_50}`,
+  },
+  header: {
+    background: `${GRAY_900}`,
+    backgroundBlur: 'rgba(0, 0, 0, 0.1)',
+    logo: '/logo/logo_w.png',
   },
 };
 
@@ -105,6 +124,7 @@ export const button: BUTTON = {
 };
 
 export const input: INPUT = {
+  background: `${GRAY_50}`,
   border: `1px solid ${GRAY_400}`,
   error: `${ERROR}`,
   placeholder: `${GRAY_400}`,
@@ -112,7 +132,7 @@ export const input: INPUT = {
 };
 
 export const mediaQuery: MEDIA = {
-  tablet: '768px',
+  tablet: `${pxToRem(768)}`,
 };
 
 export const mode: ThemeGroup = {
