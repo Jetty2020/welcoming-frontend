@@ -1,8 +1,9 @@
 import { gql, useMutation } from '@apollo/client';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AuthFooter } from '@components/common/auth/Footer';
+import { AuthFooter } from '@components/auth/Footer';
 import PageTitle from '@components/common/PageTitle';
 import {
   createAccountMutation,
@@ -52,23 +53,71 @@ const SignUp: NextPage = () => {
       <SectionSignUp>
         <h2 className="sr-only">회원가입</h2>
         <Contlogo>
-          <img src="/logo/logo_txt.png" alt="어서와 우리집 로고" />
+          <img src="/logo/logo.png" alt="어서와 우리집 로고" />
         </Contlogo>
         <form>
           <label htmlFor="emailDomain">
-            <select id="emailDomain">
-              <option disabled>선택하세요</option>
-              <option value="naver.com">naver.com</option>
-              <option value="daum.net">daum.net</option>
-              <option value="hanmail.net">hanmail.net</option>
-              <option value="hotmail.com">hotmail.com</option>
-              <option value="gmail.com">gmail.com</option>
-              <option value="nate.com">navnateer.com</option>
-              <option value="icloud.com">icloud.com</option>
-              <option value="outlook.com">outlook.com</option>
-            </select>
+            이메일
+            <input type="text" placeholder="이메일" />
           </label>
+          <span>필수 입력 항목입니다.</span>
+          <span>이메일 형식이 올바르지 않습니다.</span>
+          <span>이미 가입한 이메일입니다.</span>
+          <label htmlFor="password">
+            비밀번호
+            <span>
+              비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로
+              입력해주세요.
+            </span>
+            <input type="password" placeholder="비밀번호" />
+          </label>
+          <span>
+            비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리이어야
+            합니다.
+          </span>
+          <label htmlFor="passwordCheck">
+            비밀번호 확인
+            <input type="password" placeholder="비밀번호 확인" />
+          </label>
+          <span>비밀번호가 일치하지 않습니다.</span>
+          <label htmlFor="nickName">
+            별명
+            <span>다른 유저와 겹치지 않는 닉네임을 입력해주세요.(2~15자)</span>
+            <input type="text" placeholder="닉네임 (2~15자)" />
+          </label>
+          <span>사용 중인 별명입니다.</span>
+          <span>별명은 2~15자리이어야 합니다.</span>
+          <div>
+            약관동의
+            <div>
+              <label htmlFor="agreeAll">
+                <input type="checkbox" id="agreeAll" />
+                전체동의
+              </label>
+              <label htmlFor="agreeAll">
+                <input type="checkbox" id="agreeAll" />만 14세 이상이니다.
+                <span>&#40;필수&#41;</span>
+              </label>
+              <label htmlFor="agreeAll">
+                <input type="checkbox" id="agreeAll" />
+                이용약관
+                <span>&#40;필수&#41;</span>
+              </label>
+              <label htmlFor="agreeAll">
+                <input type="checkbox" id="agreeAll" />
+                개인정보수집 및 이용동의
+                <span>&#40;필수&#41;</span>
+              </label>
+            </div>
+          </div>
+          <button type="submit">회원가입하기</button>
         </form>
+        <p>
+          이미 아이디가 있으신가요?
+          <Link href="login">
+            <a>로그인</a>
+          </Link>
+        </p>
       </SectionSignUp>
       <AuthFooter />
     </MainSignUp>
@@ -94,7 +143,7 @@ const Header = styled.header`
   right: 0;
   left: 0;
   height: ${pxToRem(50)};
-  background-color: ${({ theme }) => theme.background.header};
+  background-color: ${({ theme }) => theme.header.background};
   color: ${({ theme }) => theme.text.default};
 `;
 
