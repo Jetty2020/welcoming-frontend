@@ -2,11 +2,11 @@
   <style>
     @media (prefers-color-scheme: dark) {
       #logo {
-        fill: #fff;
+        fill: #FAFAFA;
       }
     }
   </style>
-  <g id="logo" transform="translate(0 ,209) scale(0.1,-0.1)" fill="#FF9100" stroke="none">
+  <g id="logo" transform="translate(0 ,209) scale(0.1,-0.1)" fill="#1B1B1B" stroke="none">
     <path d="M146 2080 c-84 -27 -99 -82 -94 -355 3 -219 7 -234 65 -272 41 -27
     162 -25 200 3 58 42 63 68 63 299 0 199 -1 213 -22 255 -14 27 -35 51 -53 59
     -37 18 -120 24 -159 11z m99 -320 l0 -215 -30 0 -30 0 -3 204 c-3 215 1 235
