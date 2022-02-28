@@ -43,7 +43,7 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
       resetPassword: { ok },
     } = data;
     if (ok) {
-      router.push('/auth/login');
+      router.push('/auth/sign-in');
     } else {
       setErrorMsg('비밀번호 재설정에 실패했습니다.');
     }

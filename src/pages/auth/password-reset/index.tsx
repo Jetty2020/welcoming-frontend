@@ -21,7 +21,7 @@ const PasswordReset: NextPage = () => {
   return (
     <MainPasswordReset>
       <Header>
-        <BtnClose type="button" onClick={() => router.push('/auth/login')}>
+        <BtnClose type="button" onClick={() => router.push('/auth/sign-in')}>
           <ChevronLeft />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
