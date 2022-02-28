@@ -23,6 +23,7 @@ class MyDocument extends Document {
           <meta property="og:title" content="Welcoming site" />
           <meta property="og:description" content="Enjoy home decorating" />
           <meta property="og:image" content="/vercel.svg" />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
           <link href="/fonts/fonts.css" rel="stylesheet" />
         </Head>
         <body>
