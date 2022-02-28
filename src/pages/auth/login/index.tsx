@@ -92,7 +92,7 @@ const Login: NextPage = () => {
       <SectionLogin>
         <h2 className="sr-only">로그인</h2>
         <Contlogo>
-          <img src="/logo/logo_txt.png" alt="어서와 우리집 로고" />
+          <img src="/logo/logo.png" alt="어서와 우리집 로고" />
         </Contlogo>
         <FormLogin onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">
@@ -249,9 +249,11 @@ const BtnLogin = styled.button`
   margin: ${pxToRem(20)} 0;
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
-  color: ${({ theme }) => theme.button.text};
   background-color: ${({ theme }) => theme.button.background};
-  font-size: ${pxToRem(16)};
+  font-size: ${({ theme }) => pxToRem(theme.button.fontSize)};
+  font-weight: ${({ theme }) => theme.button.fontWeight};
+  letter-spacing: ${({ theme }) => theme.button.letterSpacing};
+  color: ${({ theme }) => theme.button.text};
 
   &:disabled {
     background-color: ${({ theme }) => theme.button.disabled};
