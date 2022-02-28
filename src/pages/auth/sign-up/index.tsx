@@ -11,7 +11,7 @@ import {
 } from '@generated/createAccountMutation';
 import { pxToRem } from '@utils/pxToRem';
 import { Close } from 'public/icons';
-import { GRAY_500, PRIMARY_900, WHITE } from '@constants/colors';
+import { GRAY_500, GRAY_900, PRIMARY_900, WHITE } from '@constants/colors';
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
@@ -135,7 +135,6 @@ const MainSignUp = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 `;
 
 const Header = styled.header`
@@ -165,15 +164,11 @@ const BtnClose = styled.button`
 `;
 
 const SectionSignUp = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   box-sizing: border-box;
   width: 100%;
   max-width: ${pxToRem(450)};
   padding: ${pxToRem(30)};
   margin: ${pxToRem(50)} 0;
-  flex-grow: 1;
 `;
 
 const Contlogo = styled.div`
@@ -187,16 +182,17 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  font-size: 16px;
+  font-size: ${pxToRem(16)};
   font-weight: 700;
+
+  &:not(:first-of-type) {
+    margin-top: ${pxToRem(30)};
+  }
 `;
 
-const Desc = styled.span`
-  margin-top: 12px;
-  font-size: 14px;
+const Desc = styled.p`
+  margin-top: ${pxToRem(12)};
+  font-size: ${pxToRem(14)};
   font-weight: 400;
   line-height: 1.4;
   color: ${GRAY_500};
@@ -204,7 +200,7 @@ const Desc = styled.span`
 
 const Input = styled.input`
   width: 100%;
-  margin-top: 12px;
+  margin-top: ${pxToRem(12)};
   padding: ${pxToRem(15)};
   box-sizing: border-box;
   border: ${({ theme }) => theme.input.border};
@@ -220,7 +216,6 @@ const Input = styled.input`
 `;
 
 const Error = styled.span`
-  /* display: none; */
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
@@ -238,28 +233,28 @@ const Error = styled.span`
 `;
 
 const ContainerAgreement = styled.div`
-  font-size: 15px;
+  margin-top: ${pxToRem(30)};
+  font-size: ${pxToRem(15)};
   font-weight: 700;
 `;
 
 const InnerContainerAgreement = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-  padding: 20px 10px 10px;
+  margin: ${pxToRem(10)} 0;
+  padding: ${pxToRem(20)} ${pxToRem(10)} ${pxToRem(12)};
   border: ${({ theme }) => theme.input.border};
   background-color: ${WHITE};
+  color: ${GRAY_900};
 `;
 
 const LabelAgreement = styled.label`
   display: flex;
   align-items: center;
-  margin: 6px 0;
+  margin-top: ${pxToRem(12)};
   font-weight: 500;
 
   &[for='agreeAll'] {
     margin-top: 0;
-    padding-bottom: 20px;
+    padding-bottom: ${pxToRem(20)};
     border-bottom: ${({ theme }) => theme.input.border};
     font-weight: 700;
   }
@@ -270,7 +265,7 @@ const LinkAgreeMent = styled.a`
 `;
 
 const SpanRequire = styled.span`
-  margin-left: 5px;
+  margin-left: ${pxToRem(5)};
   color: ${PRIMARY_900};
 `;
 
@@ -279,29 +274,29 @@ const CheckBox = styled.input`
   place-content: center;
   appearance: none;
   background-color: #fff;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
+  width: ${pxToRem(18)};
+  height: ${pxToRem(18)};
+  margin-right: ${pxToRem(10)};
   border: 1px solid ${GRAY_500};
-  border-radius: 2px;
+  border-radius: ${pxToRem(2)};
 
   &:checked {
     border: none;
     background-color: ${({ theme }) => theme.background.primary};
   }
+
   &:checked::before {
     content: '';
-    width: 14px;
-    height: 14px;
+    width: ${pxToRem(14)};
+    height: ${pxToRem(14)};
     border-radius: 1px;
-    box-shadow: inset 14px 14px ${WHITE};
+    box-shadow: inset ${pxToRem(14)} ${pxToRem(14)} ${WHITE};
     clip-path: polygon(15% 41%, 44% 65%, 83% 10%, 95% 20%, 47% 88%, 5% 54%);
   }
 `;
 
 const Button = styled.button`
-  width: 100%;
-  margin: ${pxToRem(35)} 0 ${pxToRem(30)};
+  margin: ${pxToRem(30)} 0;
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
   background-color: ${({ theme }) => theme.button.background};
@@ -320,7 +315,7 @@ const TextAskID = styled.p`
 `;
 
 const AskIDLink = styled.a`
-  margin-left: 5px;
+  margin-left: ${pxToRem(5)};
   font-weight: 600;
   text-decoration: underline;
 `;
