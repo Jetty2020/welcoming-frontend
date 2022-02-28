@@ -38,6 +38,9 @@ declare module '@emotion/react' {
       background: string;
       disabled: string;
       text: string;
+      fontSize: number;
+      fontWeight: number;
+      letterSpacing: string;
     };
     input: {
       background: string;
@@ -56,6 +59,9 @@ interface BUTTON {
   background: string;
   disabled: string;
   text: string;
+  fontSize: number;
+  fontWeight: number;
+  letterSpacing: string;
 }
 
 interface INPUT {
@@ -121,6 +127,9 @@ export const button: BUTTON = {
   background: `${PRIMARY_900}`,
   disabled: `${GRAY_300}`,
   text: `${GRAY_50}`,
+  fontSize: 16,
+  fontWeight: 600,
+  letterSpacing: '1px',
 };
 
 export const input: INPUT = {
