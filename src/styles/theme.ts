@@ -30,7 +30,9 @@ declare module '@emotion/react' {
     header: {
       background: string;
       backgroundBlur: string;
-      logo: string;
+    };
+    logo: {
+      src: string;
     };
   }
   export interface Theme extends ThemeMode {
@@ -98,7 +100,9 @@ const light: ThemeMode = {
   header: {
     background: `${WHITE}`,
     backgroundBlur: 'rgba(255, 255, 255, 0.1)',
-    logo: '/logo/logo.png',
+  },
+  logo: {
+    src: '/logo/logo.png',
   },
 };
 
@@ -119,7 +123,9 @@ const dark: ThemeMode = {
   header: {
     background: `${GRAY_900}`,
     backgroundBlur: 'rgba(0, 0, 0, 0.1)',
-    logo: '/logo/logo_w.png',
+  },
+  logo: {
+    src: '/logo/logo_w.png',
   },
 };
 
