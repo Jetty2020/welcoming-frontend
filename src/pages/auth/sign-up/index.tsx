@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthFooter } from '@components/auth/Footer';
 import PageTitle from '@components/common/PageTitle';
 import {
@@ -39,19 +39,40 @@ const SignUp: NextPage = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordCheckError, setPasswordCheckError] = useState(false);
   const [nicknameError, setNicknameError] = useState(false);
-
-  const regExpEm =
-    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  const regExpPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
+  const [agreeAllValue, setAgreeAllValue] = useState(false);
 
   const {
     register,
     getValues,
+    setValue,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm<SignInInput>({
     mode: 'onChange',
   });
+
+  const handleCheckAll = () => {
+    setValue('agreeAge', !agreeAllValue);
+    setValue('agreeTerm', !agreeAllValue);
+    setValue('agreePrivacy', !agreeAllValue);
+    setAgreeAllValue((state) => !state);
+  };
+
+  const handleCheckbox = () => {
+    if (
+      getValues().agreeAge === true &&
+      getValues().agreePrivacy === true &&
+      getValues().agreeTerm === true
+    ) {
+      setAgreeAllValue(true);
+    } else if (agreeAllValue) {
+      setAgreeAllValue(false);
+    }
+  };
+
+  const regExpEm =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const regExpPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
 
   const onCompleted = (data: createAccountMutation) => {
     const {
@@ -68,8 +89,6 @@ const SignUp: NextPage = () => {
   >(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
-
-  console.log(errors);
 
   return (
     <MainSignUp>
@@ -168,7 +187,12 @@ const SignUp: NextPage = () => {
             약관동의
             <InnerContainerAgreement>
               <LabelAgreement htmlFor="agreeAll">
-                <CheckBox type="checkbox" id="agreeAll" />
+                <CheckBox
+                  type="checkbox"
+                  id="agreeAll"
+                  checked={agreeAllValue}
+                  onChange={handleCheckAll}
+                />
                 전체동의
               </LabelAgreement>
               <LabelAgreement htmlFor="agreeAge">
@@ -177,6 +201,7 @@ const SignUp: NextPage = () => {
                   id="agreeAge"
                   {...register('agreeAge', {
                     required: true,
+                    onChange: handleCheckbox,
                   })}
                 />
                 만 14세 이상입니다.
@@ -188,6 +213,7 @@ const SignUp: NextPage = () => {
                   id="agreeTerm"
                   {...register('agreeTerm', {
                     required: true,
+                    onChange: handleCheckbox,
                   })}
                 />
                 <Link href="/" passHref>
@@ -201,6 +227,7 @@ const SignUp: NextPage = () => {
                   id="agreePrivacy"
                   {...register('agreePrivacy', {
                     required: true,
+                    onChange: handleCheckbox,
                   })}
                 />
                 <Link href="/" passHref>
