@@ -184,7 +184,7 @@ const SectionLogin = styled.section`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: ${pxToRem(300)};
+  max-width: ${pxToRem(450)};
   padding: ${pxToRem(30)};
   margin: ${pxToRem(50)} 0;
   flex-grow: 1;
