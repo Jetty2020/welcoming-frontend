@@ -87,7 +87,6 @@ const BtnClose = styled.button`
   & svg {
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
-    fill: ${GRAY_900};
   }
 `;
 
@@ -95,6 +94,7 @@ const SectionPasswordReset = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: ${pxToRem(450)};
   padding: ${pxToRem(30)};
   margin-top: ${pxToRem(50)};
   box-sizing: border-box;
