@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AuthFooter } from '@components/auth/Footer';
 import PageTitle from '@components/common/PageTitle';
 import {
   createAccountMutation,
   createAccountMutationVariables,
 } from '@generated/createAccountMutation';
+import { UserRole } from '@generated/globalTypes';
 import { pxToRem } from '@utils/pxToRem';
 import { Close } from 'public/icons';
 import { GRAY_500, GRAY_900, PRIMARY_900, WHITE } from '@constants/colors';
@@ -70,16 +71,28 @@ const SignUp: NextPage = () => {
     }
   };
 
+  const handlePasswardCheckBlur = () => {
+    const { password, passwordCheck } = getValues();
+    if (password !== passwordCheck) {
+      setPasswordCheckError(true);
+    }
+  };
+
   const regExpEm =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const regExpPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
 
   const onCompleted = (data: createAccountMutation) => {
     const {
-      createAccount: { ok },
+      createAccount: { ok, error },
     } = data;
+
     if (ok) {
-      router.push('/');
+      router.push('/auth/sign-in');
+    } else if (error === '이미 다른 유저가 사용하는 메일입니다.') {
+      setEmailError(true);
+    } else if (error === '이미 다른 유저가 사용하는 닉네임입니다.') {
+      setNicknameError(true);
     }
   };
 
@@ -89,6 +102,23 @@ const SignUp: NextPage = () => {
   >(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
+
+  const onSubmit = () => {
+    if (!loading) {
+      const { email, password, nickname } = getValues();
+
+      createAccountMutation({
+        variables: {
+          createAccountInput: {
+            email,
+            password,
+            nickname,
+            role: UserRole.Client,
+          },
+        },
+      });
+    }
+  };
 
   return (
     <MainSignUp>
@@ -105,7 +135,7 @@ const SignUp: NextPage = () => {
         <Contlogo>
           <img src="/logo/logo.png" alt="어서와 우리집 로고" />
         </Contlogo>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="emailDomain">
             이메일
             <Input
@@ -116,10 +146,8 @@ const SignUp: NextPage = () => {
                 pattern: regExpEm,
                 onChange: () => setEmailError(false),
               })}
-              data-email-error={emailError}
             />
           </Label>
-          {emailError && <Error>{emailError}</Error>}
           {errors.email?.type === 'required' && (
             <Error>필수 입력 항목입니다.</Error>
           )}
@@ -157,6 +185,7 @@ const SignUp: NextPage = () => {
               {...register('passwordCheck', {
                 required: true,
                 onChange: () => setPasswordCheckError(false),
+                onBlur: handlePasswardCheckBlur,
               })}
             />
           </Label>
@@ -239,7 +268,12 @@ const SignUp: NextPage = () => {
               </LabelAgreement>
             </InnerContainerAgreement>
           </ContainerAgreement>
-          <Button type="submit" disabled={!isValid}>
+          <Button
+            type="submit"
+            disabled={
+              !isValid || emailError || passwordCheckError || nicknameError
+            }
+          >
             회원가입하기
           </Button>
         </Form>
@@ -337,7 +371,7 @@ const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.input.placeholder};
   }
-  &[data-login-error='true'] {
+  &[data-sign-up-error='true'] {
     border-color: ${({ theme }) => theme.input.error};
   }
 `;
