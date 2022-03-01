@@ -24,12 +24,12 @@ export const DesktopNav = ({ className }: EmotionProps) => {
         </Link>
         <ListUserMenu>
           <li>
-            <Link href="/" passHref>
+            <Link href="/auth/sign-in" passHref>
               <a>로그인</a>
             </Link>
           </li>
           <li>
-            <Link href="/" passHref>
+            <Link href="/auth/sign-up" passHref>
               <a>회원가입</a>
             </Link>
           </li>
