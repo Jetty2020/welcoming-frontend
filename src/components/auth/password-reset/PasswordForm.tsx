@@ -24,7 +24,7 @@ interface PasswordFormProps {
 export const PasswordForm = ({ email }: PasswordFormProps) => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
-  const regExgPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
+  const regExpPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
 
   const {
     register,
@@ -85,7 +85,7 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
           id="password"
           {...register('password', {
             required: true,
-            pattern: regExgPw,
+            pattern: regExpPw,
             onChange: () => setErrorMsg(''),
           })}
         />
