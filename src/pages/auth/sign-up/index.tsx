@@ -141,6 +141,7 @@ const SignUp: NextPage = () => {
             <Input
               type="text"
               placeholder="이메일"
+              data-sign-up-error={emailError || Boolean(errors.email?.type)}
               {...register('email', {
                 required: true,
                 pattern: regExpEm,
@@ -161,6 +162,7 @@ const SignUp: NextPage = () => {
             <Input
               type="password"
               placeholder="비밀번호"
+              data-sign-up-error={Boolean(errors.password?.type)}
               {...register('password', {
                 required: true,
                 pattern: regExpPw,
@@ -182,6 +184,7 @@ const SignUp: NextPage = () => {
             <Input
               type="password"
               placeholder="비밀번호 확인"
+              data-sign-up-error={passwordCheckError}
               {...register('passwordCheck', {
                 required: true,
                 onChange: () => setPasswordCheckError(false),
@@ -196,6 +199,9 @@ const SignUp: NextPage = () => {
             <Input
               type="text"
               placeholder="닉네임 (2~15자)"
+              data-sign-up-error={
+                nicknameError || Boolean(errors.nickname?.type)
+              }
               {...register('nickname', {
                 required: true,
                 minLength: 2,
