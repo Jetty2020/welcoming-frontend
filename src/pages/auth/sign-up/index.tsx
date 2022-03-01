@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useTheme } from '@emotion/react';
 import { AuthFooter } from '@components/auth/Footer';
 import PageTitle from '@components/common/PageTitle';
 import {
@@ -36,6 +37,7 @@ interface SignInInput {
 }
 
 const SignUp: NextPage = () => {
+  const theme = useTheme();
   const router = useRouter();
   const [emailError, setEmailError] = useState(false);
   const [passwordCheckError, setPasswordCheckError] = useState(false);
@@ -133,7 +135,7 @@ const SignUp: NextPage = () => {
       <SectionSignUp>
         <h2 className="sr-only">회원가입</h2>
         <Contlogo>
-          <img src="/logo/logo.png" alt="어서와 우리집 로고" />
+          <img src={theme.logo.src} alt="어서와 우리집 로고" />
         </Contlogo>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="emailDomain">

@@ -27,7 +27,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
         <HeaderRow>
           <Link href="/" passHref>
             <LinkLogo>
-              <img src={theme.header.logo} alt="어서와 우리집 로고" />
+              <img src={theme.logo.src} alt="어서와 우리집 로고" />
             </LinkLogo>
           </Link>
           <ListWish>
