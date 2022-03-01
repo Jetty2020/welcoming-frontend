@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { AuthFooter } from '@components/auth/Footer';
 import PageTitle from '@components/common/PageTitle';
 import {
@@ -22,8 +24,34 @@ const CREATE_ACCOUNT_MUTATION = gql`
   }
 `;
 
+interface SignInInput {
+  email: string;
+  nickname: string;
+  password: string;
+  passwordCheck: string;
+  agreeAge: boolean;
+  agreeTerm: boolean;
+  agreePrivacy: boolean;
+}
+
 const SignUp: NextPage = () => {
   const router = useRouter();
+  const [emailError, setEmailError] = useState(false);
+  const [passwordCheckError, setPasswordCheckError] = useState(false);
+  const [nicknameError, setNicknameError] = useState(false);
+
+  const regExpEm =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const regExpPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
+
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm<SignInInput>({
+    mode: 'onChange',
+  });
 
   const onCompleted = (data: createAccountMutation) => {
     const {
@@ -40,6 +68,8 @@ const SignUp: NextPage = () => {
   >(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
+
+  console.log(errors);
 
   return (
     <MainSignUp>
@@ -59,32 +89,81 @@ const SignUp: NextPage = () => {
         <Form>
           <Label htmlFor="emailDomain">
             이메일
-            <Input type="text" placeholder="이메일" />
+            <Input
+              type="text"
+              placeholder="이메일"
+              {...register('email', {
+                required: true,
+                pattern: regExpEm,
+                onChange: () => setEmailError(false),
+              })}
+              data-email-error={emailError}
+            />
           </Label>
-          <Error>필수 입력 항목입니다.</Error>
-          <Error>이메일 형식이 올바르지 않습니다.</Error>
-          <Error>이미 가입한 이메일입니다.</Error>
+          {emailError && <Error>{emailError}</Error>}
+          {errors.email?.type === 'required' && (
+            <Error>필수 입력 항목입니다.</Error>
+          )}
+          {errors.email?.type === 'pattern' && (
+            <Error>이메일 형식이 올바르지 않습니다.</Error>
+          )}
+          {emailError && <Error>이미 가입한 이메일입니다.</Error>}
           <Label htmlFor="password">
             비밀번호
-            <Desc>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</Desc>
-            <Input type="password" placeholder="비밀번호" />
+            <Desc>영문, 숫자를 포함한 6~12자리의 비밀번호를 입력해주세요.</Desc>
+            <Input
+              type="password"
+              placeholder="비밀번호"
+              {...register('password', {
+                required: true,
+                pattern: regExpPw,
+              })}
+            />
           </Label>
-          <Error>
-            비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리이어야
-            합니다.
-          </Error>
+          {errors?.password?.type === 'required' && (
+            <Error>필수 입력 항목입니다.</Error>
+          )}
+          {errors?.password?.type === 'pattern' && (
+            <Error>
+              비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리이어야
+              합니다.
+            </Error>
+          )}
+
           <Label htmlFor="passwordCheck">
             비밀번호 확인
-            <Input type="password" placeholder="비밀번호 확인" />
+            <Input
+              type="password"
+              placeholder="비밀번호 확인"
+              {...register('passwordCheck', {
+                required: true,
+                onChange: () => setPasswordCheckError(false),
+              })}
+            />
           </Label>
-          <Error>비밀번호가 일치하지 않습니다.</Error>
+          {passwordCheckError && <Error>비밀번호가 일치하지 않습니다.</Error>}
           <Label htmlFor="nickName">
             별명
             <Desc>다른 유저와 겹치지 않는 별명을 입력해주세요. (2~15자)</Desc>
-            <Input type="text" placeholder="닉네임 (2~15자)" />
+            <Input
+              type="text"
+              placeholder="닉네임 (2~15자)"
+              {...register('nickname', {
+                required: true,
+                minLength: 2,
+                maxLength: 15,
+                onChange: () => setNicknameError(false),
+              })}
+            />
           </Label>
-          <Error>사용 중인 별명입니다.</Error>
-          <Error>별명은 2~15자리이어야 합니다.</Error>
+          {errors?.nickname?.type === 'required' && (
+            <Error>필수 입력 항목입니다.</Error>
+          )}
+          {(errors?.nickname?.type === 'maxLength' ||
+            errors?.nickname?.type === 'minLength') && (
+            <Error>별명은 2~15자리이어야 합니다.</Error>
+          )}
+          {nicknameError && <Error>사용 중인 별명입니다.</Error>}
           <ContainerAgreement>
             약관동의
             <InnerContainerAgreement>
@@ -93,18 +172,37 @@ const SignUp: NextPage = () => {
                 전체동의
               </LabelAgreement>
               <LabelAgreement htmlFor="agreeAge">
-                <CheckBox type="checkbox" id="agreeAge" />만 14세 이상입니다.
+                <CheckBox
+                  type="checkbox"
+                  id="agreeAge"
+                  {...register('agreeAge', {
+                    required: true,
+                  })}
+                />
+                만 14세 이상입니다.
                 <SpanRequire>&#40;필수&#41;</SpanRequire>
               </LabelAgreement>
               <LabelAgreement htmlFor="agreeTerm">
-                <CheckBox type="checkbox" id="agreeTerm" />
+                <CheckBox
+                  type="checkbox"
+                  id="agreeTerm"
+                  {...register('agreeTerm', {
+                    required: true,
+                  })}
+                />
                 <Link href="/" passHref>
                   <LinkAgreeMent target="_blank">이용약관</LinkAgreeMent>
                 </Link>
                 <SpanRequire>&#40;필수&#41;</SpanRequire>
               </LabelAgreement>
               <LabelAgreement htmlFor="agreePrivacy">
-                <CheckBox type="checkbox" id="agreePrivacy" />
+                <CheckBox
+                  type="checkbox"
+                  id="agreePrivacy"
+                  {...register('agreePrivacy', {
+                    required: true,
+                  })}
+                />
                 <Link href="/" passHref>
                   <LinkAgreeMent target="_blank">
                     개인정보수집 및 이용동의
@@ -114,7 +212,9 @@ const SignUp: NextPage = () => {
               </LabelAgreement>
             </InnerContainerAgreement>
           </ContainerAgreement>
-          <Button type="submit">회원가입하기</Button>
+          <Button type="submit" disabled={!isValid}>
+            회원가입하기
+          </Button>
         </Form>
         <TextAskID>
           이미 아이디가 있으신가요?
