@@ -9,7 +9,6 @@ import { CheckCodeForm } from '@components/auth/password-reset/CheckCodeForm';
 import { genCode } from '@utils/genCode';
 import { AuthFooter } from '@components/auth/Footer';
 import { PasswordForm } from '@components/auth/password-reset/PasswordForm';
-import { GRAY_900 } from '@constants/colors';
 
 const PasswordReset: NextPage = () => {
   const router = useRouter();
