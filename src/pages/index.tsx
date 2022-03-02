@@ -15,6 +15,7 @@ import {
 } from '@generated//getAllPostsQuery';
 import { Layout } from '@components/layouts/Layout';
 import { Carousel } from '@components/landing/Carousel';
+import { Category } from '@components/landing/Category';
 
 const Home: NextPage = () => {
   const TODAYDEAL_QUERY = gql`
@@ -102,6 +103,7 @@ const Home: NextPage = () => {
       <Layout>
         <main>
           <Carousel />
+          <Category />
         </main>
       </Layout>
     </>
