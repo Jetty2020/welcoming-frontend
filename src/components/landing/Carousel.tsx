@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { v4 as uuidv4 } from 'uuid';
 import React, { useState } from 'react';
 import { mediaQuery } from '@styles/theme';
 import { ChevronLeft, ChevronRight } from 'public/icons';
@@ -148,7 +149,7 @@ export const Carousel = () => {
         </li>
         {data.map((ele) => {
           return (
-            <li key={`${ele.deImg.slice(-20, -10)}-img`}>
+            <li key={`carousel-list-${uuidv4()}`}>
               <CarouselPic>
                 <source
                   media={`(min-width:${mediaQuery.tablet})`}
