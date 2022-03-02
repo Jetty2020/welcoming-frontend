@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { pxToRem } from '@utils/pxToRem';
+import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
+import { pxToRem } from '@utils/pxToRem';
 
 const data = [
   { img: '/images/landing/furniture.png', name: '가구' },
@@ -19,7 +20,7 @@ export const Category = () => {
       <Title>카테고리</Title>
       <List>
         {data.map((ele) => (
-          <li key={Math.random()}>
+          <li key={`category-list-${uuidv4()}`}>
             <Link href="/" passHref>
               <Anchor>
                 <Img src={ele.img} alt={ele.name} />
