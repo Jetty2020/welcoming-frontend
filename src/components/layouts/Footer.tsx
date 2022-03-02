@@ -128,7 +128,7 @@ const CompanyInfoBox = styled.div`
 const FooterRow = styled.div`
   margin: ${pxToRem(30)} ${pxToRem(-15)} 0;
   padding: ${pxToRem(30)} 0;
-  background-color: ${({ theme }) => theme.background.header};
+  background-color: ${({ theme }) => theme.header.background};
   color: ${({ theme }) => theme.text.lighter};
   font-size: ${pxToRem(12)};
   text-align: center;
