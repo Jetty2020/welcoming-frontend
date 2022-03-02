@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
+import { pxToRem } from '@utils/pxToRem';
 import Link from 'next/link';
-import { GRAY_600 } from '@constants/colors';
-import { ChevronLeft, ChevronRight } from 'public/icons';
 
 const data = [
   { img: '/images/landing/furniture.png', name: '가구' },
@@ -16,52 +15,51 @@ const data = [
 
 export const Category = () => {
   return (
-    <CategorySec>
+    <Section>
       <h2 className="sr-only">카테고리</h2>
-      <CategoryCon>
+      <List>
         {data.map((ele) => (
           <li key={Math.random()}>
             <Link href="/" passHref>
-              <CategoryAnc>
-                <CategoryImg src={ele.img} alt={ele.name} />
-                <CategoryName>{ele.name}</CategoryName>
-              </CategoryAnc>
+              <Anchor>
+                <Img src={ele.img} alt={ele.name} />
+                <Name>{ele.name}</Name>
+              </Anchor>
             </Link>
           </li>
         ))}
-      </CategoryCon>
-    </CategorySec>
+      </List>
+    </Section>
   );
 };
 
-const CategorySec = styled.section`
-  margin: 40px 10px 0;
+const Section = styled.section`
+  margin-top: ${pxToRem(20)};
 `;
 
-const CategoryCon = styled.ul`
+const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* grid-template-rows: minmax(120px, 25vw); */
+  row-gap: ${pxToRem(10)};
 `;
 
-const CategoryAnc = styled.a`
+const Anchor = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 25vw;
-  min-height: 120px;
 `;
 
-const CategoryImg = styled.img`
-  width: 60px;
-  margin-bottom: 16px;
+const Img = styled.img`
+  width: 60%;
+  max-width: ${pxToRem(80)};
+  margin-bottom: ${pxToRem(14)};
 `;
 
-const CategoryName = styled.p`
-  font-size: 13px;
-  font-weight: 500;
+const Name = styled.span`
   color: ${({ theme }) => theme.text.lighter};
-  text-align: center;
+  font-size: ${pxToRem(13)};
+  font-weight: 500;
 `;
