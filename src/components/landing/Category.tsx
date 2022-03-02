@@ -16,7 +16,7 @@ const data = [
 export const Category = () => {
   return (
     <Section>
-      <h2 className="sr-only">카테고리</h2>
+      <Title>카테고리</Title>
       <List>
         {data.map((ele) => (
           <li key={Math.random()}>
@@ -34,13 +34,38 @@ export const Category = () => {
 };
 
 const Section = styled.section`
-  margin-top: ${pxToRem(20)};
+  margin: ${pxToRem(20)} auto 0;
+  max-width: ${pxToRem(1200)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin-top: ${pxToRem(70)};
+  }
+`;
+
+const Title = styled.h2`
+  font-size: ${pxToRem(20)};
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: ${pxToRem(20)};
+
+  @media screen and (max-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+  }
 `;
 
 const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: ${pxToRem(10)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    grid-template-columns: repeat(8, 1fr);
+  }
 `;
 
 const Anchor = styled.a`
@@ -50,6 +75,11 @@ const Anchor = styled.a`
   justify-content: center;
   width: 100%;
   height: 25vw;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    height: 12.5vw;
+    max-height: ${pxToRem(150)};
+  }
 `;
 
 const Img = styled.img`
