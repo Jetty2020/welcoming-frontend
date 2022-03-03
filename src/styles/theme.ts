@@ -52,7 +52,8 @@ declare module '@emotion/react' {
       text: string;
     };
     title: {
-      fontSize: number;
+      mobileFontSize: number;
+      desktopFontSize: number;
       fontWeight: number;
     };
     mediaQuery: {
@@ -79,7 +80,8 @@ interface INPUT {
 }
 
 interface TITLE {
-  fontSize: number;
+  mobileFontSize: number;
+  desktopFontSize: number;
   fontWeight: number;
 }
 interface MEDIA {
@@ -155,7 +157,8 @@ export const input: INPUT = {
 };
 
 export const title: TITLE = {
-  fontSize: 20,
+  mobileFontSize: 20,
+  desktopFontSize: 26,
   fontWeight: 600,
 };
 
