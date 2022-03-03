@@ -16,6 +16,7 @@ import {
 import { Layout } from '@components/layouts/Layout';
 import { Carousel } from '@components/landing/Carousel';
 import { Category } from '@components/landing/Category';
+import { WelcomeDeal } from '@components/landing/WelcomeDeal';
 
 const Home: NextPage = () => {
   const TODAYDEAL_QUERY = gql`
@@ -104,6 +105,7 @@ const Home: NextPage = () => {
         <main>
           <Carousel />
           <Category />
+          <WelcomeDeal />
         </main>
       </Layout>
     </>
