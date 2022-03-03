@@ -95,11 +95,11 @@ const ContainerTitle = styled.div`
 
 const Title = styled.h2`
   margin-bottom: ${pxToRem(5)};
-  font-size: ${({ theme }) => pxToRem(theme.title.fontSize)};
+  font-size: ${({ theme }) => pxToRem(theme.title.mobileFontSize)};
   font-weight: ${({ theme }) => theme.title.fontWeight};
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
     margin-bottom: ${pxToRem(8)};
-    font-size: ${pxToRem(26)};
+    font-size: ${({ theme }) => pxToRem(theme.title.desktopFontSize)};
   }
 `;
 
