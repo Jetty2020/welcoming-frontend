@@ -22,6 +22,7 @@ export const WelcomeDeal = () => {
           <Title>웰컴딜</Title>
           <SubTitle>일주일 한정 특가</SubTitle>
         </div>
+        <CountTime>0일 00시 00분 00초</CountTime>
         <Link href="/" passHref>
           <AnchorMore>
             더보기 <ChevronRight />
@@ -72,23 +73,62 @@ const Section = styled.section`
   margin: ${pxToRem(40)} auto 0;
   max-width: ${pxToRem(1200)};
   padding: 0 ${pxToRem(15)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    position: relative;
+    padding: 0 ${pxToRem(30)};
+  }
 `;
 
 const ContainerTitle = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    flex-direction: column;
+    position: absolute;
+    top: ${pxToRem(10)};
+    left: ${pxToRem(40)};
+  }
 `;
 
 const Title = styled.h2`
   margin-bottom: ${pxToRem(5)};
   font-size: ${({ theme }) => pxToRem(theme.title.fontSize)};
   font-weight: ${({ theme }) => theme.title.fontWeight};
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin-bottom: ${pxToRem(8)};
+    font-size: ${pxToRem(26)};
+  }
 `;
 
 const SubTitle = styled.p`
   color: ${({ theme }) => theme.text.lighter};
   font-size: ${pxToRem(14)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    font-size: ${pxToRem(16)};
+  }
+`;
+const CountTime = styled.span`
+  margin: ${pxToRem(10)} 0 ${pxToRem(20)};
+  font-size: ${pxToRem(18)};
+  letter-spacing: -0.02em;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: ${pxToRem(12)};
+    height: ${pxToRem(12)};
+    margin: 0 ${pxToRem(5)} ${pxToRem(1)} 0;
+    background-color: ${({ theme }) => theme.background.primary};
+    border-radius: 50%;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: none;
+  }
 `;
 
 const AnchorMore = styled.a`
@@ -102,11 +142,19 @@ const AnchorMore = styled.a`
     margin-left: ${pxToRem(5)};
     vertical-align: baseline;
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    font-size: ${pxToRem(16)};
+  }
 `;
 
 const ContainerCountDay = styled.div`
   margin: ${pxToRem(10)} 0 ${pxToRem(30)};
   font-weight: 700;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: none;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -119,6 +167,9 @@ const ProgressBar = styled.div`
 const TextCountDay = styled.span`
   margin-right: ${pxToRem(10)};
   color: ${({ theme }) => theme.text.primary};
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin-bottom: ${pxToRem(5)};
+  }
 `;
 
 const ProgressValue = styled.div<{ 'progress-value': number }>`
@@ -130,6 +181,12 @@ const ProgressValue = styled.div<{ 'progress-value': number }>`
 const List = styled.ul`
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: grid;
+    gap: ${pxToRem(50)} ${pxToRem(20)};
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 const Item = styled.li`
@@ -143,6 +200,37 @@ const Item = styled.li`
     margin-bottom: ${pxToRem(20)};
     border-top: 1px solid ${GRAY_300};
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    &:nth-of-type(1) {
+      grid-column: 2;
+    }
+    &:nth-of-type(2) {
+      grid-column: 3;
+    }
+    &:nth-of-type(3) {
+      grid-column: 4;
+    }
+    &:nth-of-type(4) {
+      grid-column: 1;
+    }
+    &:nth-of-type(5) {
+      grid-column: 2;
+    }
+    &:nth-of-type(6) {
+      grid-column: 3;
+    }
+    &:nth-of-type(7) {
+      grid-column: 4;
+    }
+
+    & + & {
+      margin-top: 0;
+    }
+    & + &::before {
+      display: none;
+    }
+  }
 `;
 
 const Anchor = styled.a`
@@ -150,16 +238,25 @@ const Anchor = styled.a`
   grid-template-columns: repeat(2, 1fr);
   gap: ${pxToRem(10)};
   min-height: calc(50vw - ${pxToRem(20)});
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+  }
 `;
 
 const Img = styled.div`
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   background-color: #ddd;
 `;
 
 const Info = styled.div`
   align-self: center;
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    padding: 0 ${pxToRem(5)};
+  }
 `;
 
 const BrandName = styled.span`
