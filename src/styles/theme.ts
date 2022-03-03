@@ -51,6 +51,10 @@ declare module '@emotion/react' {
       placeholder: string;
       text: string;
     };
+    title: {
+      fontSize: number;
+      fontWeight: number;
+    };
     mediaQuery: {
       tablet: string;
     };
@@ -74,6 +78,10 @@ interface INPUT {
   text: string;
 }
 
+interface TITLE {
+  fontSize: number;
+  fontWeight: number;
+}
 interface MEDIA {
   tablet: string;
 }
@@ -146,11 +154,16 @@ export const input: INPUT = {
   text: `${GRAY_900}`,
 };
 
+export const title: TITLE = {
+  fontSize: 20,
+  fontWeight: 600,
+};
+
 export const mediaQuery: MEDIA = {
   tablet: `${pxToRem(768)}`,
 };
 
 export const mode: ThemeGroup = {
-  light: { ...light, button, input, mediaQuery },
-  dark: { ...dark, button, input, mediaQuery },
+  light: { ...light, button, input, title, mediaQuery },
+  dark: { ...dark, button, input, title, mediaQuery },
 };
