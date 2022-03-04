@@ -2,10 +2,6 @@ import type { NextPage } from 'next';
 import { gql, useQuery } from '@apollo/client';
 import PageTitle from '@components/common/PageTitle';
 import {
-  getTodayDealPostQuery,
-  getTodayDealPostQueryVariables,
-} from '@generated//getTodayDealPostQuery';
-import {
   getEventsQuery,
   getEventsQueryVariables,
 } from '@generated//getEventsQuery';
@@ -19,20 +15,6 @@ import { Category } from '@components/landing/Category';
 import { WelcomeDeal } from '@components/landing/WelcomeDeal';
 
 const Home: NextPage = () => {
-  const TODAYDEAL_QUERY = gql`
-    query getTodayDealPostQuery($todayDealInput: GetTodayDealPostInput!) {
-      getTodayDealPost(input: $todayDealInput) {
-        ok
-        error
-        posts {
-          id
-          title
-          ori_price
-          selling_price
-        }
-      }
-    }
-  `;
   const EVENT_QUERY = gql`
     query getEventsQuery($getEventsInput: GetEventsInput!) {
       getEvents(input: $getEventsInput) {
@@ -62,17 +44,6 @@ const Home: NextPage = () => {
     }
   `;
 
-  const { data: todayDealData, loading: todayDealLoading } = useQuery<
-    getTodayDealPostQuery,
-    getTodayDealPostQueryVariables
-  >(TODAYDEAL_QUERY, {
-    variables: {
-      todayDealInput: {
-        postNum: 4,
-      },
-    },
-  });
-
   const { data: evnetsData, loading: evnetsLoading } = useQuery<
     getEventsQuery,
     getEventsQueryVariables
@@ -96,7 +67,6 @@ const Home: NextPage = () => {
     },
   });
   console.log(evnetsData?.getEvents, evnetsLoading);
-  console.log(todayDealData?.getTodayDealPost, todayDealLoading);
   console.log(allPostsData?.getAllPosts, allPostsLoading);
   return (
     <>
