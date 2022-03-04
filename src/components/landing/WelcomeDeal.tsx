@@ -1,3 +1,8 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { gql, useQuery } from '@apollo/client';
+import { v4 as uuidv4 } from 'uuid';
+import Link from 'next/link';
 import {
   ERROR,
   GRAY_300,
@@ -5,16 +10,48 @@ import {
   PRIMARY_700,
   PRIMARY_800,
 } from '@constants/colors';
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import Link from 'next/link';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  getTodayDealPostQuery,
+  getTodayDealPostQueryVariables,
+} from '@generated/getTodayDealPostQuery';
 import { pxToRem } from '@utils/pxToRem';
 import { ChevronRight } from 'public/icons';
 
-const data = [0, 1, 2, 3, 4, 5, 6];
+const fakeData = [0, 1, 2, 3, 4, 5, 6];
+
+const TODAYDEAL_QUERY = gql`
+  query getTodayDealPostQuery($todayDealInput: GetTodayDealPostInput!) {
+    getTodayDealPost(input: $todayDealInput) {
+      ok
+      error
+      posts {
+        id
+        title
+        ori_price
+        selling_price
+      }
+    }
+  }
+`;
 
 export const WelcomeDeal = () => {
+  const { data, loading } = useQuery<
+    getTodayDealPostQuery,
+    getTodayDealPostQueryVariables
+  >(TODAYDEAL_QUERY, {
+    variables: {
+      todayDealInput: {
+        postNum: 4,
+      },
+    },
+  });
+
+  if (loading) return <div>로딩중</div>;
+  if (!data) return <div>데이터가 없습니다</div>;
+
+  console.log('웹컴딜');
+  console.log(data.getTodayDealPost);
+
   return (
     <Section>
       <ContainerTitle>
@@ -37,7 +74,7 @@ export const WelcomeDeal = () => {
         <span>2022.02.21 ~ 03.12</span>
       </ContainerCountDay>
       <List>
-        {data.map((item) => {
+        {fakeData.map((item) => {
           return (
             <Item key={`product-list-${uuidv4()}`}>
               <Link href="/" passHref>
