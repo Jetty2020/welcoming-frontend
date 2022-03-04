@@ -13,6 +13,7 @@ import { Layout } from '@components/layouts/Layout';
 import { Carousel } from '@components/landing/Carousel';
 import { Category } from '@components/landing/Category';
 import { WelcomeDeal } from '@components/landing/WelcomeDeal';
+import { Best } from '@components/landing/Best';
 
 const Home: NextPage = () => {
   const EVENT_QUERY = gql`
@@ -76,6 +77,7 @@ const Home: NextPage = () => {
           <Carousel />
           <Category />
           <WelcomeDeal />
+          <Best />
         </main>
       </Layout>
     </>
