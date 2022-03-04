@@ -134,6 +134,7 @@ const Title = styled.h2`
   margin-bottom: ${pxToRem(5)};
   font-size: ${({ theme }) => pxToRem(theme.title.mobileFontSize)};
   font-weight: ${({ theme }) => theme.title.fontWeight};
+
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
     margin-bottom: ${pxToRem(8)};
     font-size: ${({ theme }) => pxToRem(theme.title.desktopFontSize)};
@@ -148,6 +149,7 @@ const SubTitle = styled.p`
     font-size: ${pxToRem(16)};
   }
 `;
+
 const CountTime = styled.span`
   margin: ${pxToRem(10)} 0 ${pxToRem(20)};
   font-size: ${pxToRem(18)};
