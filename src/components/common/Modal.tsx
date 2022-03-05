@@ -3,6 +3,7 @@ import React, { ReactChild, useEffect } from 'react';
 import { pxToRem } from '@utils/pxToRem';
 
 interface ModalProps {
+  className?: string;
   isShowModal: boolean;
   setIsShowModal: (value: boolean) => void;
   children: ReactChild;
@@ -13,6 +14,7 @@ interface IsShowModalProps {
 }
 
 export const Modal = ({
+  className,
   isShowModal,
   setIsShowModal,
   children,
@@ -26,7 +28,7 @@ export const Modal = ({
   }, [isShowModal]);
 
   return (
-    <Container>
+    <Container className={className}>
       <Background
         isShowModal={isShowModal}
         onClick={() => setIsShowModal(false)}
@@ -63,3 +65,7 @@ const ContainerContent = styled.div<IsShowModalProps>`
     isShowModal ? 'translate(0)' : 'translateY(100%)'};
   transition: transform 1s;
 `;
+
+Modal.defaultProps = {
+  className: undefined,
+};

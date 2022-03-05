@@ -32,6 +32,10 @@ const GETALLPOSTS_QUERY = gql`
   }
 `;
 
+interface SelectFilterProps {
+  isShowModal: boolean;
+}
+
 export const Best = () => {
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -66,11 +70,17 @@ export const Best = () => {
           </AnchorMore>
         </Link>
       </ContainerTitle>
-      <BtnOpenFilter type="button" onClick={() => setIsShowModal(true)}>
+      <BtnOpenFilter
+        type="button"
+        onClick={() => setIsShowModal((state) => !state)}
+      >
         인기순
         <IconCaret />
       </BtnOpenFilter>
-      <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
+      <BestFilterModal
+        isShowModal={isShowModal}
+        setIsShowModal={setIsShowModal}
+      >
         <>
           <TItleFilter>정렬</TItleFilter>
           <ul>
@@ -81,7 +91,16 @@ export const Best = () => {
             ))}
           </ul>
         </>
-      </Modal>
+      </BestFilterModal>
+      <ContainerSelectFilter isShowModal={isShowModal}>
+        <ul>
+          {BEST_FILTER_LIST.map((el) => (
+            <ItemFilter key={`desktop-best-filter-list-${uuidv4()}`}>
+              <BtnFilter type="button">{el.title}</BtnFilter>
+            </ItemFilter>
+          ))}
+        </ul>
+      </ContainerSelectFilter>
       <List>
         {fakeData.map((item) => {
           return (
@@ -214,6 +233,12 @@ const IconCaret = styled(Caret)`
   vertical-align: middle;
 `;
 
+const BestFilterModal = styled(Modal)`
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: none;
+  }
+`;
+
 const TItleFilter = styled.p`
   padding: ${pxToRem(8)} 0;
   font-weight: 600;
@@ -226,6 +251,21 @@ const ItemFilter = styled.li`
 
 const BtnFilter = styled.button`
   font-size: ${pxToRem(16)};
+`;
+
+const ContainerSelectFilter = styled.div<SelectFilterProps>`
+  display: ${({ isShowModal }) => (isShowModal ? 'block' : 'none')};
+  position: absolute;
+  top: -10px;
+  right: 30px;
+  padding: 5px 3px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: none;
+  }
 `;
 
 const List = styled.ul`
