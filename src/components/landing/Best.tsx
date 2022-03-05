@@ -13,6 +13,7 @@ import {
   getAllPostsQuery,
   getAllPostsQueryVariables,
 } from '@generated/getAllPostsQuery';
+import { BEST_FILTER_LIST } from '@constants/bestFilterList';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
@@ -57,7 +58,7 @@ export const Best = () => {
       <ContainerTitle>
         <div>
           <Title>베스트</Title>
-          <SubTitle>어서와 우리집 베스트 TOP 100</SubTitle>
+          <SubTitle>웰커밍 베스트 TOP 100</SubTitle>
         </div>
         <Link href="/" passHref>
           <AnchorMore>
@@ -73,21 +74,11 @@ export const Best = () => {
         <>
           <TItleFilter>정렬</TItleFilter>
           <ul>
-            <ItemFilter>
-              <BtnFilter type="button">낮은가격순</BtnFilter>
-            </ItemFilter>
-            <ItemFilter>
-              <BtnFilter type="button">높은가격순</BtnFilter>
-            </ItemFilter>
-            <ItemFilter>
-              <BtnFilter type="button">최신순</BtnFilter>
-            </ItemFilter>
-            <ItemFilter>
-              <BtnFilter type="button">인기순</BtnFilter>
-            </ItemFilter>
-            <ItemFilter>
-              <BtnFilter type="button">많은 리뷰순</BtnFilter>
-            </ItemFilter>
+            {BEST_FILTER_LIST.map((el) => (
+              <ItemFilter key={`best-filter-list-${uuidv4()}`}>
+                <BtnFilter type="button">{el.title}</BtnFilter>
+              </ItemFilter>
+            ))}
           </ul>
         </>
       </Modal>
