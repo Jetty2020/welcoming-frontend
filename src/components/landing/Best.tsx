@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { css } from '@emotion/react';
 import { pxToRem } from '@utils/pxToRem';
 import { ChevronRight } from 'public/icons';
 import Caret from 'public/icons/caret-down.svg';
 import { Modal } from '@components/common/Modal';
-import { PRIMARY_800, ERROR, PRIMARY_600 } from '@constants/colors';
+import { PRIMARY_600, PRIMARY_800, ERROR } from '@constants/colors';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
@@ -56,7 +56,7 @@ export const Best = () => {
       <List>
         {fakeData.map((item) => {
           return (
-            <li key={`best-list-${uuidv4()}`}>
+            <Item key={`best-list-${uuidv4()}`}>
               <Link href="/" passHref>
                 <a>
                   <Img>이미지 준비중</Img>
@@ -78,17 +78,24 @@ export const Best = () => {
                   </Info>
                 </a>
               </Link>
-            </li>
+            </Item>
           );
         })}
       </List>
     </Section>
   );
 };
+
 const Section = styled.section`
   margin: ${pxToRem(40)} auto 0;
   max-width: ${pxToRem(1200)};
   padding: 0 ${pxToRem(15)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    position: relative;
+    margin-top: ${pxToRem(100)};
+    padding: 0 ${pxToRem(30)};
+  }
 `;
 
 const ContainerTitle = styled.div`
@@ -106,17 +113,38 @@ const ContainerTitle = styled.div`
     bottom: ${pxToRem(-12)};
     background-color: ${PRIMARY_600};
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    flex-direction: column;
+    position: absolute;
+    top: ${pxToRem(10)};
+    left: ${pxToRem(40)};
+
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h2`
   margin-bottom: ${pxToRem(5)};
   font-size: ${({ theme }) => pxToRem(theme.title.mobileFontSize)};
   font-weight: ${({ theme }) => theme.title.fontWeight};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin-bottom: ${pxToRem(8)};
+    font-size: ${({ theme }) => pxToRem(theme.title.desktopFontSize)};
+  }
 `;
 
 const SubTitle = styled.p`
   color: ${({ theme }) => theme.text.lighter};
   font-size: ${pxToRem(14)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin: ${pxToRem(10)} 0 ${pxToRem(15)};
+    font-size: ${pxToRem(16)};
+  }
 `;
 
 const AnchorMore = styled.a`
@@ -130,15 +158,26 @@ const AnchorMore = styled.a`
     margin-left: ${pxToRem(5)};
     vertical-align: baseline;
   }
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    font-size: ${pxToRem(16)};
+  }
 `;
 
 const BtnOpenFilter = styled.button`
   margin-top: ${pxToRem(22)};
-  padding: ${pxToRem(6)} ${pxToRem(6)} ${pxToRem(5)} ${pxToRem(10)};
+  padding: ${pxToRem(6)} ${pxToRem(6)} ${pxToRem(6)} ${pxToRem(10)};
   border-radius: ${pxToRem(4)};
   background-color: ${({ theme }) => theme.text.default};
   font-size: ${pxToRem(14)};
   color: ${({ theme }) => theme.background.default};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    position: absolute;
+    top: ${pxToRem(-49)};
+    right: ${pxToRem(30)};
+    margin: 0;
+  }
 `;
 
 const IconCaret = styled(Caret)`
@@ -165,6 +204,38 @@ const List = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   gap: ${pxToRem(20)} ${pxToRem(10)};
   margin-top: ${pxToRem(10)};
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    display: grid;
+    gap: ${pxToRem(50)} ${pxToRem(20)};
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const Item = styled.li`
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    &:nth-of-type(1) {
+      grid-column: 2;
+    }
+    &:nth-of-type(2) {
+      grid-column: 3;
+    }
+    &:nth-of-type(3) {
+      grid-column: 4;
+    }
+    &:nth-of-type(4) {
+      grid-column: 1;
+    }
+    &:nth-of-type(5) {
+      grid-column: 2;
+    }
+    &:nth-of-type(6) {
+      grid-column: 3;
+    }
+    &:nth-of-type(7) {
+      grid-column: 4;
+    }
+  }
 `;
 
 const Img = styled.div`
