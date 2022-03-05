@@ -8,11 +8,49 @@ import { ChevronRight } from 'public/icons';
 import Caret from 'public/icons/caret-down.svg';
 import { Modal } from '@components/common/Modal';
 import { PRIMARY_600, PRIMARY_800, ERROR } from '@constants/colors';
+import { gql, useQuery } from '@apollo/client';
+import {
+  getAllPostsQuery,
+  getAllPostsQueryVariables,
+} from '@generated/getAllPostsQuery';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
+const GETALLPOSTS_QUERY = gql`
+  query getAllPostsQuery($getAllPostsInput: AllPostsInput!) {
+    getAllPosts(input: $getAllPostsInput) {
+      ok
+      error
+      posts {
+        id
+        title
+        ori_price
+        selling_price
+      }
+    }
+  }
+`;
+
 export const Best = () => {
   const [isShowModal, setIsShowModal] = useState(false);
+
+  const { data, loading } = useQuery<
+    getAllPostsQuery,
+    getAllPostsQueryVariables
+  >(GETALLPOSTS_QUERY, {
+    variables: {
+      getAllPostsInput: {
+        order: 0,
+        page: 1,
+      },
+    },
+  });
+
+  if (loading) return <div>로딩중</div>;
+  if (!data) return <div>데이터가 없습니다</div>;
+
+  console.log('베스트');
+  console.log(data.getAllPosts);
 
   return (
     <Section>

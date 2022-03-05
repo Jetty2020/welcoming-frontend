@@ -4,11 +4,7 @@ import PageTitle from '@components/common/PageTitle';
 import {
   getEventsQuery,
   getEventsQueryVariables,
-} from '@generated//getEventsQuery';
-import {
-  getAllPostsQuery,
-  getAllPostsQueryVariables,
-} from '@generated//getAllPostsQuery';
+} from '@generated/getEventsQuery';
 import { Layout } from '@components/layouts/Layout';
 import { Carousel } from '@components/landing/Carousel';
 import { Category } from '@components/landing/Category';
@@ -30,21 +26,6 @@ const Home: NextPage = () => {
     }
   `;
 
-  const GETALLPOSTS_QUERY = gql`
-    query getAllPostsQuery($getAllPostsInput: AllPostsInput!) {
-      getAllPosts(input: $getAllPostsInput) {
-        ok
-        error
-        posts {
-          id
-          title
-          ori_price
-          selling_price
-        }
-      }
-    }
-  `;
-
   const { data: evnetsData, loading: evnetsLoading } = useQuery<
     getEventsQuery,
     getEventsQueryVariables
@@ -56,19 +37,7 @@ const Home: NextPage = () => {
     },
   });
 
-  const { data: allPostsData, loading: allPostsLoading } = useQuery<
-    getAllPostsQuery,
-    getAllPostsQueryVariables
-  >(GETALLPOSTS_QUERY, {
-    variables: {
-      getAllPostsInput: {
-        order: 0,
-        page: 1,
-      },
-    },
-  });
   console.log(evnetsData?.getEvents, evnetsLoading);
-  console.log(allPostsData?.getAllPosts, allPostsLoading);
   return (
     <>
       <PageTitle title="홈" />
