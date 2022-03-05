@@ -8,8 +8,8 @@ import { pxToRem } from '@utils/pxToRem';
 
 const data = [
   {
-    deImg: 'https://welcoming-2022.s3.amazonaws.com/16430327323051.jpg',
-    moImg: 'https://welcoming-2022.s3.amazonaws.com/16430328647101m.jpg',
+    deImg: '/images/landing/welcom_deal_banner.png',
+    moImg: '/images/landing/welcom_deal_banner_m.png',
   },
   {
     deImg: 'https://welcoming-2022.s3.amazonaws.com/16430328768812.jpg',
