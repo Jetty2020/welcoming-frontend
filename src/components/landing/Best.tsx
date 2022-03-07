@@ -71,6 +71,12 @@ export const Best = () => {
     setIsShowSelect(false);
   };
 
+  const handleSelectHover = (value: boolean) => {
+    if (window.innerWidth >= parseInt(mediaQuery.tablet, 10)) {
+      setIsShowSelect(value);
+    }
+  };
+
   console.log('베스트');
   console.log(data.getAllPosts);
 
@@ -87,7 +93,12 @@ export const Best = () => {
           </AnchorMore>
         </Link>
       </ContainerTitle>
-      <BtnOpenFilter type="button" onClick={handleShowFilter}>
+      <BtnOpenFilter
+        type="button"
+        onClick={handleShowFilter}
+        onMouseEnter={() => handleSelectHover(true)}
+        onMouseLeave={() => handleSelectHover(false)}
+      >
         {selectFilter}
         <IconCaret />
       </BtnOpenFilter>
@@ -108,7 +119,11 @@ export const Best = () => {
           </ul>
         </>
       </Modal>
-      <ContainerSelectFilter isShowModal={isShowSelect}>
+      <ContainerSelectFilter
+        isShowModal={isShowSelect}
+        onMouseEnter={() => handleSelectHover(true)}
+        onMouseLeave={() => handleSelectHover(false)}
+      >
         <ul>
           {BEST_FILTER_LIST.map((el) => (
             <ItemFilter key={`desktop-best-filter-list-${uuidv4()}`}>
@@ -269,7 +284,7 @@ const BtnFilter = styled.button`
 `;
 
 const ContainerSelectFilter = styled.div<SelectFilterProps>`
-  display: ${({ isShowModal }) => (isShowModal ? 'block' : 'none')};
+  visibility: ${({ isShowModal }) => (isShowModal ? 'visible' : 'hidden')};
   position: absolute;
   top: -10px;
   right: 30px;
@@ -277,6 +292,8 @@ const ContainerSelectFilter = styled.div<SelectFilterProps>`
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  opacity: ${({ isShowModal }) => (isShowModal ? '1' : '0')};
+  transition: all 0.5s;
 `;
 
 const List = styled.ul`
