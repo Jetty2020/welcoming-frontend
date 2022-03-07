@@ -38,6 +38,7 @@ interface SelectFilterProps {
 }
 
 export const Best = () => {
+  const [selectFilter, setSelectFilter] = useState('인기순');
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowSelect, setIsShowSelect] = useState(false);
 
@@ -64,6 +65,12 @@ export const Best = () => {
     }
   };
 
+  const handleSelectFilter = (value: string) => {
+    setSelectFilter(value);
+    setIsShowModal(false);
+    setIsShowSelect(false);
+  };
+
   console.log('베스트');
   console.log(data.getAllPosts);
 
@@ -81,7 +88,7 @@ export const Best = () => {
         </Link>
       </ContainerTitle>
       <BtnOpenFilter type="button" onClick={handleShowFilter}>
-        인기순
+        {selectFilter}
         <IconCaret />
       </BtnOpenFilter>
       <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
@@ -90,7 +97,12 @@ export const Best = () => {
           <ul>
             {BEST_FILTER_LIST.map((el) => (
               <ItemFilter key={`best-filter-list-${uuidv4()}`}>
-                <BtnFilter type="button">{el.title}</BtnFilter>
+                <BtnFilter
+                  type="button"
+                  onClick={() => handleSelectFilter(el.title)}
+                >
+                  {el.title}
+                </BtnFilter>
               </ItemFilter>
             ))}
           </ul>
@@ -100,7 +112,12 @@ export const Best = () => {
         <ul>
           {BEST_FILTER_LIST.map((el) => (
             <ItemFilter key={`desktop-best-filter-list-${uuidv4()}`}>
-              <BtnFilter type="button">{el.title}</BtnFilter>
+              <BtnFilter
+                type="button"
+                onClick={() => handleSelectFilter(el.title)}
+              >
+                {el.title}
+              </BtnFilter>
             </ItemFilter>
           ))}
         </ul>
