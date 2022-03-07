@@ -163,7 +163,7 @@ export const title: TITLE = {
 };
 
 export const mediaQuery: MEDIA = {
-  tablet: `${pxToRem(768)}`,
+  tablet: '768px',
 };
 
 export const mode: ThemeGroup = {
