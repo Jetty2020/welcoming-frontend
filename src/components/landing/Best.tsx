@@ -14,6 +14,7 @@ import {
   getAllPostsQueryVariables,
 } from '@generated/getAllPostsQuery';
 import { BEST_FILTER_LIST } from '@constants/bestFilterList';
+import { mediaQuery } from '@styles/theme';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
@@ -38,6 +39,7 @@ interface SelectFilterProps {
 
 export const Best = () => {
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowSelect, setIsShowSelect] = useState(false);
 
   const { data, loading } = useQuery<
     getAllPostsQuery,
@@ -53,6 +55,14 @@ export const Best = () => {
 
   if (loading) return <div>로딩중</div>;
   if (!data) return <div>데이터가 없습니다</div>;
+
+  const handleShowFilter = () => {
+    if (window.innerWidth < parseInt(mediaQuery.tablet, 10)) {
+      setIsShowModal(true);
+    } else {
+      setIsShowSelect((state) => !state);
+    }
+  };
 
   console.log('베스트');
   console.log(data.getAllPosts);
@@ -70,17 +80,11 @@ export const Best = () => {
           </AnchorMore>
         </Link>
       </ContainerTitle>
-      <BtnOpenFilter
-        type="button"
-        onClick={() => setIsShowModal((state) => !state)}
-      >
+      <BtnOpenFilter type="button" onClick={handleShowFilter}>
         인기순
         <IconCaret />
       </BtnOpenFilter>
-      <BestFilterModal
-        isShowModal={isShowModal}
-        setIsShowModal={setIsShowModal}
-      >
+      <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
         <>
           <TItleFilter>정렬</TItleFilter>
           <ul>
@@ -91,8 +95,8 @@ export const Best = () => {
             ))}
           </ul>
         </>
-      </BestFilterModal>
-      <ContainerSelectFilter isShowModal={isShowModal}>
+      </Modal>
+      <ContainerSelectFilter isShowModal={isShowSelect}>
         <ul>
           {BEST_FILTER_LIST.map((el) => (
             <ItemFilter key={`desktop-best-filter-list-${uuidv4()}`}>
@@ -233,12 +237,6 @@ const IconCaret = styled(Caret)`
   vertical-align: middle;
 `;
 
-const BestFilterModal = styled(Modal)`
-  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
-    display: none;
-  }
-`;
-
 const TItleFilter = styled.p`
   padding: ${pxToRem(8)} 0;
   font-weight: 600;
@@ -262,10 +260,6 @@ const ContainerSelectFilter = styled.div<SelectFilterProps>`
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-
-  @media screen and (max-width: ${({ theme }) => theme.mediaQuery.tablet}) {
-    display: none;
-  }
 `;
 
 const List = styled.ul`
