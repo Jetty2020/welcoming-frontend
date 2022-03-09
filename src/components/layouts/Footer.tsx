@@ -8,78 +8,78 @@ export const Footer = () => {
     <LayoutFooter>
       <ContainerSection>
         <Section>
-          <TitleCs>
+          <TitleCS>
             고객센터
             <ChevronRight />
-          </TitleCs>
-          <CsTel>1234-1234</CsTel>
-          <CsTime>
+          </TitleCS>
+          <TelCS>1234-1234</TelCS>
+          <TimeCS>
             평일 09:00 ~ 18:00 (점심시간 12:00 ~ 14:00 제외 / 주말, 공휴일 제외)
-          </CsTime>
-          <ListBtnCs>
-            <ItemBtnCs>
-              <BtnCs type="button">자주하는 질문</BtnCs>
-            </ItemBtnCs>
-            <ItemBtnCs>
-              <BtnCs type="button">1:1 문의</BtnCs>
-            </ItemBtnCs>
-          </ListBtnCs>
+          </TimeCS>
+          <ListBtnCS>
+            <ItemBtnCS>
+              <BtnCS type="button">자주하는 질문</BtnCS>
+            </ItemBtnCS>
+            <ItemBtnCS>
+              <BtnCS type="button">1:1 문의</BtnCS>
+            </ItemBtnCS>
+          </ListBtnCS>
         </Section>
         <Section>
           <h2 className="sr-only">기업정보</h2>
           <nav>
-            <FooterNav>
-              <li>
+            <MenuFooter>
+              <ItemMenu>
                 <Link href="/" passHref>
                   <a>이용악관</a>
                 </Link>
-              </li>
-              <li>
+              </ItemMenu>
+              <ItemMenu>
                 <Link href="/" passHref>
                   <a>개인정보처리방침</a>
                 </Link>
-              </li>
-              <li>
+              </ItemMenu>
+              <ItemMenu>
                 <Link href="/" passHref>
                   <a>공지사항</a>
                 </Link>
-              </li>
-              <li>
+              </ItemMenu>
+              <ItemMenu>
                 <Link href="/" passHref>
                   <a>고객센터</a>
                 </Link>
-              </li>
-            </FooterNav>
+              </ItemMenu>
+            </MenuFooter>
             <dl>
-              <CompanyInfoBox>
-                <dt>상호명 :</dt>
+              <InfoCompany>
+                <TitleInfo>상호명 :</TitleInfo>
                 <dd>(주)어서와우리집</dd>
-              </CompanyInfoBox>
-              <CompanyInfoBox>
-                <dt>주소 :</dt>
+              </InfoCompany>
+              <InfoCompany>
+                <TitleInfo>주소 :</TitleInfo>
                 <dd>광주광역시 웰컴구 웰컴로 000 </dd>
-              </CompanyInfoBox>
-              <CompanyInfoBox>
-                <dt>대표이사 :</dt>
+              </InfoCompany>
+              <InfoCompany>
+                <TitleInfo>대표이사 :</TitleInfo>
                 <dd>박정훈, 이보리</dd>
-              </CompanyInfoBox>
-              <CompanyInfoBox>
-                <dt>사업자등록번호 :</dt>
+              </InfoCompany>
+              <InfoCompany>
+                <TitleInfo>사업자등록번호 :</TitleInfo>
                 <dd>000-00-00000</dd>
-              </CompanyInfoBox>
-              <CompanyInfoBox>
-                <dt>통신판매업신고 :</dt>
+              </InfoCompany>
+              <InfoCompany>
+                <TitleInfo>통신판매업신고 :</TitleInfo>
                 <dd>2022-가나다라-0000호</dd>
-              </CompanyInfoBox>
-              <CompanyInfoBox>
-                <dt>이메일 :</dt>
+              </InfoCompany>
+              <InfoCompany>
+                <TitleInfo>이메일 :</TitleInfo>
                 <dd>welcoming@이메일.com</dd>
-              </CompanyInfoBox>
+              </InfoCompany>
             </dl>
           </nav>
         </Section>
       </ContainerSection>
-      <FooterRow>
+      <ContainerMessage>
         <small>
           <Link href="/" passHref>
             <a>© &nbsp;welcoming, Co., Ltd.</a>
@@ -90,7 +90,7 @@ export const Footer = () => {
           * 해당 웹페이지는 실제 운영 중인 사이트가 아닌 포트폴리오 사이트
           입니다.
         </Message>
-      </FooterRow>
+      </ContainerMessage>
     </LayoutFooter>
   );
 };
@@ -129,7 +129,7 @@ const Section = styled.section`
   }
 `;
 
-const TitleCs = styled.h2`
+const TitleCS = styled.h2`
   font-weight: 700;
 
   & svg {
@@ -148,7 +148,7 @@ const TitleCs = styled.h2`
   }
 `;
 
-const CsTel = styled.span`
+const TelCS = styled.span`
   display: inline-block;
   margin: ${pxToRem(8)} 0;
   font-size: ${pxToRem(30)};
@@ -159,7 +159,7 @@ const CsTel = styled.span`
   }
 `;
 
-const CsTime = styled.p`
+const TimeCS = styled.p`
   color: ${({ theme }) => theme.text.lighter};
   font-size: ${pxToRem(13)};
   font-weight: 600;
@@ -170,7 +170,7 @@ const CsTime = styled.p`
   }
 `;
 
-const ListBtnCs = styled.ul`
+const ListBtnCS = styled.ul`
   width: 100%;
   margin-top: ${pxToRem(10)};
 
@@ -178,7 +178,7 @@ const ListBtnCs = styled.ul`
   }
 `;
 
-const ItemBtnCs = styled.li`
+const ItemBtnCS = styled.li`
   display: inline-block;
   width: calc(50% - ${pxToRem(5)});
 
@@ -187,7 +187,7 @@ const ItemBtnCs = styled.li`
   }
 `;
 
-const BtnCs = styled.button`
+const BtnCS = styled.button`
   width: 100%;
   padding: ${pxToRem(10)} 0;
   border-radius: ${pxToRem(4)};
@@ -197,38 +197,42 @@ const BtnCs = styled.button`
   letter-spacing: 1px;
 `;
 
-const FooterNav = styled.ul`
+const MenuFooter = styled.ul`
   display: flex;
   margin: ${pxToRem(20)} 0;
   color: ${({ theme }) => theme.text.lighter};
 
-  & li + li {
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin: 0 0 ${pxToRem(20)};
+    font-size: ${pxToRem(17)};
+  }
+`;
+
+const ItemMenu = styled.li`
+  & + & {
     margin-left: ${pxToRem(8)};
   }
 
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
-    margin: 0 0 ${pxToRem(20)};
-    font-size: ${pxToRem(17)};
-
-    & li + li {
+    & + & {
       margin-left: ${pxToRem(15)};
     }
   }
 `;
 
-const CompanyInfoBox = styled.div`
+const InfoCompany = styled.div`
   display: flex;
 
   & + & {
     margin-top: ${pxToRem(10)};
   }
-
-  & dt {
-    margin-right: ${pxToRem(8)};
-  }
 `;
 
-const FooterRow = styled.div`
+const TitleInfo = styled.dt`
+  margin-right: ${pxToRem(8)};
+`;
+
+const ContainerMessage = styled.div`
   margin: ${pxToRem(30)} auto 0;
   padding: ${pxToRem(30)} 0;
   background-color: ${({ theme }) => theme.header.background};
