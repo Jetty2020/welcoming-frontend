@@ -12,8 +12,8 @@ const data = [
     moImg: '/images/landing/welcom_deal_banner_m.png',
   },
   {
-    deImg: 'https://welcoming-2022.s3.amazonaws.com/16430328768812.jpg',
-    moImg: 'https://welcoming-2022.s3.amazonaws.com/16430328983252m.jpg',
+    deImg: '/images/landing/living_week_banner.png',
+    moImg: '/images/landing/living_week_banner_m.png',
   },
   {
     deImg: 'https://welcoming-2022.s3.amazonaws.com/16430329130963.jpg',
