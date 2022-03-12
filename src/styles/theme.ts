@@ -34,6 +34,10 @@ declare module '@emotion/react' {
     logo: {
       src: string;
     };
+    error: {
+      error404: string;
+      error500: string;
+    };
   }
   export interface Theme extends ThemeMode {
     button: {
@@ -114,6 +118,10 @@ const light: ThemeMode = {
   logo: {
     src: '/logo/logo.png',
   },
+  error: {
+    error404: '/error/404.png',
+    error500: '/error/500.png',
+  },
 };
 
 const dark: ThemeMode = {
@@ -136,6 +144,10 @@ const dark: ThemeMode = {
   },
   logo: {
     src: '/logo/logo_w.png',
+  },
+  error: {
+    error404: '/error/404_w.png',
+    error500: '/error/500_w.png',
   },
 };
 
