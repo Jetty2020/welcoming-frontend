@@ -1,5 +1,4 @@
 import { Theme, ThemeMode } from '@emotion/react';
-import { pxToRem } from '@utils/pxToRem';
 import {
   GRAY_900,
   GRAY_800,
@@ -36,7 +35,7 @@ declare module '@emotion/react' {
     };
     error: {
       error404: string;
-      error500: string;
+      default: string;
     };
   }
   export interface Theme extends ThemeMode {
@@ -120,7 +119,7 @@ const light: ThemeMode = {
   },
   error: {
     error404: '/error/404.png',
-    error500: '/error/500.png',
+    default: '/error/error.png',
   },
 };
 
@@ -147,7 +146,7 @@ const dark: ThemeMode = {
   },
   error: {
     error404: '/error/404_w.png',
-    error500: '/error/500_w.png',
+    default: '/error/error_w.png',
   },
 };
 
