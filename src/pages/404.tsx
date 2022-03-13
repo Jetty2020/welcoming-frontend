@@ -1,9 +1,8 @@
-import PageTitle from '@components/common/PageTitle';
-import { Layout } from '@components/layouts/Layout';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { pxToRem } from '@utils/pxToRem';
 import Link from 'next/link';
+import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
+import PageTitle from '@components/common/PageTitle';
+import { pxToRem } from '@utils/pxToRem';
 
 const Error404 = () => {
   const theme = useTheme();
@@ -33,12 +32,12 @@ const Error404 = () => {
 export default Error404;
 
 const Header = styled.header`
-  background-color: rgba(255, 255, 255, 0.5);
+  background: ${({ theme }) => theme.header.background};
   padding: ${pxToRem(15)};
 `;
 
 const ImgLogo = styled.img`
-  width: ${pxToRem(110)};
+  width: ${pxToRem(100)};
   margin: 0 auto;
 `;
 
