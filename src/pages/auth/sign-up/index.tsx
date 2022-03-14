@@ -239,7 +239,6 @@ const SignUp: NextPage = () => {
                   type="checkbox"
                   id="agreeAge"
                   {...register('agreeAge', {
-                    required: true,
                     onChange: handleCheckbox,
                   })}
                 />
@@ -251,7 +250,6 @@ const SignUp: NextPage = () => {
                   type="checkbox"
                   id="agreeTerm"
                   {...register('agreeTerm', {
-                    required: true,
                     onChange: handleCheckbox,
                   })}
                 />
@@ -265,7 +263,6 @@ const SignUp: NextPage = () => {
                   type="checkbox"
                   id="agreePrivacy"
                   {...register('agreePrivacy', {
-                    required: true,
                     onChange: handleCheckbox,
                   })}
                 />
@@ -281,7 +278,11 @@ const SignUp: NextPage = () => {
           <Button
             type="submit"
             disabled={
-              !isValid || emailError || passwordCheckError || nicknameError
+              !isValid ||
+              !agreeAllValue ||
+              emailError ||
+              passwordCheckError ||
+              nicknameError
             }
           >
             회원가입하기
