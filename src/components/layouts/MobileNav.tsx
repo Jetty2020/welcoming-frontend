@@ -160,6 +160,7 @@ const ListWish = styled.ul`
 
 const IconCart = styled(Cart)`
   width: ${pxToRem(22)};
+  fill: ${({ theme }) => theme.text.default};
   vertical-align: bottom;
 `;
 
@@ -190,6 +191,7 @@ const LinkMenu = styled.a`
   border-bottom: ${pxToRem(3)} solid transparent;
   font-size: ${pxToRem(15)};
   font-weight: 600;
+  color: ${({ theme }) => theme.text.default};
 
   &.active {
     border-color: ${({ theme }) => theme.text.default};
