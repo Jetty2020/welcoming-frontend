@@ -1,6 +1,7 @@
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import Link from 'next/link';
+import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
+import { pxToRem } from '@utils/pxToRem';
 
 export const ComingSoon = () => {
   const theme = useTheme();
@@ -22,38 +23,38 @@ export const ComingSoon = () => {
 };
 
 const Section = styled.section`
-  min-width: 300px;
-  padding: 100px 0;
+  min-width: ${pxToRem(300)};
+  padding: ${pxToRem(100)} 0;
   text-align: center;
   line-height: 1.5;
 
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
-    padding: 200px 0;
+    padding: ${pxToRem(200)} 0;
   }
 `;
 
 const Img = styled.img`
-  min-width: 280px;
+  min-width: ${pxToRem(830)};
   width: 55%;
-  max-width: 430px;
-  margin: 10vh auto 40px;
+  max-width: ${pxToRem(430)};
+  margin: 10vh auto ${pxToRem(40)};
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: ${pxToRem(20)};
   font-weight: 600;
   word-break: keep-all;
 `;
 
 const Text = styled.p`
-  margin-top: 5px;
+  margin-top: ${pxToRem(5)};
 `;
 
 const LinkBack = styled.a`
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 18px;
-  border-radius: 4px;
+  margin-top: ${pxToRem(20)};
+  padding: ${pxToRem(10)} ${pxToRem(18)};
+  border-radius: ${pxToRem(4)};
   background: ${({ theme }) => theme.button.background};
   color: ${({ theme }) => theme.button.text};
 `;
