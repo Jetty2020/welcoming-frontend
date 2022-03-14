@@ -16,7 +16,7 @@ export const ComingSoon = () => {
         빠른 시일 내에 이용하실 수 있도록 하겠습니다.
       </Text>
       <Link href="/" passHref>
-        <LinkBack>이전 페이지로 돌아가기</LinkBack>
+        <LinkHome>홈으로 가기</LinkHome>
       </Link>
     </Section>
   );
@@ -50,7 +50,7 @@ const Text = styled.p`
   margin-top: ${pxToRem(5)};
 `;
 
-const LinkBack = styled.a`
+const LinkHome = styled.a`
   display: inline-block;
   margin-top: ${pxToRem(20)};
   padding: ${pxToRem(10)} ${pxToRem(18)};

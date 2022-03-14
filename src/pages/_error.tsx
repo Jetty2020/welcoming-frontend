@@ -16,7 +16,7 @@ function Error() {
           <Title>에러가 발생했습니다.</Title>
           <Text>서비스 이용에 불편을 드려 죄송합니다.</Text>
           <Link href="/" passHref>
-            <LinkBack>이전 페이지로 돌아가기</LinkBack>
+            <LinkHome>홈으로 가기</LinkHome>
           </Link>
         </Section>
       </Layout>
@@ -54,7 +54,7 @@ const Text = styled.p`
   margin-top: ${pxToRem(5)};
 `;
 
-const LinkBack = styled.a`
+const LinkHome = styled.a`
   display: inline-block;
   margin-top: ${pxToRem(20)};
   padding: ${pxToRem(10)} 18 ${pxToRem(18)}px;

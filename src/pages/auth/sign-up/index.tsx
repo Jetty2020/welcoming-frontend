@@ -126,7 +126,7 @@ const SignUp: NextPage = () => {
     <MainSignUp>
       <PageTitle title="회원가입" />
       <Header>
-        <BtnClose type="button" onClick={() => router.push('/')}>
+        <BtnClose type="button" onClick={() => router.back()}>
           <IconClose />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
