@@ -4,8 +4,8 @@ import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
 import Cart from 'public/icons/cart.svg';
-import DarkIcon from 'public/icons/dark-icon.svg';
-import LightIcon from 'public/icons/light-icon.svg';
+import DarkSVG from 'public/icons/dark-icon.svg';
+import LightSVG from 'public/icons/light-icon.svg';
 import Search from 'public/icons/search.svg';
 import HamburgerMenu from 'public/icons/hamburger-menu.svg';
 import Home from 'public/icons/home.svg';
@@ -25,89 +25,89 @@ export const MobileNav = ({ className }: EmotionProps) => {
         <HeaderRow>
           <Link href="/" passHref>
             <LinkLogo>
-              <img src={theme.logo.src} alt="어서와 우리집 로고" />
+              <ImgLogo src={theme.logo.src} alt="어서와 우리집 로고" />
             </LinkLogo>
           </Link>
           <ListWish>
             <li>
               <Link href="/" passHref>
                 <a>
-                  <Cart />
+                  <IconCart />
                   <span className="sr-only">장바구니</span>
                 </a>
               </Link>
             </li>
             <li>
               <button type="button" onClick={() => isDark(!isDark())}>
-                {useReactiveVar(isDark) ? <DarkIcon /> : <LightIcon />}
+                {useReactiveVar(isDark) ? <IconDark /> : <IconLight />}
               </button>
             </li>
           </ListWish>
         </HeaderRow>
         <nav>
-          <HeaderNav>
-            <li>
+          <ListMenu>
+            <ItemMenu>
               <Link href="/" passHref>
                 <LinkMenu>홈</LinkMenu>
               </Link>
-            </li>
-            <li>
+            </ItemMenu>
+            <ItemMenu>
               <Link href="/" passHref>
                 <LinkMenu>베스트</LinkMenu>
               </Link>
-            </li>
-            <li>
+            </ItemMenu>
+            <ItemMenu>
               <Link href="/" passHref>
                 <LinkMenu>웰컴딜</LinkMenu>
               </Link>
-            </li>
-            <li>
+            </ItemMenu>
+            <ItemMenu>
               <Link href="/" passHref>
                 <LinkMenu>최신 기획전</LinkMenu>
               </Link>
-            </li>
-            <li>
+            </ItemMenu>
+            <ItemMenu>
               <Link href="/" passHref>
                 <LinkMenu>기획전</LinkMenu>
               </Link>
-            </li>
-          </HeaderNav>
+            </ItemMenu>
+          </ListMenu>
         </nav>
       </Header>
       <NavBar className={className}>
-        <NavList>
+        <ListNav>
           <li>
             <Link href="/" passHref>
-              <BtnMenu>
+              <AnchorMenu>
                 <Home />홈
-              </BtnMenu>
+              </AnchorMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <BtnMenu>
+              <AnchorMenu>
                 <HamburgerMenu />
                 카테고리
-              </BtnMenu>
+              </AnchorMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <BtnMenu>
+              <AnchorMenu>
                 <Search />
                 검색
-              </BtnMenu>
+              </AnchorMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <BtnMenu>
+              <AnchorMenu>
                 <Person />
                 마이페이지
-              </BtnMenu>
+              </AnchorMenu>
             </Link>
           </li>
-        </NavList>
+        </ListNav>
       </NavBar>
     </>
   );
@@ -141,10 +141,10 @@ const HeaderRow = styled.div`
 const LinkLogo = styled.a`
   display: block;
   padding: ${pxToRem(15)};
+`;
 
-  & img {
-    height: ${pxToRem(40)};
-  }
+const ImgLogo = styled.img`
+  height: ${pxToRem(40)};
 `;
 
 const ListWish = styled.ul`
@@ -153,29 +153,34 @@ const ListWish = styled.ul`
   position: absolute;
   right: ${pxToRem(26)};
 
-  & svg {
-    width: ${pxToRem(22)};
-    vertical-align: bottom;
-  }
-
-  & button svg {
-    width: ${pxToRem(20)};
-  }
-
   & li + li {
     margin-left: ${pxToRem(20)};
   }
 `;
 
-const HeaderNav = styled.ul`
+const IconCart = styled(Cart)`
+  width: ${pxToRem(22)};
+  vertical-align: bottom;
+`;
+
+const IconDark = styled(DarkSVG)`
+  width: ${pxToRem(20)};
+  vertical-align: bottom;
+`;
+
+const IconLight = styled(LightSVG)`
+  width: ${pxToRem(20)};
+  vertical-align: bottom;
+`;
+const ListMenu = styled.ul`
   overflow-x: auto;
   display: flex;
+`;
 
-  & li {
-    flex: 1;
-    min-width: fit-content;
-    text-align: center;
-  }
+const ItemMenu = styled.li`
+  flex: 1;
+  min-width: fit-content;
+  text-align: center;
 `;
 
 const LinkMenu = styled.a`
@@ -199,7 +204,7 @@ const NavBar = styled.nav`
   z-index: 10;
 `;
 
-const NavList = styled.ul`
+const ListNav = styled.ul`
   display: flex;
   background-color: ${({ theme }) => theme.background.default};
 
@@ -208,7 +213,7 @@ const NavList = styled.ul`
   }
 `;
 
-const BtnMenu = styled.a`
+const AnchorMenu = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;

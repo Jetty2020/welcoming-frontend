@@ -10,7 +10,7 @@ export const Footer = () => {
         <Section>
           <TitleCS>
             고객센터
-            <ChevronRight />
+            <IconChevronRight />
           </TitleCS>
           <TelCS>1234-1234</TelCS>
           <TimeCS>
@@ -132,19 +132,18 @@ const Section = styled.section`
 const TitleCS = styled.h2`
   font-weight: 700;
 
-  & svg {
-    width: ${pxToRem(14)};
-    margin-left: ${pxToRem(5)};
-    vertical-align: top;
-  }
-
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
     font-size: ${pxToRem(20)};
+  }
+`;
 
-    & svg {
-      width: ${pxToRem(20)};
-      height: ${pxToRem(20)};
-    }
+const IconChevronRight = styled(ChevronRight)`
+  width: ${pxToRem(14)};
+  margin-left: ${pxToRem(5)};
+  vertical-align: top;
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    width: ${pxToRem(20)};
+    height: ${pxToRem(20)};
   }
 `;
 

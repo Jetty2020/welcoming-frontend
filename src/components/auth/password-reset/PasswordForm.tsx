@@ -102,12 +102,12 @@ export const PasswordForm = ({ email }: PasswordFormProps) => {
         />
       </Label>
       {errors?.password?.type === 'pattern' && (
-        <Error>
+        <TextError>
           비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리로
           입력해주세요.
-        </Error>
+        </TextError>
       )}
-      {errorMsg && <Error>{errorMsg}</Error>}
+      {errorMsg && <TextError>{errorMsg}</TextError>}
       <BtnPwReset type="submit" disabled={!isValid}>
         비밀번호 재설정
       </BtnPwReset>
@@ -153,7 +153,7 @@ const Input = styled.input`
   }
 `;
 
-const Error = styled.span`
+const TextError = styled.span`
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};

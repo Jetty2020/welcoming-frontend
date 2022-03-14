@@ -84,16 +84,16 @@ const Login: NextPage = () => {
       <PageTitle title="로그인" />
       <Header>
         <BtnClose type="button" onClick={() => router.push('/')}>
-          <Close />
+          <IconClose />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
         <span>로그인</span>
       </Header>
       <SectionLogin>
         <h2 className="sr-only">로그인</h2>
-        <Contlogo>
+        <ContainerLogo>
           <img src="/logo/logo.png" alt="어서와 우리집 로고" />
-        </Contlogo>
+        </ContainerLogo>
         <FormLogin onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">
             <InputEmail
@@ -119,23 +119,23 @@ const Login: NextPage = () => {
             />
           </Label>
           {loginError && (
-            <Error>이메일 또는 비밀번호가 일치하지 않습니다.</Error>
+            <TextError>이메일 또는 비밀번호가 일치하지 않습니다.</TextError>
           )}
           <BtnLogin type="submit" disabled={!isValid}>
             로그인
           </BtnLogin>
         </FormLogin>
         <ListLink>
-          <li>
+          <ItemLink>
             <Link href="/auth/password-reset" passHref>
               <a>비밀번호 재설정</a>
             </Link>
-          </li>
-          <li>
+          </ItemLink>
+          <ItemLink>
             <Link href="/auth/sign-up" passHref>
               <a>회원가입</a>
             </Link>
-          </li>
+          </ItemLink>
         </ListLink>
       </SectionLogin>
       <AuthFooter />
@@ -172,11 +172,11 @@ const BtnClose = styled.button`
   left: ${pxToRem(15)};
   transform: translateY(-50%);
   font-size: 0;
+`;
 
-  & svg {
-    width: ${pxToRem(20)};
-    height: ${pxToRem(20)};
-  }
+const IconClose = styled(Close)`
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
 `;
 
 const SectionLogin = styled.section`
@@ -191,7 +191,7 @@ const SectionLogin = styled.section`
   flex-grow: 1;
 `;
 
-const Contlogo = styled.div`
+const ContainerLogo = styled.div`
   width: ${pxToRem(200)};
   margin: 0 auto ${pxToRem(50)};
 `;
@@ -229,7 +229,7 @@ const InputPassword = styled(InputSyle)`
   border-radius: 0 0 ${pxToRem(5)} ${pxToRem(5)};
 `;
 
-const Error = styled.span`
+const TextError = styled.span`
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
@@ -265,8 +265,8 @@ const ListLink = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
 
-  & li {
-    margin: 0 ${pxToRem(10)};
-  }
+const ItemLink = styled.li`
+  margin: 0 ${pxToRem(10)};
 `;
