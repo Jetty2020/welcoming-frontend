@@ -3,15 +3,13 @@ import { useTheme } from '@emotion/react';
 import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
-import {
-  Cart,
-  DarkIcon,
-  HamburgerMenu,
-  Home,
-  LightIcon,
-  Person,
-  Search,
-} from 'public/icons';
+import Cart from 'public/icons/cart.svg';
+import DarkIcon from 'public/icons/dark-icon.svg';
+import LightIcon from 'public/icons/light-icon.svg';
+import Search from 'public/icons/search.svg';
+import HamburgerMenu from 'public/icons/hamburger-menu.svg';
+import Home from 'public/icons/home.svg';
+import Person from 'public/icons/person.svg';
 import { isDark } from '@apollo';
 import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';

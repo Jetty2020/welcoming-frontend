@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Close } from 'public/icons';
+import Close from 'public/icons/close.svg';
 import { pxToRem } from 'src/utils/pxToRem';
 import PageTitle from '@components/common/PageTitle';
 import { authTokenVar, isLoggedInVar } from '@apollo';
