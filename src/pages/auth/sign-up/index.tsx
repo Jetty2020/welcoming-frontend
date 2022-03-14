@@ -127,16 +127,16 @@ const SignUp: NextPage = () => {
       <PageTitle title="회원가입" />
       <Header>
         <BtnClose type="button" onClick={() => router.push('/')}>
-          <Close />
+          <IconClose />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
         <span>회원가입</span>
       </Header>
       <SectionSignUp>
         <h2 className="sr-only">회원가입</h2>
-        <Contlogo>
+        <ContainerLogo>
           <img src={theme.logo.src} alt="어서와 우리집 로고" />
-        </Contlogo>
+        </ContainerLogo>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="emailDomain">
             이메일
@@ -152,12 +152,12 @@ const SignUp: NextPage = () => {
             />
           </Label>
           {errors.email?.type === 'required' && (
-            <Error>필수 입력 항목입니다.</Error>
+            <TextError>필수 입력 항목입니다.</TextError>
           )}
           {errors.email?.type === 'pattern' && (
-            <Error>이메일 형식이 올바르지 않습니다.</Error>
+            <TextError>이메일 형식이 올바르지 않습니다.</TextError>
           )}
-          {emailError && <Error>이미 가입한 이메일입니다.</Error>}
+          {emailError && <TextError>이미 가입한 이메일입니다.</TextError>}
           <Label htmlFor="password">
             비밀번호
             <Desc>영문, 숫자를 포함한 6~12자리의 비밀번호를 입력해주세요.</Desc>
@@ -172,13 +172,13 @@ const SignUp: NextPage = () => {
             />
           </Label>
           {errors?.password?.type === 'required' && (
-            <Error>필수 입력 항목입니다.</Error>
+            <TextError>필수 입력 항목입니다.</TextError>
           )}
           {errors?.password?.type === 'pattern' && (
-            <Error>
+            <TextError>
               비밀번호는 영문(대/소문자 구분), 숫자 조합하여 6~12자리이어야
               합니다.
-            </Error>
+            </TextError>
           )}
 
           <Label htmlFor="passwordCheck">
@@ -194,7 +194,9 @@ const SignUp: NextPage = () => {
               })}
             />
           </Label>
-          {passwordCheckError && <Error>비밀번호가 일치하지 않습니다.</Error>}
+          {passwordCheckError && (
+            <TextError>비밀번호가 일치하지 않습니다.</TextError>
+          )}
           <Label htmlFor="nickName">
             별명
             <Desc>다른 유저와 겹치지 않는 별명을 입력해주세요. (2~15자)</Desc>
@@ -213,13 +215,13 @@ const SignUp: NextPage = () => {
             />
           </Label>
           {errors?.nickname?.type === 'required' && (
-            <Error>필수 입력 항목입니다.</Error>
+            <TextError>필수 입력 항목입니다.</TextError>
           )}
           {(errors?.nickname?.type === 'maxLength' ||
             errors?.nickname?.type === 'minLength') && (
-            <Error>별명은 2~15자리이어야 합니다.</Error>
+            <TextError>별명은 2~15자리이어야 합니다.</TextError>
           )}
-          {nicknameError && <Error>사용 중인 별명입니다.</Error>}
+          {nicknameError && <TextError>사용 중인 별명입니다.</TextError>}
           <ContainerAgreement>
             약관동의
             <InnerContainerAgreement>
@@ -254,7 +256,7 @@ const SignUp: NextPage = () => {
                   })}
                 />
                 <Link href="/" passHref>
-                  <LinkAgreeMent target="_blank">이용약관</LinkAgreeMent>
+                  <AnchorAgreeMent target="_blank">이용약관</AnchorAgreeMent>
                 </Link>
                 <SpanRequire>&#40;필수&#41;</SpanRequire>
               </LabelAgreement>
@@ -268,9 +270,9 @@ const SignUp: NextPage = () => {
                   })}
                 />
                 <Link href="/" passHref>
-                  <LinkAgreeMent target="_blank">
+                  <AnchorAgreeMent target="_blank">
                     개인정보수집 및 이용동의
-                  </LinkAgreeMent>
+                  </AnchorAgreeMent>
                 </Link>
                 <SpanRequire>&#40;필수&#41;</SpanRequire>
               </LabelAgreement>
@@ -325,11 +327,11 @@ const BtnClose = styled.button`
   left: ${pxToRem(15)};
   transform: translateY(-50%);
   font-size: 0;
+`;
 
-  & svg {
-    width: ${pxToRem(20)};
-    height: ${pxToRem(20)};
-  }
+const IconClose = styled(Close)`
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
 `;
 
 const SectionSignUp = styled.section`
@@ -340,7 +342,7 @@ const SectionSignUp = styled.section`
   margin: ${pxToRem(50)} 0;
 `;
 
-const Contlogo = styled.div`
+const ContainerLogo = styled.div`
   width: ${pxToRem(200)};
   margin: 0 auto ${pxToRem(50)};
 `;
@@ -384,7 +386,7 @@ const Input = styled.input`
   }
 `;
 
-const Error = styled.span`
+const TextError = styled.span`
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
@@ -429,7 +431,7 @@ const LabelAgreement = styled.label`
   }
 `;
 
-const LinkAgreeMent = styled.a`
+const AnchorAgreeMent = styled.a`
   text-decoration: underline;
 `;
 
