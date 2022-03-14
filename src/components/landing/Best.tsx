@@ -7,7 +7,7 @@ import { pxToRem } from '@utils/pxToRem';
 import ChevronRight from 'public/icons/chevron-right.svg';
 import Caret from 'public/icons/caret-down.svg';
 import { Modal } from '@components/common/Modal';
-import { PRIMARY_600, PRIMARY_800, ERROR } from '@constants/colors';
+import { PRIMARY_600, PRIMARY_800, ERROR, GRAY_900 } from '@constants/colors';
 import { gql, useQuery } from '@apollo/client';
 import {
   getAllPostsQuery,
@@ -104,7 +104,7 @@ export const Best = () => {
       </BtnOpenFilter>
       <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
         <>
-          <TItleFilter>정렬</TItleFilter>
+          <TitleFilter>정렬</TitleFilter>
           <ul>
             {BEST_FILTER_LIST.map((el) => (
               <ItemFilter key={`best-filter-list-${uuidv4()}`}>
@@ -269,7 +269,7 @@ const IconCaret = styled(Caret)`
   vertical-align: middle;
 `;
 
-const TItleFilter = styled.p`
+const TitleFilter = styled.p`
   padding: ${pxToRem(8)} 0;
   font-weight: 600;
   text-align: center;
@@ -281,6 +281,7 @@ const ItemFilter = styled.li`
 
 const BtnFilter = styled.button`
   font-size: ${pxToRem(16)};
+  color: ${GRAY_900};
 `;
 
 const ContainerSelectFilter = styled.div<SelectFilterProps>`
