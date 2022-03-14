@@ -28,17 +28,17 @@ export const DesktopNav = ({ className }: EmotionProps) => {
         <ListUserMenu>
           <li>
             <Link href="/auth/sign-in" passHref>
-              <a>로그인</a>
+              <AnchorUserMenu>로그인</AnchorUserMenu>
             </Link>
           </li>
           <li>
             <Link href="/auth/sign-up" passHref>
-              <a>회원가입</a>
+              <AnchorUserMenu>회원가입</AnchorUserMenu>
             </Link>
           </li>
           <li>
             <Link href="/" passHref>
-              <a>고객센터</a>
+              <AnchorUserMenu>고객센터</AnchorUserMenu>
             </Link>
           </li>
         </ListUserMenu>
@@ -88,7 +88,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           <ItemBtns>
             <Link href="/" passHref>
               <a>
-                <Cart />
+                <IconCart />
                 <span className="sr-only">장바구니</span>
               </a>
             </Link>
@@ -156,6 +156,10 @@ const ListUserMenu = styled.ul`
   }
 `;
 
+const AnchorUserMenu = styled.a`
+  color: ${({ theme }) => theme.text.default};
+`;
+
 const ListMenu = styled.ul`
   display: flex;
   font-size: ${pxToRem(18)};
@@ -170,9 +174,10 @@ const ListMenu = styled.ul`
 
 const AnchorMenu = styled.a`
   display: block;
-  padding: ${pxToRem(15)} ${pxToRem(10)} ${pxToRem(12)};
   box-sizing: border-box;
+  padding: ${pxToRem(15)} ${pxToRem(10)} ${pxToRem(12)};
   border-bottom: ${pxToRem(3)} solid transparent;
+  color: ${({ theme }) => theme.text.default};
   transition: border-color 0.3s;
 
   &:hover,
@@ -187,6 +192,10 @@ const ListBtns = styled.ul`
 
 const ItemBtns = styled.li`
   width: ${pxToRem(20)};
+`;
+
+const IconCart = styled(Cart)`
+  fill: ${({ theme }) => theme.text.default};
 `;
 
 const LabelSearch = styled.label`
