@@ -14,7 +14,7 @@ import {
 } from '@generated/createAccountMutation';
 import { UserRole } from '@generated/globalTypes';
 import { pxToRem } from '@utils/pxToRem';
-import { Close } from 'public/icons';
+import Close from 'public/icons/close.svg';
 import { GRAY_500, GRAY_900, PRIMARY_900, WHITE } from '@constants/colors';
 
 const CREATE_ACCOUNT_MUTATION = gql`

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
-import { ChevronLeft } from 'public/icons';
+import ChevronLeft from 'public/icons/chevron-left.svg';
 import { pxToRem } from '@utils/pxToRem';
 import { EmailForm } from '@components/auth/password-reset/EmailForm';
 import { CheckCodeForm } from '@components/auth/password-reset/CheckCodeForm';

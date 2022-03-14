@@ -15,7 +15,7 @@ import {
   getTodayDealPostQueryVariables,
 } from '@generated/getTodayDealPostQuery';
 import { pxToRem } from '@utils/pxToRem';
-import { ChevronRight } from 'public/icons';
+import ChevronRight from 'public/icons/chevron-right.svg';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
