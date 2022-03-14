@@ -37,6 +37,9 @@ declare module '@emotion/react' {
       error404: string;
       default: string;
     };
+    comingSoon: {
+      src: string;
+    };
   }
   export interface Theme extends ThemeMode {
     button: {
@@ -121,6 +124,9 @@ const light: ThemeMode = {
     error404: '/error/404.png',
     default: '/error/error.png',
   },
+  comingSoon: {
+    src: '/images/coming_soon/coming_soon.png',
+  },
 };
 
 const dark: ThemeMode = {
@@ -147,6 +153,9 @@ const dark: ThemeMode = {
   error: {
     error404: '/error/404_w.png',
     default: '/error/error_w.png',
+  },
+  comingSoon: {
+    src: '/images/coming_soon/coming_soon_w.png',
   },
 };
 
