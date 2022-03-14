@@ -21,7 +21,7 @@ const PasswordReset: NextPage = () => {
     <MainPasswordReset>
       <Header>
         <BtnClose type="button" onClick={() => router.push('/auth/sign-in')}>
-          <ChevronLeft />
+          <IconChevronLeft />
           <span className="sr-only">뒤로가기</span>
         </BtnClose>
         <span>비밀번호 재설정</span>
@@ -82,11 +82,11 @@ const BtnClose = styled.button`
   left: ${pxToRem(15)};
   transform: translateY(-50%);
   font-size: 0;
+`;
 
-  & svg {
-    width: ${pxToRem(20)};
-    height: ${pxToRem(20)};
-  }
+const IconChevronLeft = styled(ChevronLeft)`
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
 `;
 
 const SectionPasswordReset = styled.section`
