@@ -1,11 +1,12 @@
 import { gql, useMutation } from '@apollo/client';
 import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import Cookies from 'js-cookie';
+import { useForm } from 'react-hook-form';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import Close from 'public/icons/close.svg';
 import { pxToRem } from 'src/utils/pxToRem';
 import PageTitle from '@components/common/PageTitle';
@@ -28,6 +29,7 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login: NextPage = () => {
+  const theme = useTheme();
   const router = useRouter();
   const [loginError, setLoginError] = useState(false);
 
@@ -92,7 +94,7 @@ const Login: NextPage = () => {
       <SectionLogin>
         <h2 className="sr-only">로그인</h2>
         <ContainerLogo>
-          <img src="/logo/logo.png" alt="어서와 우리집 로고" />
+          <img src={theme.logo.src} alt="어서와 우리집 로고" />
         </ContainerLogo>
         <FormLogin onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">
