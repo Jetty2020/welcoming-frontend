@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import PageTitle from '@components/common/PageTitle';
 import { pxToRem } from '@utils/pxToRem';
+import { Layout } from '@components/layouts/Layout';
 
 const Error404 = () => {
   const theme = useTheme();
@@ -10,63 +11,55 @@ const Error404 = () => {
   return (
     <>
       <PageTitle title="Page Not found" />
-      <Header>
-        <Link href="/" passHref>
-          <a>
-            <ImgLogo src={theme.logo.src} alt="웰커밍 로고" />
-          </a>
-        </Link>
-      </Header>
-      <Section>
-        <Img src={theme.error.error404} alt="404에러 이미지" />
-        <Title>요청하신 페이지를 찾을 수 없습니다.</Title>
-        <Text>입력한 주소를 다시 한 번 확인해주세요.</Text>
-        <Link href="/" passHref>
-          <BtnBack>이전 페이지로 돌아가기</BtnBack>
-        </Link>
-      </Section>
+      <Layout>
+        <Section>
+          <Img src={theme.error.error404} alt="404에러 이미지" />
+          <Title>요청하신 페이지를 찾을 수 없습니다.</Title>
+          <Text>입력한 주소를 다시 한 번 확인해주세요.</Text>
+          <Link href="/" passHref>
+            <LinkBack>이전 페이지로 돌아가기</LinkBack>
+          </Link>
+        </Section>
+      </Layout>
     </>
   );
 };
 
 export default Error404;
 
-const Header = styled.header`
-  background: ${({ theme }) => theme.header.background};
-  padding: ${pxToRem(15)};
-`;
-
-const ImgLogo = styled.img`
-  width: ${pxToRem(100)};
-  margin: 0 auto;
-`;
-
 const Section = styled.section`
-  min-width: 300px;
+  min-width: ${pxToRem(300)};
+  padding: ${pxToRem(100)} 0;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.5;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    padding: ${pxToRem(200)} 0;
+  }
 `;
 
 const Img = styled.img`
-  max-width: 55%;
-  margin: 22vh auto 40px;
+  min-width: ${pxToRem(230)};
+  width: 55%;
+  max-width: ${pxToRem(330)};
+  margin: 10vh auto ${pxToRem(40)};
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: ${pxToRem(20)};
   font-weight: 600;
   word-break: keep-all;
 `;
 
 const Text = styled.p`
-  margin-top: 5px;
+  margin-top: ${pxToRem(5)};
 `;
 
-const BtnBack = styled.a`
+const LinkBack = styled.a`
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 18px;
-  border-radius: 4px;
+  margin-top: ${pxToRem(20)};
+  padding: ${pxToRem(10)} ${pxToRem(18)};
+  border-radius: ${pxToRem(4)};
   background: ${({ theme }) => theme.button.background};
   color: ${({ theme }) => theme.button.text};
 `;

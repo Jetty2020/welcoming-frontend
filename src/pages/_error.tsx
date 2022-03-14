@@ -3,69 +3,62 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import PageTitle from '@components/common/PageTitle';
 import { pxToRem } from '@utils/pxToRem';
+import { Layout } from '@components/layouts/Layout';
 
 function Error() {
   const theme = useTheme();
   return (
     <>
       <PageTitle title="An error occurred" />
-      <Header>
-        <Link href="/" passHref>
-          <a>
-            <ImgLogo src={theme.logo.src} alt="웰커밍 로고" />
-          </a>
-        </Link>
-      </Header>
-      <Section>
-        <Img src={theme.error.default} alt="에러 이미지" />
-        <Title>에러가 발생했습니다.</Title>
-        <Text>서비스 이용에 불편을 드려 죄송합니다.</Text>
-        <Link href="/" passHref>
-          <BtnBack>이전 페이지로 돌아가기</BtnBack>
-        </Link>
-      </Section>
+      <Layout>
+        <Section>
+          <Img src={theme.error.default} alt="에러 이미지" />
+          <Title>에러가 발생했습니다.</Title>
+          <Text>서비스 이용에 불편을 드려 죄송합니다.</Text>
+          <Link href="/" passHref>
+            <LinkBack>이전 페이지로 돌아가기</LinkBack>
+          </Link>
+        </Section>
+      </Layout>
     </>
   );
 }
 
 export default Error;
 
-const Header = styled.header`
-  background: ${({ theme }) => theme.header.background};
-  padding: ${pxToRem(15)};
-`;
+const Section = styled.section`
+  min-width: ${pxToRem(300)};
+  padding: ${pxToRem(100)} 0;
+  text-align: center;
+  line-height: 1.5;
 
-const ImgLogo = styled.img`
-  width: ${pxToRem(100)};
-  margin: 0 auto;
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    padding: ${pxToRem(200)} 0;
+  }
 `;
 
 const Img = styled.img`
-  max-width: 55%;
-  margin: 22vh auto 40px;
-`;
-
-const Section = styled.section`
-  min-width: 300px;
-  text-align: center;
-  line-height: 1.3;
+  min-width: ${pxToRem(200)};
+  width: 55%;
+  max-width: ${pxToRem(280)};
+  margin: 10vh auto ${pxToRem(40)};
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: ${pxToRem(20)};
   font-weight: 600;
   word-break: keep-all;
 `;
 
 const Text = styled.p`
-  margin-top: 5px;
+  margin-top: ${pxToRem(5)};
 `;
 
-const BtnBack = styled.a`
+const LinkBack = styled.a`
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 18px;
-  border-radius: 4px;
+  margin-top: ${pxToRem(20)};
+  padding: ${pxToRem(10)} 18 ${pxToRem(18)}px;
+  border-radius: ${pxToRem(4)};
   background: ${({ theme }) => theme.button.background};
   color: ${({ theme }) => theme.button.text};
 `;
