@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { v4 as uuidv4 } from 'uuid';
 import React, { useState } from 'react';
 import { mediaQuery } from '@styles/theme';
-import ChevronLeft from 'public/icon/chevron-left.svg';
-import ChevronRight from 'public/icon/chevron-right.svg';
+import ChevronRight from 'public/icons/chevron-right.svg';
+import ChevronLeft from 'public/icons/chevron-left.svg';
 import { WHITE } from 'src/constants/colors';
 import { pxToRem } from '@utils/pxToRem';
 

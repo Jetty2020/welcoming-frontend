@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import { useState } from 'react';
 import { pxToRem } from '@utils/pxToRem';
-import { ChevronRight } from 'public/icons';
+import ChevronRight from 'public/icons/chevron-right.svg';
 import Caret from 'public/icons/caret-down.svg';
 import { Modal } from '@components/common/Modal';
 import { PRIMARY_600, PRIMARY_800, ERROR } from '@constants/colors';

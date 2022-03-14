@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { pxToRem } from '@utils/pxToRem';
 import Link from 'next/link';
-import { ChevronRight } from 'public/icons';
+import ChevronRight from 'public/icons/chevron-right.svg';
 
 export const Footer = () => {
   return (
