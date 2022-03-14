@@ -115,12 +115,12 @@ export const CheckCodeForm = ({
             onChange: () => setErrorMessage(''),
           })}
         />
-        <Timer>
-          <TimerBox>{padNumber(Math.floor(timer / 60), 2)}</TimerBox> :{' '}
-          <TimerBox>{padNumber(timer % 60, 2)}</TimerBox>
-        </Timer>
+        <ContainerTimer>
+          <Timer>{padNumber(Math.floor(timer / 60), 2)} </Timer>:
+          <Timer> {padNumber(timer % 60, 2)}</Timer>
+        </ContainerTimer>
       </Label>
-      {errorMessage && <Error>{errorMessage}</Error>}
+      {errorMessage && <TextError>{errorMessage}</TextError>}
       <TextResend>
         인증코드를 받지 못하셨나요?
         <BtnResend type="button" onClick={sendEmail}>
@@ -162,7 +162,7 @@ const Input = styled.input`
   }
 `;
 
-const Error = styled.span`
+const TextError = styled.span`
   margin-top: ${pxToRem(10)};
   color: ${({ theme }) => theme.input.error};
   font-size: ${pxToRem(14)};
@@ -179,7 +179,7 @@ const Error = styled.span`
   }
 `;
 
-const Timer = styled.span`
+const ContainerTimer = styled.span`
   position: absolute;
   top: 50%;
   right: ${pxToRem(15)};
@@ -188,7 +188,7 @@ const Timer = styled.span`
   font-size: ${pxToRem(14)};
 `;
 
-const TimerBox = styled.span`
+const Timer = styled.span`
   display: inline-block;
   width: 20px;
   text-align: center;

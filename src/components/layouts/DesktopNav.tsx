@@ -21,9 +21,9 @@ export const DesktopNav = ({ className }: EmotionProps) => {
       <h1 className="sr-only">어서와 우리집</h1>
       <HeaderRow>
         <Link href="/" passHref>
-          <LinkLogo>
+          <AnchorLogo>
             <img src={theme.logo.src} alt="어서와 우리집 로고" />
-          </LinkLogo>
+          </AnchorLogo>
         </Link>
         <ListUserMenu>
           <li>
@@ -48,56 +48,56 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           <ListMenu>
             <li>
               <Link href="/" passHref>
-                <a>홈</a>
+                <AnchorMenu>홈</AnchorMenu>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <a>카테고리</a>
+                <AnchorMenu>카테고리</AnchorMenu>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <a>베스트</a>
+                <AnchorMenu>베스트</AnchorMenu>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <a>웰컴딜</a>
+                <AnchorMenu>웰컴딜</AnchorMenu>
               </Link>
             </li>
             <li className="recentEvent">
               <Link href="/" passHref>
-                <a>최신 기획전</a>
+                <AnchorMenu>최신 기획전</AnchorMenu>
               </Link>
             </li>
             <li>
               <Link href="/" passHref>
-                <a>기획전</a>
+                <AnchorMenu>기획전</AnchorMenu>
               </Link>
             </li>
           </ListMenu>
         </nav>
         <LabelSearch htmlFor="search">
-          <input type="search" placeholder="검색어를 입력해주세요." />
+          <InputSearch type="search" placeholder="검색어를 입력해주세요." />
           <BtnSearch type="button">
-            <Search />
+            <IconSearch />
           </BtnSearch>
         </LabelSearch>
         <ListBtns>
-          <li>
+          <ItemBtns>
             <Link href="/" passHref>
               <a>
                 <Cart />
                 <span className="sr-only">장바구니</span>
               </a>
             </Link>
-          </li>
-          <li>
+          </ItemBtns>
+          <ItemBtns>
             <BtnDarkMode type="button" onClick={() => isDark(!isDark())}>
               {useReactiveVar(isDark) ? <DarkIcon /> : <LightIcon />}
             </BtnDarkMode>
-          </li>
+          </ItemBtns>
         </ListBtns>
       </HeaderRow>
     </Header>
@@ -136,7 +136,7 @@ const HeaderRow = styled.div`
   justify-content: center;
 `;
 
-const LinkLogo = styled.a`
+const AnchorLogo = styled.a`
   display: block;
   width: ${pxToRem(200)};
   margin: ${pxToRem(10)} 0;
@@ -161,19 +161,6 @@ const ListMenu = styled.ul`
   font-size: ${pxToRem(18)};
   font-weight: 600;
 
-  & a {
-    display: block;
-    padding: ${pxToRem(15)} ${pxToRem(10)} ${pxToRem(12)};
-    box-sizing: border-box;
-    border-bottom: ${pxToRem(3)} solid transparent;
-    transition: border-color 0.3s;
-  }
-
-  & a:hover,
-  & a:active {
-    border-color: ${({ theme }) => theme.text.default};
-  }
-
   & li.recentEvent {
     @media screen and (max-width: ${pxToRem(860)}) {
       display: none;
@@ -181,12 +168,25 @@ const ListMenu = styled.ul`
   }
 `;
 
+const AnchorMenu = styled.a`
+  display: block;
+  padding: ${pxToRem(15)} ${pxToRem(10)} ${pxToRem(12)};
+  box-sizing: border-box;
+  border-bottom: ${pxToRem(3)} solid transparent;
+  transition: border-color 0.3s;
+
+  &:hover,
+  &:active {
+    border-color: ${({ theme }) => theme.text.default};
+  }
+`;
+
 const ListBtns = styled.ul`
   display: flex;
+`;
 
-  & li {
-    width: ${pxToRem(20)};
-  }
+const ItemBtns = styled.li`
+  width: ${pxToRem(20)};
 `;
 
 const LabelSearch = styled.label`
@@ -196,24 +196,24 @@ const LabelSearch = styled.label`
   padding: 0 ${pxToRem(15)};
   border-radius: ${pxToRem(30)};
   background-color: ${({ theme }) => theme.input.background};
+`;
 
-  & input {
-    padding: ${pxToRem(10)} 0;
-    border: 0;
-    background: none;
-  }
+const InputSearch = styled.input`
+  padding: ${pxToRem(10)} 0;
+  border: 0;
+  background: none;
 
-  & input::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.input.placeholder};
   }
 `;
 
 const BtnSearch = styled.button`
   width: ${pxToRem(18)};
+`;
 
-  & svg {
-    fill: ${GRAY_900};
-  }
+const IconSearch = styled(Search)`
+  fill: ${GRAY_900};
 `;
 
 const BtnDarkMode = styled.button`

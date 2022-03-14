@@ -13,11 +13,11 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
   );
 
   if (!mounted) {
-    return <HiddenDiv>{body}</HiddenDiv>;
+    return <ContainerHidden>{body}</ContainerHidden>;
   }
   return body;
 };
 
-const HiddenDiv = styled.div`
+const ContainerHidden = styled.div`
   visibility: hidden;
 `;

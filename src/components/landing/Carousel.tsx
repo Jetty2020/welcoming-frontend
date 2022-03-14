@@ -123,7 +123,7 @@ export const Carousel = () => {
   };
 
   return (
-    <CarouselCon>
+    <ContainerCarousel>
       <h2 className="sr-only">이벤트 슬라이드</h2>
       <InnerContainer
         onMouseDown={onMouseDown}
@@ -140,53 +140,56 @@ export const Carousel = () => {
         }}
       >
         <li>
-          <CarouselPic>
+          <PictureCarousel>
             <source
               media={`(min-width:${mediaQuery.tablet})`}
               srcSet={data[data.length - 1].deImg}
             />
-            <CarouselImg src={data[data.length - 1].moImg} alt="carouselImg" />
-          </CarouselPic>
+            <ImageCarousel
+              src={data[data.length - 1].moImg}
+              alt="carouselImg"
+            />
+          </PictureCarousel>
         </li>
         {data.map((ele) => {
           return (
             <li key={`carousel-list-${uuidv4()}`}>
-              <CarouselPic>
+              <PictureCarousel>
                 <source
                   media={`(min-width:${mediaQuery.tablet})`}
                   srcSet={ele.deImg}
                 />
-                <CarouselImg src={ele.moImg} alt="carouselImg" />
-              </CarouselPic>
+                <ImageCarousel src={ele.moImg} alt="carouselImg" />
+              </PictureCarousel>
             </li>
           );
         })}
         <li>
-          <CarouselPic>
+          <PictureCarousel>
             <source
               media={`(min-width:${mediaQuery.tablet})`}
               srcSet={data[0].deImg}
             />
-            <CarouselImg src={data[0].moImg} alt="carouselImg" />
-          </CarouselPic>
+            <ImageCarousel src={data[0].moImg} alt="carouselImg" />
+          </PictureCarousel>
         </li>
       </InnerContainer>
-      <PrevBtn type="button" onClick={prevImg} disabled={btnDis}>
+      <BtnPrev type="button" onClick={prevImg} disabled={btnDis}>
         <ChevronLeft />
-      </PrevBtn>
-      <NextBtn type="button" onClick={nextImg} disabled={btnDis}>
+      </BtnPrev>
+      <BtnNext type="button" onClick={nextImg} disabled={btnDis}>
         <ChevronRight />
-      </NextBtn>
-      <PageIndex>
+      </BtnNext>
+      <ContainerPageIndex>
         {imgPage}
-        <PageSpan>/</PageSpan>
+        <TextPage>/</TextPage>
         {data.length}
-      </PageIndex>
-    </CarouselCon>
+      </ContainerPageIndex>
+    </ContainerCarousel>
   );
 };
 
-const CarouselCon = styled.section`
+const ContainerCarousel = styled.section`
   overflow-x: hidden;
   position: relative;
 `;
@@ -195,12 +198,12 @@ const InnerContainer = styled.ul`
   display: flex;
 `;
 
-const CarouselPic = styled.picture`
+const PictureCarousel = styled.picture`
   display: block;
   height: 100vh;
 `;
 
-const CarouselImg = styled.img`
+const ImageCarousel = styled.img`
   width: 100vw;
   height: 100vh;
   object-fit: cover;
@@ -224,17 +227,17 @@ const CarouselBtn = styled.button`
   }
 `;
 
-const PrevBtn = styled(CarouselBtn)`
+const BtnPrev = styled(CarouselBtn)`
   left: ${pxToRem(20)};
   padding: ${pxToRem(15)} ${pxToRem(17)} ${pxToRem(15)} ${pxToRem(13)};
 `;
 
-const NextBtn = styled(CarouselBtn)`
+const BtnNext = styled(CarouselBtn)`
   right: ${pxToRem(20)};
   padding: ${pxToRem(15)} ${pxToRem(13)} ${pxToRem(15)} ${pxToRem(17)};
 `;
 
-const PageIndex = styled.div`
+const ContainerPageIndex = styled.div`
   position: absolute;
   bottom: ${pxToRem(100)};
   right: ${pxToRem(30)};
@@ -245,6 +248,6 @@ const PageIndex = styled.div`
   text-align: center;
 `;
 
-const PageSpan = styled.span`
+const TextPage = styled.span`
   margin: 0 ${pxToRem(3)};
 `;
