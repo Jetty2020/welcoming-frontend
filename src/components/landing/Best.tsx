@@ -7,7 +7,7 @@ import { pxToRem } from '@utils/pxToRem';
 import ChevronRight from 'public/icons/chevron-right.svg';
 import Caret from 'public/icons/caret-down.svg';
 import { Modal } from '@components/common/Modal';
-import { PRIMARY_600, PRIMARY_800, ERROR, GRAY_900 } from '@constants/colors';
+import { GRAY_900 } from '@constants/colors';
 import { gql, useQuery } from '@apollo/client';
 import {
   getAllPostsQuery,
@@ -196,7 +196,7 @@ const ContainerTitle = styled.div`
     height: ${pxToRem(2)};
     position: absolute;
     bottom: ${pxToRem(-12)};
-    background-color: ${PRIMARY_600};
+    background-color: ${({ theme }) => theme.background.primary};
   }
 
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
@@ -362,7 +362,7 @@ const ProductName = styled.p`
 
 const Discount = styled.span`
   padding-right: ${pxToRem(5)};
-  color: ${PRIMARY_800};
+  color: ${({ theme }) => theme.text.primary};
   font-size: ${pxToRem(17)};
   font-weight: 600;
 `;
@@ -378,7 +378,7 @@ const ContainerReview = styled.div`
 `;
 
 const Rate = styled.span`
-  color: ${PRIMARY_800};
+  color: ${({ theme }) => theme.text.primary};
 `;
 
 const Review = styled.span`
@@ -401,6 +401,6 @@ const TagFreeShipping = styled.span`
 
 const TagEventPrice = styled.span`
   ${StyleTag}
-  background-color: ${ERROR};
+  background-color: ${({ theme }) => theme.background.primary};
   color: ${({ theme }) => theme.background.default};
 `;
