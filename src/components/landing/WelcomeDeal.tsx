@@ -16,6 +16,7 @@ import {
 } from '@generated/getTodayDealPostQuery';
 import { pxToRem } from '@utils/pxToRem';
 import ChevronRight from 'public/icons/chevron-right.svg';
+import { ROUTES } from '@constants/routes';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
@@ -60,7 +61,7 @@ export const WelcomeDeal = () => {
           <SubTitle>일주일 한정 특가</SubTitle>
         </div>
         <CountTime>0일 00시 00분 00초</CountTime>
-        <Link href="/" passHref>
+        <Link href={ROUTES.welcomeDeal} passHref>
           <AnchorMore>
             더보기 <ChevronRight />
           </AnchorMore>

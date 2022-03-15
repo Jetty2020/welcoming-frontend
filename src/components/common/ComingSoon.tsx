@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import { pxToRem } from '@utils/pxToRem';
+import { ROUTES } from '@constants/routes';
 
 export const ComingSoon = () => {
   const theme = useTheme();
@@ -15,7 +16,7 @@ export const ComingSoon = () => {
         <br />
         빠른 시일 내에 이용하실 수 있도록 하겠습니다.
       </Text>
-      <Link href="/" passHref>
+      <Link href={ROUTES.home} passHref>
         <LinkHome>홈으로 가기</LinkHome>
       </Link>
     </Section>
@@ -34,7 +35,7 @@ const Section = styled.section`
 `;
 
 const Img = styled.img`
-  min-width: ${pxToRem(830)};
+  min-width: ${pxToRem(230)};
   width: 55%;
   max-width: ${pxToRem(430)};
   margin: 10vh auto ${pxToRem(40)};
