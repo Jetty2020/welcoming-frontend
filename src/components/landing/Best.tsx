@@ -15,6 +15,7 @@ import {
 } from '@generated/getAllPostsQuery';
 import { BEST_FILTER_LIST } from '@constants/bestFilterList';
 import { mediaQuery } from '@styles/theme';
+import { ROUTES } from '@constants/routes';
 
 const fakeData = [0, 1, 2, 3, 4, 5, 6];
 
@@ -87,7 +88,7 @@ export const Best = () => {
           <Title>베스트</Title>
           <SubTitle>웰커밍 베스트 TOP 100</SubTitle>
         </div>
-        <Link href="/" passHref>
+        <Link href={ROUTES.best} passHref>
           <AnchorMore>
             더보기 <ChevronRight />
           </AnchorMore>

@@ -17,6 +17,7 @@ import {
   loginMutationVariables,
 } from '@generated/loginMutation';
 import { AuthFooter } from '@components/auth/Footer';
+import { ROUTES } from '@constants/routes';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -129,12 +130,12 @@ const Login: NextPage = () => {
         </FormLogin>
         <ListLink>
           <ItemLink>
-            <Link href="/auth/password-reset" passHref>
+            <Link href={ROUTES.passwordReset} passHref>
               <a>비밀번호 재설정</a>
             </Link>
           </ItemLink>
           <ItemLink>
-            <Link href="/auth/sign-up" passHref>
+            <Link href={ROUTES.signUp} passHref>
               <a>회원가입</a>
             </Link>
           </ItemLink>
