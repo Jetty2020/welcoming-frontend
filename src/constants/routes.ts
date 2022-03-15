@@ -1,0 +1,17 @@
+export const ROUTES = {
+  home: '/',
+  passwordReset: '/auth/password-reset',
+  signIn: '/auth/sign-in',
+  signUp: '/auth/sign-up',
+  csCenter: '/cs-center',
+  agreement: '/cs-center/agreement',
+  notice: '/cs-center/notice',
+  privacy: '/cs-center/privacy',
+  best: '/products/best',
+  category: '/products/category',
+  events: '/products/events',
+  search: '/products/search',
+  welcomeDeal: '/products/welcome-deal',
+  cart: '/users/cart',
+  myPage: '/users/my-page',
+};
