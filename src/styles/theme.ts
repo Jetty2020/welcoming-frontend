@@ -7,8 +7,9 @@ import {
   GRAY_300,
   GRAY_50,
   WHITE,
-  PRIMARY_900,
   ERROR,
+  PRIMARY,
+  PRIMARY_LIGHT,
 } from 'src/constants/colors';
 
 declare module '@emotion/react' {
@@ -102,12 +103,12 @@ interface ThemeGroup {
 const light: ThemeMode = {
   background: {
     default: `${GRAY_50}`,
-    primary: `${PRIMARY_900}`,
+    primary: `${PRIMARY}`,
   },
   text: {
     default: `${GRAY_900}`,
     lighter: `${GRAY_600}`,
-    primary: `${PRIMARY_900}`,
+    primary: `${PRIMARY}`,
   },
   toggleMode: {
     background: `${GRAY_50}`,
@@ -132,12 +133,12 @@ const light: ThemeMode = {
 const dark: ThemeMode = {
   background: {
     default: `${GRAY_800}`,
-    primary: `${PRIMARY_900}`,
+    primary: `${PRIMARY_LIGHT}`,
   },
   text: {
     default: `${GRAY_50}`,
     lighter: `${GRAY_400}`,
-    primary: `${PRIMARY_900}`,
+    primary: `${PRIMARY_LIGHT}`,
   },
   toggleMode: {
     background: `${GRAY_900}`,
@@ -160,7 +161,7 @@ const dark: ThemeMode = {
 };
 
 export const button: BUTTON = {
-  background: `${PRIMARY_900}`,
+  background: `${PRIMARY}`,
   disabled: `${GRAY_300}`,
   text: `${GRAY_50}`,
   fontSize: 16,
