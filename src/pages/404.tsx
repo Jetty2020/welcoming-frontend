@@ -8,7 +8,7 @@ import { ROUTES } from '@constants/routes';
 
 const Error404 = () => {
   const theme = useTheme();
-  // TODO: 404이미지 다크모드 적용하기 위해 theme 생성
+
   return (
     <>
       <PageTitle title="Page Not found" />
@@ -41,8 +41,8 @@ const Section = styled.section`
 
 const Img = styled.img`
   min-width: ${pxToRem(230)};
-  width: 55%;
-  max-width: ${pxToRem(330)};
+  width: 50%;
+  max-width: ${pxToRem(280)};
   margin: 10vh auto ${pxToRem(40)};
 `;
 
