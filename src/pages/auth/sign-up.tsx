@@ -15,7 +15,7 @@ import {
 import { UserRole } from '@generated/globalTypes';
 import { pxToRem } from '@utils/pxToRem';
 import Close from 'public/icons/close.svg';
-import { GRAY_500, GRAY_900, PRIMARY_900, WHITE } from '@constants/colors';
+import { GRAY_500, GRAY_900, PRIMARY, WHITE } from '@constants/colors';
 import { ROUTES } from '@constants/routes';
 
 const CREATE_ACCOUNT_MUTATION = gql`
@@ -439,7 +439,7 @@ const AnchorAgreeMent = styled.a`
 
 const SpanRequire = styled.span`
   margin-left: ${pxToRem(5)};
-  color: ${PRIMARY_900};
+  color: ${PRIMARY};
 `;
 
 const CheckBox = styled.input`
