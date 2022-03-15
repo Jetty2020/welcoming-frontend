@@ -58,7 +58,7 @@ const Text = styled.p`
 const LinkHome = styled.a`
   display: inline-block;
   margin-top: ${pxToRem(20)};
-  padding: ${pxToRem(10)} 18 ${pxToRem(18)}px;
+  padding: ${pxToRem(10)} ${pxToRem(18)};
   border-radius: ${pxToRem(4)};
   background: ${({ theme }) => theme.button.background};
   color: ${({ theme }) => theme.button.text};

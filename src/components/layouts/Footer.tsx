@@ -204,7 +204,7 @@ const MenuFooter = styled.ul`
 
   @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
     margin: 0 0 ${pxToRem(20)};
-    font-size: ${pxToRem(17)};
+    font-size: ${pxToRem(16)};
   }
 `;
 
@@ -233,12 +233,16 @@ const TitleInfo = styled.dt`
 `;
 
 const ContainerMessage = styled.div`
-  margin: ${pxToRem(30)} auto 0;
+  margin: ${pxToRem(30)} ${pxToRem(-15)} 0;
   padding: ${pxToRem(30)} 0;
   background-color: ${({ theme }) => theme.header.background};
   color: ${({ theme }) => theme.text.lighter};
   font-size: ${pxToRem(12)};
   text-align: center;
+
+  @media screen and (min-width: ${({ theme }) => theme.mediaQuery.tablet}) {
+    margin: ${pxToRem(30)} auto 0;
+  }
 `;
 
 const Message = styled.p`
