@@ -3,13 +3,7 @@ import styled from '@emotion/styled';
 import { gql, useQuery } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
-import {
-  ERROR,
-  GRAY_300,
-  GRAY_500,
-  PRIMARY_700,
-  PRIMARY_800,
-} from '@constants/colors';
+import { GRAY_300, GRAY_400 } from '@constants/colors';
 import {
   getTodayDealPostQuery,
   getTodayDealPostQueryVariables,
@@ -201,7 +195,7 @@ const ProgressBar = styled.div`
   width: 100%;
   height: 2px;
   margin-bottom: ${pxToRem(10)};
-  background-color: ${GRAY_500};
+  background-color: ${GRAY_400};
 `;
 
 const TextCountDay = styled.span`
@@ -215,7 +209,7 @@ const TextCountDay = styled.span`
 const ProgressValue = styled.div<{ 'progress-value': number }>`
   width: ${(props) => props['progress-value']}%;
   height: 100%;
-  background-color: ${PRIMARY_700};
+  background-color: ${({ theme }) => theme.background.primary};
 `;
 
 const List = styled.ul`
@@ -314,7 +308,7 @@ const ProductName = styled.p`
 
 const Discount = styled.span`
   padding-right: ${pxToRem(5)};
-  color: ${PRIMARY_800};
+  color: ${({ theme }) => theme.text.primary};
   font-size: ${pxToRem(17)};
   font-weight: 600;
 `;
@@ -330,7 +324,7 @@ const ContainerReview = styled.div`
 `;
 
 const Rate = styled.span`
-  color: ${PRIMARY_800};
+  color: ${({ theme }) => theme.text.primary};
 `;
 
 const Review = styled.span`
@@ -353,6 +347,6 @@ const TagFreeShipping = styled.span`
 
 const TagEventPrice = styled.span`
   ${StyleTag}
-  background-color: ${ERROR};
+  background-color: ${({ theme }) => theme.background.primary};
   color: ${({ theme }) => theme.background.default};
 `;
