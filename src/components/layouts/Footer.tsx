@@ -1,3 +1,4 @@
+import { ROUTES } from '@constants/routes';
 import styled from '@emotion/styled';
 import { pxToRem } from '@utils/pxToRem';
 import Link from 'next/link';
@@ -30,22 +31,22 @@ export const Footer = () => {
           <nav>
             <MenuFooter>
               <ItemMenu>
-                <Link href="/" passHref>
+                <Link href={ROUTES.agreement} passHref>
                   <a>이용악관</a>
                 </Link>
               </ItemMenu>
               <ItemMenu>
-                <Link href="/" passHref>
+                <Link href={ROUTES.privacy} passHref>
                   <a>개인정보처리방침</a>
                 </Link>
               </ItemMenu>
               <ItemMenu>
-                <Link href="/" passHref>
+                <Link href={ROUTES.notice} passHref>
                   <a>공지사항</a>
                 </Link>
               </ItemMenu>
               <ItemMenu>
-                <Link href="/" passHref>
+                <Link href={ROUTES.csCenter} passHref>
                   <a>고객센터</a>
                 </Link>
               </ItemMenu>
@@ -81,7 +82,7 @@ export const Footer = () => {
       </ContainerSection>
       <ContainerMessage>
         <small>
-          <Link href="/" passHref>
+          <Link href={ROUTES.home} passHref>
             <a>© &nbsp;welcoming, Co., Ltd.</a>
           </Link>
           . All Rights Reserved

@@ -11,6 +11,7 @@ import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
 import { GRAY_900 } from '@constants/colors';
 import { pxToRem } from '@utils/pxToRem';
+import { ROUTES } from '@constants/routes';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
@@ -20,24 +21,24 @@ export const DesktopNav = ({ className }: EmotionProps) => {
     <Header className={className} data-scroll={isScroll} data-upward={isUpward}>
       <h1 className="sr-only">어서와 우리집</h1>
       <HeaderRow>
-        <Link href="/" passHref>
+        <Link href={ROUTES.home} passHref>
           <AnchorLogo>
             <img src={theme.logo.src} alt="어서와 우리집 로고" />
           </AnchorLogo>
         </Link>
         <ListUserMenu>
           <li>
-            <Link href="/auth/sign-in" passHref>
+            <Link href={ROUTES.signIn} passHref>
               <AnchorUserMenu>로그인</AnchorUserMenu>
             </Link>
           </li>
           <li>
-            <Link href="/auth/sign-up" passHref>
+            <Link href={ROUTES.signUp} passHref>
               <AnchorUserMenu>회원가입</AnchorUserMenu>
             </Link>
           </li>
           <li>
-            <Link href="/" passHref>
+            <Link href={ROUTES.csCenter} passHref>
               <AnchorUserMenu>고객센터</AnchorUserMenu>
             </Link>
           </li>
@@ -47,32 +48,32 @@ export const DesktopNav = ({ className }: EmotionProps) => {
         <nav>
           <ListMenu>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.home} passHref>
                 <AnchorMenu>홈</AnchorMenu>
               </Link>
             </li>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.category} passHref>
                 <AnchorMenu>카테고리</AnchorMenu>
               </Link>
             </li>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.best} passHref>
                 <AnchorMenu>베스트</AnchorMenu>
               </Link>
             </li>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.welcomeDeal} passHref>
                 <AnchorMenu>웰컴딜</AnchorMenu>
               </Link>
             </li>
             <li className="recentEvent">
-              <Link href="/" passHref>
+              <Link href={ROUTES.events} passHref>
                 <AnchorMenu>최신 기획전</AnchorMenu>
               </Link>
             </li>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.events} passHref>
                 <AnchorMenu>기획전</AnchorMenu>
               </Link>
             </li>
@@ -86,7 +87,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
         </LabelSearch>
         <ListBtns>
           <ItemBtns>
-            <Link href="/" passHref>
+            <Link href={ROUTES.cart} passHref>
               <a>
                 <IconCart />
                 <span className="sr-only">장바구니</span>

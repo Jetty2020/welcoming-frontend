@@ -4,6 +4,7 @@ import { useTheme } from '@emotion/react';
 import PageTitle from '@components/common/PageTitle';
 import { pxToRem } from '@utils/pxToRem';
 import { Layout } from '@components/layouts/Layout';
+import { ROUTES } from '@constants/routes';
 
 function Error() {
   const theme = useTheme();
@@ -15,7 +16,7 @@ function Error() {
           <Img src={theme.error.default} alt="에러 이미지" />
           <Title>에러가 발생했습니다.</Title>
           <Text>서비스 이용에 불편을 드려 죄송합니다.</Text>
-          <Link href="/" passHref>
+          <Link href={ROUTES.home} passHref>
             <LinkHome>홈으로 가기</LinkHome>
           </Link>
         </Section>

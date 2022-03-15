@@ -16,6 +16,7 @@ import { UserRole } from '@generated/globalTypes';
 import { pxToRem } from '@utils/pxToRem';
 import Close from 'public/icons/close.svg';
 import { GRAY_500, GRAY_900, PRIMARY_900, WHITE } from '@constants/colors';
+import { ROUTES } from '@constants/routes';
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
@@ -253,7 +254,7 @@ const SignUp: NextPage = () => {
                     onChange: handleCheckbox,
                   })}
                 />
-                <Link href="/" passHref>
+                <Link href={ROUTES.agreement} passHref>
                   <AnchorAgreeMent target="_blank">이용약관</AnchorAgreeMent>
                 </Link>
                 <SpanRequire>&#40;필수&#41;</SpanRequire>
@@ -266,7 +267,7 @@ const SignUp: NextPage = () => {
                     onChange: handleCheckbox,
                   })}
                 />
-                <Link href="/" passHref>
+                <Link href={ROUTES.privacy} passHref>
                   <AnchorAgreeMent target="_blank">
                     개인정보수집 및 이용동의
                   </AnchorAgreeMent>
@@ -290,7 +291,7 @@ const SignUp: NextPage = () => {
         </Form>
         <TextAskID>
           이미 아이디가 있으신가요?
-          <Link href="/auth/sign-in" passHref>
+          <Link href={ROUTES.signIn} passHref>
             <AskIDLink>로그인</AskIDLink>
           </Link>
         </TextAskID>

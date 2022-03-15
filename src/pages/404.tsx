@@ -4,6 +4,7 @@ import { useTheme } from '@emotion/react';
 import PageTitle from '@components/common/PageTitle';
 import { pxToRem } from '@utils/pxToRem';
 import { Layout } from '@components/layouts/Layout';
+import { ROUTES } from '@constants/routes';
 
 const Error404 = () => {
   const theme = useTheme();
@@ -16,7 +17,7 @@ const Error404 = () => {
           <Img src={theme.error.error404} alt="404에러 이미지" />
           <Title>요청하신 페이지를 찾을 수 없습니다.</Title>
           <Text>입력한 주소를 다시 한 번 확인해주세요.</Text>
-          <Link href="/" passHref>
+          <Link href={ROUTES.home} passHref>
             <LinkHome>홈으로 가기</LinkHome>
           </Link>
         </Section>

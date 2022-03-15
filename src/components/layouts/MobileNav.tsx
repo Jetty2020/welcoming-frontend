@@ -13,6 +13,7 @@ import Person from 'public/icons/person.svg';
 import { isDark } from '@apollo';
 import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
+import { ROUTES } from '@constants/routes';
 
 export const MobileNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
@@ -23,14 +24,14 @@ export const MobileNav = ({ className }: EmotionProps) => {
       <Header className={className} data-scroll={isScroll}>
         <h1 className="sr-only">어서와 우리집</h1>
         <HeaderRow>
-          <Link href="/" passHref>
+          <Link href={ROUTES.home} passHref>
             <LinkLogo>
               <ImgLogo src={theme.logo.src} alt="어서와 우리집 로고" />
             </LinkLogo>
           </Link>
           <ListWish>
             <li>
-              <Link href="/" passHref>
+              <Link href={ROUTES.cart} passHref>
                 <a>
                   <IconCart />
                   <span className="sr-only">장바구니</span>
@@ -47,27 +48,27 @@ export const MobileNav = ({ className }: EmotionProps) => {
         <nav>
           <ListMenu>
             <ItemMenu>
-              <Link href="/" passHref>
+              <Link href={ROUTES.home} passHref>
                 <LinkMenu>홈</LinkMenu>
               </Link>
             </ItemMenu>
             <ItemMenu>
-              <Link href="/" passHref>
+              <Link href={ROUTES.best} passHref>
                 <LinkMenu>베스트</LinkMenu>
               </Link>
             </ItemMenu>
             <ItemMenu>
-              <Link href="/" passHref>
+              <Link href={ROUTES.welcomeDeal} passHref>
                 <LinkMenu>웰컴딜</LinkMenu>
               </Link>
             </ItemMenu>
             <ItemMenu>
-              <Link href="/" passHref>
+              <Link href={ROUTES.events} passHref>
                 <LinkMenu>최신 기획전</LinkMenu>
               </Link>
             </ItemMenu>
             <ItemMenu>
-              <Link href="/" passHref>
+              <Link href={ROUTES.events} passHref>
                 <LinkMenu>기획전</LinkMenu>
               </Link>
             </ItemMenu>
@@ -77,14 +78,14 @@ export const MobileNav = ({ className }: EmotionProps) => {
       <NavBar className={className}>
         <ListNav>
           <li>
-            <Link href="/" passHref>
+            <Link href={ROUTES.home} passHref>
               <AnchorMenu>
                 <Home />홈
               </AnchorMenu>
             </Link>
           </li>
           <li>
-            <Link href="/" passHref>
+            <Link href={ROUTES.category} passHref>
               <AnchorMenu>
                 <HamburgerMenu />
                 카테고리
@@ -92,7 +93,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
             </Link>
           </li>
           <li>
-            <Link href="/" passHref>
+            <Link href={ROUTES.search} passHref>
               <AnchorMenu>
                 <Search />
                 검색
@@ -100,7 +101,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
             </Link>
           </li>
           <li>
-            <Link href="/" passHref>
+            <Link href={ROUTES.myPage} passHref>
               <AnchorMenu>
                 <Person />
                 마이페이지
