@@ -1,13 +1,6 @@
-export const PRIMARY_900 = '#01261F';
-export const PRIMARY_800 = '#1A3C35';
-export const PRIMARY_700 = '#34514C';
-export const PRIMARY_600 = '#4D6762';
-export const PRIMARY_500 = '#677D79';
-export const PRIMARY_400 = '#80928F';
-export const PRIMARY_300 = '#99A8A5';
-export const PRIMARY_200 = '#B3BEBC';
-export const PRIMARY_100 = '#CCD4D2';
-export const PRIMARY_50 = '#F2F4F4';
+export const PRIMARY = '#A47551';
+export const PRIMARY_LIGHT = '#d6a27d';
+export const PRIMARY_DARK = '#896143';
 
 export const GRAY_900 = '#1B1B1B';
 export const GRAY_800 = '#212121';
