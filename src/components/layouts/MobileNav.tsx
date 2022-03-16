@@ -10,7 +10,7 @@ import Search from 'public/icons/search.svg';
 import HamburgerMenu from 'public/icons/hamburger-menu.svg';
 import Home from 'public/icons/home.svg';
 import Person from 'public/icons/person.svg';
-import { isDark } from '@apollo';
+import { isDark, isLoggedInVar } from '@apollo';
 import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
 import { ROUTES } from '@constants/routes';
@@ -18,6 +18,8 @@ import { ROUTES } from '@constants/routes';
 export const MobileNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
   const { isScroll } = useScrollY();
+
+  const myPageRoute = isLoggedInVar() ? ROUTES.myPage : ROUTES.signIn;
 
   return (
     <>
@@ -101,7 +103,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
             </Link>
           </li>
           <li>
-            <Link href={ROUTES.myPage} passHref>
+            <Link href={myPageRoute} passHref>
               <AnchorMenu>
                 <Person />
                 마이페이지
