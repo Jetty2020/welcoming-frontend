@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import Link from 'next/link';
 import { isDark } from '@apollo';
-import { useReactiveVar } from '@apollo/client';
 import Cart from 'public/icons/cart.svg';
 import DarkIcon from 'public/icons/dark-icon.svg';
 import LightIcon from 'public/icons/light-icon.svg';
@@ -96,7 +95,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           </ItemBtns>
           <ItemBtns>
             <BtnDarkMode type="button" onClick={() => isDark(!isDark())}>
-              {useReactiveVar(isDark) ? <DarkIcon /> : <LightIcon />}
+              {isDark() ? <DarkIcon /> : <LightIcon />}
             </BtnDarkMode>
           </ItemBtns>
         </ListBtns>
