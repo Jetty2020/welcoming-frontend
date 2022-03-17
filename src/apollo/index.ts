@@ -1,4 +1,10 @@
-import { ApolloClient, InMemoryCache, makeVar } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  makeVar,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import Cookies from 'js-cookie';
 import { SERVER_URL, TOKEN_KEY } from '../constants';
 
@@ -15,7 +21,20 @@ export const userLogout = () => {
   client.cache.reset();
 };
 
-export const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: SERVER_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'welcoming-token': authTokenVar() || '',
+    },
+  };
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
