@@ -13,12 +13,15 @@ import { useScrollY } from '@hooks/useScrollY';
 import { GRAY_900 } from '@constants/colors';
 import { pxToRem } from '@utils/pxToRem';
 import { ROUTES } from '@constants/routes';
+import { useUser } from '@hooks/useUser';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
   const { isScroll, isUpward } = useScrollY();
 
   const cartRoute = isLoggedInVar() ? ROUTES.cart : ROUTES.signIn;
+
+  const { data, loading } = useUser();
 
   return (
     <Header className={className} data-scroll={isScroll} data-upward={isUpward}>
@@ -34,7 +37,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
             <ItemUserMenu className="showMyPageMenu">
               <Link href={ROUTES.myPage} passHref>
                 <AnchorUserMenu>
-                  닉네임 님
+                  {loading ? '유저' : data?.me.nickname} 님
                   <IconCaret />
                 </AnchorUserMenu>
               </Link>
