@@ -19,6 +19,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
   const { isScroll } = useScrollY();
 
   const myPageRoute = isLoggedInVar() ? ROUTES.myPage : ROUTES.signIn;
+  const cartRoute = isLoggedInVar() ? ROUTES.cart : ROUTES.signIn;
 
   return (
     <>
@@ -32,7 +33,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
           </Link>
           <ListWish>
             <li>
-              <Link href={ROUTES.cart} passHref>
+              <Link href={cartRoute} passHref>
                 <a>
                   <IconCart />
                   <span className="sr-only">장바구니</span>
