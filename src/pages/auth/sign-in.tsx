@@ -48,7 +48,7 @@ const Login: NextPage = () => {
       login: { ok, token },
     } = data;
     if (ok && token) {
-      Cookies.set('TOKEN', token);
+      Cookies.set('token', token);
       authTokenVar(token);
       isLoggedInVar(true);
       router.push('/');
