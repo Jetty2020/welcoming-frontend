@@ -3,9 +3,10 @@ import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import { CustomThemeProvider } from '@components/common/DarkMode/CustomThemeProvider';
 import client, { isLoggedInVar, authTokenVar } from '@apollo';
+import { TOKEN_KEY } from '@constants/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const token = Cookies.get('token');
+  const token = Cookies.get(TOKEN_KEY);
 
   isLoggedInVar(Boolean(token));
   authTokenVar(token);

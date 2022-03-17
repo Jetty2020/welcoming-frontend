@@ -18,6 +18,7 @@ import {
 } from '@generated/loginMutation';
 import { AuthFooter } from '@components/auth/Footer';
 import { ROUTES } from '@constants/routes';
+import { TOKEN_KEY } from '@constants/index';
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -48,7 +49,7 @@ const Login: NextPage = () => {
       login: { ok, token },
     } = data;
     if (ok && token) {
-      Cookies.set('token', token);
+      Cookies.set(TOKEN_KEY, token);
       authTokenVar(token);
       isLoggedInVar(true);
       router.push('/');
