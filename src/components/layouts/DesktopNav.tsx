@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
+import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
-import { isDark, isLoggedInVar } from '@apollo';
+import { isDark, isLoggedInVar, userLogout } from '@apollo';
 import Cart from 'public/icons/cart.svg';
 import DarkIcon from 'public/icons/dark-icon.svg';
 import LightIcon from 'public/icons/light-icon.svg';
 import Search from 'public/icons/search.svg';
+import Caret from 'public/icons/caret-down.svg';
 import { EmotionProps } from 'src/types';
 import { useScrollY } from '@hooks/useScrollY';
 import { GRAY_900 } from '@constants/colors';
 import { pxToRem } from '@utils/pxToRem';
 import { ROUTES } from '@constants/routes';
-import Caret from 'public/icons/caret-down.svg';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
@@ -29,7 +30,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           </AnchorLogo>
         </Link>
         <ListUserMenu>
-          {isLoggedInVar() ? (
+          {useReactiveVar(isLoggedInVar) ? (
             <ItemUserMenu className="showMyPageMenu">
               <Link href={ROUTES.myPage} passHref>
                 <AnchorUserMenu>
@@ -54,9 +55,9 @@ export const DesktopNav = ({ className }: EmotionProps) => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" passHref>
-                    <AnchorMyPage>로그아웃</AnchorMyPage>
-                  </Link>
+                  <BtnLogout type="button" onClick={userLogout}>
+                    로그아웃
+                  </BtnLogout>
                 </li>
               </ListMyPage>
             </ItemUserMenu>
@@ -224,6 +225,13 @@ const ListMyPage = styled.ul`
 const AnchorMyPage = styled.a`
   display: block;
   padding: 5px 12px;
+  font-size: 12px;
+`;
+
+const BtnLogout = styled.button`
+  display: block;
+  padding: 5px 12px;
+  border: none;
   font-size: 12px;
 `;
 
