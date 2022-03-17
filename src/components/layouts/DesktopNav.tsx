@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import Link from 'next/link';
-import { isDark } from '@apollo';
+import { isDark, isLoggedInVar } from '@apollo';
 import Cart from 'public/icons/cart.svg';
 import DarkIcon from 'public/icons/dark-icon.svg';
 import LightIcon from 'public/icons/light-icon.svg';
@@ -15,6 +15,8 @@ import { ROUTES } from '@constants/routes';
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
   const { isScroll, isUpward } = useScrollY();
+
+  const cartRoute = isLoggedInVar() ? ROUTES.cart : ROUTES.signIn;
 
   return (
     <Header className={className} data-scroll={isScroll} data-upward={isUpward}>
@@ -86,7 +88,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
         </LabelSearch>
         <ListBtns>
           <ItemBtns>
-            <Link href={ROUTES.cart} passHref>
+            <Link href={cartRoute} passHref>
               <a>
                 <IconCart />
                 <span className="sr-only">장바구니</span>
