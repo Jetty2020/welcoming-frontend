@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
-import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
 import Cart from 'public/icons/cart.svg';
@@ -42,7 +41,7 @@ export const MobileNav = ({ className }: EmotionProps) => {
             </li>
             <li>
               <button type="button" onClick={() => isDark(!isDark())}>
-                {useReactiveVar(isDark) ? <IconDark /> : <IconLight />}
+                {isDark() ? <IconDark /> : <IconLight />}
               </button>
             </li>
           </ListWish>
