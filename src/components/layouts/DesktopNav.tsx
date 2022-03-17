@@ -11,6 +11,7 @@ import { useScrollY } from '@hooks/useScrollY';
 import { GRAY_900 } from '@constants/colors';
 import { pxToRem } from '@utils/pxToRem';
 import { ROUTES } from '@constants/routes';
+import Caret from 'public/icons/caret-down.svg';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
@@ -28,21 +29,56 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           </AnchorLogo>
         </Link>
         <ListUserMenu>
-          <li>
-            <Link href={ROUTES.signIn} passHref>
-              <AnchorUserMenu>로그인</AnchorUserMenu>
-            </Link>
-          </li>
-          <li>
-            <Link href={ROUTES.signUp} passHref>
-              <AnchorUserMenu>회원가입</AnchorUserMenu>
-            </Link>
-          </li>
-          <li>
+          {isLoggedInVar() ? (
+            <ItemUserMenu className="showMyPageMenu">
+              <Link href={ROUTES.myPage} passHref>
+                <AnchorUserMenu>
+                  닉네임 님
+                  <IconCaret />
+                </AnchorUserMenu>
+              </Link>
+              <ListMyPage>
+                <li>
+                  <Link href="/" passHref>
+                    <AnchorMyPage>주문내역</AnchorMyPage>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" passHref>
+                    <AnchorMyPage>위시리스트</AnchorMyPage>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" passHref>
+                    <AnchorMyPage>개인 정보 수정</AnchorMyPage>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" passHref>
+                    <AnchorMyPage>로그아웃</AnchorMyPage>
+                  </Link>
+                </li>
+              </ListMyPage>
+            </ItemUserMenu>
+          ) : (
+            <>
+              <ItemUserMenu>
+                <Link href={ROUTES.signIn} passHref>
+                  <AnchorUserMenu>로그인</AnchorUserMenu>
+                </Link>
+              </ItemUserMenu>
+              <ItemUserMenu>
+                <Link href={ROUTES.signUp} passHref>
+                  <AnchorUserMenu>회원가입</AnchorUserMenu>
+                </Link>
+              </ItemUserMenu>
+            </>
+          )}
+          <ItemUserMenu>
             <Link href={ROUTES.csCenter} passHref>
               <AnchorUserMenu>고객센터</AnchorUserMenu>
             </Link>
-          </li>
+          </ItemUserMenu>
         </ListUserMenu>
       </HeaderRow>
       <HeaderRow>
@@ -146,20 +182,49 @@ const AnchorLogo = styled.a`
 
 const ListUserMenu = styled.ul`
   display: flex;
-  align-items: center;
   position: absolute;
   top: ${pxToRem(20)};
   right: ${pxToRem(15)};
   font-size: ${pxToRem(14)};
   font-weight: 600;
+`;
 
-  & li + li {
+const ItemUserMenu = styled.li`
+  & + & {
     margin-left: ${pxToRem(15)};
+  }
+
+  &.showMyPageMenu:hover ul {
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
 const AnchorUserMenu = styled.a`
   color: ${({ theme }) => theme.text.default};
+`;
+
+const IconCaret = styled(Caret)`
+  display: inline-block;
+  margin-left: ${pxToRem(5)};
+  vertical-align: middle;
+`;
+
+const ListMyPage = styled.ul`
+  visibility: hidden;
+  position: absolute;
+  top: 20px;
+  left: -5px;
+  padding: 6px 0;
+  background-color: ${({ theme }) => theme.header.backgroundBlur};
+  opacity: 0;
+  transition: all 0.3s;
+`;
+
+const AnchorMyPage = styled.a`
+  display: block;
+  padding: 5px 12px;
+  font-size: 12px;
 `;
 
 const ListMenu = styled.ul`
