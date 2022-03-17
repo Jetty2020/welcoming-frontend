@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
+import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { pxToRem } from '@utils/pxToRem';
 import Cart from 'public/icons/cart.svg';
@@ -18,8 +19,10 @@ export const MobileNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
   const { isScroll } = useScrollY();
 
-  const myPageRoute = isLoggedInVar() ? ROUTES.myPage : ROUTES.signIn;
-  const cartRoute = isLoggedInVar() ? ROUTES.cart : ROUTES.signIn;
+  const cartRoute = useReactiveVar(isLoggedInVar) ? ROUTES.cart : ROUTES.signIn;
+  const myPageRoute = useReactiveVar(isLoggedInVar)
+    ? ROUTES.myPage
+    : ROUTES.signIn;
 
   return (
     <>
