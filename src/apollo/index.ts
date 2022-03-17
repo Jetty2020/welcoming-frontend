@@ -7,9 +7,14 @@ export const isLoggedInVar = makeVar(Boolean(token));
 export const authTokenVar = makeVar(token);
 export const isDark = makeVar(false);
 
-const client = new ApolloClient({
+export const userLogout = () => {
+  Cookies.remove('token');
+  isLoggedInVar(false);
+  authTokenVar('');
+  client.cache.reset();
+};
+
+export const client = new ApolloClient({
   uri: SERVER_URL,
   cache: new InMemoryCache(),
 });
-
-export default client;
