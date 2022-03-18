@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css, useTheme } from '@emotion/react';
 import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { isDark, isLoggedInVar, userLogout } from '@apollo';
 import Cart from 'public/icons/cart.svg';
 import DarkIcon from 'public/icons/dark-icon.svg';
@@ -17,11 +18,16 @@ import { useUser } from '@hooks/useUser';
 
 export const DesktopNav = ({ className }: EmotionProps) => {
   const theme = useTheme();
+  const router = useRouter();
   const { isScroll, isUpward } = useScrollY();
 
   const cartRoute = isLoggedInVar() ? ROUTES.cart : ROUTES.signIn;
 
   const { data, loading } = useUser();
+  const handleLogout = () => {
+    userLogout();
+    router.push('/');
+  };
 
   return (
     <Header className={className} data-scroll={isScroll} data-upward={isUpward}>
@@ -72,7 +78,7 @@ export const DesktopNav = ({ className }: EmotionProps) => {
                   </li>
                 )}
                 <li>
-                  <BtnLogout type="button" onClick={userLogout}>
+                  <BtnLogout type="button" onClick={handleLogout}>
                     로그아웃
                   </BtnLogout>
                 </li>
