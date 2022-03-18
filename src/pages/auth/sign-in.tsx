@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import styled from '@emotion/styled';
-import { useTheme } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { NextPage } from 'next';
@@ -83,6 +83,19 @@ const Login: NextPage = () => {
     setLoginError(false);
   };
 
+  const testAccountLogin = () => {
+    if (!loading) {
+      loginMutation({
+        variables: {
+          loginInput: {
+            email: 'test@welcoming.com',
+            password: 'welcome1234',
+          },
+        },
+      });
+    }
+  };
+
   return (
     <MainLogin>
       <PageTitle title="로그인" />
@@ -128,6 +141,9 @@ const Login: NextPage = () => {
           <BtnLogin type="submit" disabled={!isValid}>
             로그인
           </BtnLogin>
+          <BtnTestAccount type="button" onClick={testAccountLogin}>
+            테스트 계정으로 로그인
+          </BtnTestAccount>
         </FormLogin>
         <ListLink>
           <ItemLink>
@@ -250,19 +266,28 @@ const TextError = styled.span`
   }
 `;
 
-const BtnLogin = styled.button`
-  margin: ${pxToRem(20)} 0;
+const BtnStyle = () => css`
   padding: ${pxToRem(15)};
   border-radius: ${pxToRem(5)};
-  background-color: ${({ theme }) => theme.button.background};
-  font-size: ${({ theme }) => pxToRem(theme.button.fontSize)};
-  font-weight: ${({ theme }) => theme.button.fontWeight};
-  letter-spacing: ${({ theme }) => theme.button.letterSpacing};
-  color: ${({ theme }) => theme.button.text};
+  background-color: ${useTheme().button.background};
+  font-size: ${pxToRem(useTheme().button.fontSize)};
+  font-weight: ${useTheme().button.fontWeight};
+  letter-spacing: ${useTheme().button.letterSpacing};
+  color: ${useTheme().button.text};
+`;
+
+const BtnLogin = styled.button`
+  ${BtnStyle}
+  margin-top: ${pxToRem(20)};
 
   &:disabled {
     background-color: ${({ theme }) => theme.button.disabled};
   }
+`;
+
+const BtnTestAccount = styled.button`
+  ${BtnStyle}
+  margin: ${pxToRem(5)} 0 ${pxToRem(20)};
 `;
 
 const ListLink = styled.ul`
