@@ -64,6 +64,13 @@ export const DesktopNav = ({ className }: EmotionProps) => {
                     <AnchorMyPage>개인 정보 수정</AnchorMyPage>
                   </Link>
                 </li>
+                {data?.me.role !== 'Seller' && (
+                  <li>
+                    <Link href="/" passHref>
+                      <AnchorMyPage>판매자 신청하기</AnchorMyPage>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <BtnLogout type="button" onClick={userLogout}>
                     로그아웃
