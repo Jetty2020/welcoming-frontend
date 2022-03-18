@@ -44,29 +44,29 @@ export const DesktopNav = ({ className }: EmotionProps) => {
               <ListMyPage>
                 {data?.me.role === 'Seller' && (
                   <li>
-                    <Link href="/" passHref>
+                    <Link href={ROUTES.registerProduct} passHref>
                       <AnchorMyPage sellerPage={true}>상품 등록</AnchorMyPage>
                     </Link>
                   </li>
                 )}
                 <li>
-                  <Link href="/" passHref>
+                  <Link href={ROUTES.orderList} passHref>
                     <AnchorMyPage>주문내역</AnchorMyPage>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" passHref>
+                  <Link href={ROUTES.wishlist} passHref>
                     <AnchorMyPage>위시리스트</AnchorMyPage>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" passHref>
+                  <Link href={ROUTES.editProfile} passHref>
                     <AnchorMyPage>개인 정보 수정</AnchorMyPage>
                   </Link>
                 </li>
                 {data?.me.role !== 'Seller' && (
                   <li>
-                    <Link href="/" passHref>
+                    <Link href={ROUTES.applySeller} passHref>
                       <AnchorMyPage>판매자 신청하기</AnchorMyPage>
                     </Link>
                   </li>
