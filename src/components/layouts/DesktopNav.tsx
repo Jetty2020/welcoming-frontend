@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useTheme } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import { useReactiveVar } from '@apollo/client';
 import Link from 'next/link';
 import { isDark, isLoggedInVar, userLogout } from '@apollo';
@@ -124,20 +124,31 @@ export const DesktopNav = ({ className }: EmotionProps) => {
           <InputSearch type="search" placeholder="검색어를 입력해주세요." />
           <BtnSearch type="button">
             <IconSearch />
+            <span className="sr-only">검색하기</span>
           </BtnSearch>
         </LabelSearch>
         <ListBtns>
           <ItemBtns>
             <Link href={cartRoute} passHref>
-              <a>
+              <AnchorCart>
                 <IconCart />
-                <span className="sr-only">장바구니</span>
-              </a>
+                <span className="sr-only">장바구니로 이동하기</span>
+              </AnchorCart>
             </Link>
           </ItemBtns>
           <ItemBtns>
             <BtnDarkMode type="button" onClick={() => isDark(!isDark())}>
-              {isDark() ? <DarkIcon /> : <LightIcon />}
+              {isDark() ? (
+                <>
+                  <IconDarkMode />
+                  <span className="sr-only">다크모드 전환하기</span>
+                </>
+              ) : (
+                <>
+                  <IconLightMode />
+                  <span className="sr-only">라이트모드 전환하기</span>
+                </>
+              )}
             </BtnDarkMode>
           </ItemBtns>
         </ListBtns>
@@ -159,7 +170,7 @@ const Header = styled.header`
   padding-top: ${pxToRem(10)};
   backdrop-filter: blur(2px);
   background-color: ${({ theme }) => theme.header.backgroundBlur};
-  transition: all 0.5s ease;
+  transition: all 0.5s;
   transform: translateY(${pxToRem(-104)});
 
   &[data-scroll='true'] {
@@ -217,25 +228,30 @@ const IconCaret = styled(Caret)`
 const ListMyPage = styled.ul`
   visibility: hidden;
   position: absolute;
-  top: 20px;
-  left: -5px;
-  padding: 6px 0;
-  background-color: ${({ theme }) => theme.header.backgroundBlur};
+  top: ${pxToRem(20)};
+  left: ${pxToRem(-5)};
+  z-index: 10;
+  padding: ${pxToRem(6)} 0;
+  border: 1px solid ${({ theme }) => theme.text.default};
+  border-radius: ${pxToRem(4)};
+  background-color: ${({ theme }) => theme.background.default};
   opacity: 0;
   transition: all 0.3s;
 `;
 
 const AnchorMyPage = styled.a`
   display: block;
-  padding: 5px 12px;
-  font-size: 12px;
+  padding: ${pxToRem(5)} ${pxToRem(12)};
+  font-size: ${pxToRem(12)};
+  color: ${({ theme }) => theme.text.default};
 `;
 
 const BtnLogout = styled.button`
   display: block;
-  padding: 5px 12px;
+  padding: ${pxToRem(5)} ${pxToRem(12)};
   border: none;
-  font-size: 12px;
+  font-size: ${pxToRem(12)};
+  font-weight: 600;
 `;
 
 const ListMenu = styled.ul`
@@ -243,8 +259,8 @@ const ListMenu = styled.ul`
   font-size: ${pxToRem(18)};
   font-weight: 600;
 
-  & li.recentEvent {
-    @media screen and (max-width: ${pxToRem(860)}) {
+  @media screen and (max-width: ${pxToRem(860)}) {
+    & li.recentEvent {
       display: none;
     }
   }
@@ -269,26 +285,81 @@ const ListBtns = styled.ul`
 `;
 
 const ItemBtns = styled.li`
+  & + & {
+    margin-left: ${pxToRem(2)};
+  }
+`;
+
+const IconSize = () => css`
   width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
+`;
+
+const IconBorder = () => css`
+  position: relative;
+  padding: ${pxToRem(10)};
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: ${useTheme().text.default};
+  }
+`;
+
+const AnchorCart = styled.a`
+  ${IconSize}
+  ${IconBorder}
+  display: block;
 `;
 
 const IconCart = styled(Cart)`
+  ${IconSize}
+  fill: ${({ theme }) => theme.text.default};
+`;
+
+const BtnDarkMode = styled.button`
+  ${IconSize}
+  ${IconBorder}
+  box-sizing: content-box;
+`;
+
+const IconDarkMode = styled(DarkIcon)`
+  ${IconSize}
+  fill: ${({ theme }) => theme.text.default};
+`;
+
+const IconLightMode = styled(LightIcon)`
+  ${IconSize}
   fill: ${({ theme }) => theme.text.default};
 `;
 
 const LabelSearch = styled.label`
   display: flex;
   align-items: center;
+  position: relative;
   margin: 0 ${pxToRem(15)} 0 ${pxToRem(30)};
   padding: 0 ${pxToRem(15)};
   border-radius: ${pxToRem(30)};
   background-color: ${({ theme }) => theme.input.background};
+
+  &:focus-within::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    right: -2px;
+    left: -2px;
+    border: 2px solid ${({ theme }) => theme.text.primary};
+    border-radius: ${pxToRem(34)};
+  }
 `;
 
 const InputSearch = styled.input`
   padding: ${pxToRem(10)} 0;
   border: 0;
   background: none;
+  outline: none;
 
   &::placeholder {
     color: ${({ theme }) => theme.input.placeholder};
@@ -297,13 +368,9 @@ const InputSearch = styled.input`
 
 const BtnSearch = styled.button`
   width: ${pxToRem(18)};
+  height: ${pxToRem(18)};
 `;
 
 const IconSearch = styled(Search)`
   fill: ${GRAY_900};
-`;
-
-const BtnDarkMode = styled.button`
-  width: ${pxToRem(20)};
-  margin-left: ${pxToRem(15)};
 `;
