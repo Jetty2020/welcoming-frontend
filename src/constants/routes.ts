@@ -14,4 +14,9 @@ export const ROUTES = {
   welcomeDeal: '/products/welcome-deal',
   cart: '/users/cart',
   myPage: '/users/my-page',
+  applySeller: '/users/apply-seller',
+  editProfile: '/users/edit-profile',
+  orderList: '/users/order-list',
+  registerProduct: '/users/register-product',
+  wishlist: '/users/wishlist',
 };
