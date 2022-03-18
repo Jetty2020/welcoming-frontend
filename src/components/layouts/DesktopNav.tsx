@@ -42,6 +42,13 @@ export const DesktopNav = ({ className }: EmotionProps) => {
                 </AnchorUserMenu>
               </Link>
               <ListMyPage>
+                {data?.me.role === 'Seller' && (
+                  <li>
+                    <Link href="/" passHref>
+                      <AnchorMyPage sellerPage={true}>상품 등록</AnchorMyPage>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link href="/" passHref>
                     <AnchorMyPage>주문내역</AnchorMyPage>
@@ -239,11 +246,12 @@ const ListMyPage = styled.ul`
   transition: all 0.3s;
 `;
 
-const AnchorMyPage = styled.a`
+const AnchorMyPage = styled.a<{ sellerPage?: boolean }>`
   display: block;
   padding: ${pxToRem(5)} ${pxToRem(12)};
   font-size: ${pxToRem(12)};
-  color: ${({ theme }) => theme.text.default};
+  color: ${({ theme, sellerPage }) =>
+    sellerPage ? theme.text.primary : theme.text.default};
 `;
 
 const BtnLogout = styled.button`
