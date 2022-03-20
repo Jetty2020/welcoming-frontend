@@ -42,30 +42,12 @@ declare module '@emotion/react' {
       src: string;
     };
   }
+
   export interface Theme extends ThemeMode {
-    button: {
-      background: string;
-      disabled: string;
-      text: string;
-      fontSize: number;
-      fontWeight: number;
-      letterSpacing: string;
-    };
-    input: {
-      background: string;
-      border: string;
-      error: string;
-      placeholder: string;
-      text: string;
-    };
-    title: {
-      mobileFontSize: number;
-      desktopFontSize: number;
-      fontWeight: number;
-    };
-    mediaQuery: {
-      tablet: string;
-    };
+    button: BUTTON;
+    input: INPUT;
+    title: TITLE;
+    mediaQuery: MEDIA;
   }
 }
 
