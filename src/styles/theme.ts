@@ -1,4 +1,5 @@
 import { Theme, ThemeMode } from '@emotion/react';
+import { pxToRem } from '@utils/pxToRem';
 import {
   GRAY_900,
   GRAY_800,
@@ -48,6 +49,7 @@ declare module '@emotion/react' {
     input: INPUT;
     title: TITLE;
     mediaQuery: MEDIA;
+    margin: MARGIN;
   }
 }
 
@@ -75,6 +77,11 @@ interface TITLE {
 }
 interface MEDIA {
   tablet: string;
+}
+
+interface MARGIN {
+  mobileTop: string;
+  tabletTop: string;
 }
 
 interface ThemeGroup {
@@ -169,7 +176,12 @@ export const mediaQuery: MEDIA = {
   tablet: '768px',
 };
 
+const margin: MARGIN = {
+  mobileTop: `${pxToRem(15)}`,
+  tabletTop: `${pxToRem(156)}`,
+};
+
 export const mode: ThemeGroup = {
-  light: { ...light, button, input, title, mediaQuery },
-  dark: { ...dark, button, input, title, mediaQuery },
+  light: { ...light, button, input, title, mediaQuery, margin },
+  dark: { ...dark, button, input, title, mediaQuery, margin },
 };
