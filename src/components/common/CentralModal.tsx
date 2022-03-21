@@ -3,19 +3,11 @@ import React, { useEffect } from 'react';
 import { pxToRem } from '@utils/pxToRem';
 import { IsShowModalProps, ModalProps } from 'src/types';
 
-interface CentralModalProps extends ModalProps {
-  width: string;
-}
-interface ContainerContentProps extends IsShowModalProps {
-  width: string;
-}
-
 export const CentralModal = ({
   isShowModal,
   setIsShowModal,
   children,
-  width,
-}: CentralModalProps) => {
+}: ModalProps) => {
   useEffect(() => {
     if (isShowModal) {
       document.body.style.overflow = 'hidden';
@@ -30,9 +22,7 @@ export const CentralModal = ({
         isShowModal={isShowModal}
         onClick={() => setIsShowModal(false)}
       />
-      <ContainerContent isShowModal={isShowModal} width={width}>
-        {children}
-      </ContainerContent>
+      <ContainerContent isShowModal={isShowModal}>{children}</ContainerContent>
     </Container>
   );
 };
@@ -53,13 +43,13 @@ const Background = styled.div<IsShowModalProps>`
   transition: visibility 0.1s;
 `;
 
-const ContainerContent = styled.div<ContainerContentProps>`
+const ContainerContent = styled.div<IsShowModalProps>`
+  overflow: hidden;
   position: fixed;
   left: 50%;
   bottom: 50%;
   visibility: ${({ isShowModal }) => (isShowModal ? 'visible' : 'hidden')};
-  width: ${({ width }) => width};
-  padding: ${pxToRem(30)};
+  border-radius: 20px;
   background-color: ${({ theme }) => theme.background.default};
   transform: translate(-50%);
 `;
