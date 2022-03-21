@@ -2,13 +2,16 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
+import { useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
 import QuestionIcon from 'public/icons/question-circle.svg';
 import { GRAY_200, WHITE } from '@constants/colors';
+import { CentralModal } from '@components/common/CentralModal';
 
 const RegisterProduct: NextPage = () => {
+  const [isShowModal, setIsShowModal] = useState(false);
   return (
     <>
       <PageTitle title="상품 등록" />
@@ -136,7 +139,13 @@ const RegisterProduct: NextPage = () => {
                 plugins:
                   'autolink autosave code link media image table textcolor autoresize',
                 toolbar:
-                  'undo redo |forecolor bold italic | alignleft aligncenter alignright alignjustify ',
+                  'undo redo |forecolor bold italic | alignleft aligncenter alignright alignjustify | custom_image ',
+                setup: (editor) => {
+                  editor.ui.registry.addButton('custom_image', {
+                    icon: 'image',
+                    onAction: () => setIsShowModal(true),
+                  });
+                },
               }}
             />
             <TitleForm>
@@ -171,6 +180,13 @@ const RegisterProduct: NextPage = () => {
             </div>
             <BtnSubmit type="submit">상품 등록하기</BtnSubmit>
           </Form>
+          <CentralModal
+            isShowModal={isShowModal}
+            setIsShowModal={setIsShowModal}
+            width="300px"
+          >
+            모달
+          </CentralModal>
         </Main>
       </Layout>
     </>
