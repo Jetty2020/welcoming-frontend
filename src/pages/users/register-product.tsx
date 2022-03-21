@@ -1,8 +1,8 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
@@ -183,9 +183,25 @@ const RegisterProduct: NextPage = () => {
           <CentralModal
             isShowModal={isShowModal}
             setIsShowModal={setIsShowModal}
-            width="300px"
           >
-            모달
+            <FormUpload>
+              <LabelUpload htmlFor="uploadImg">
+                파일 선택
+                <input
+                  className="sr-only"
+                  type="file"
+                  id="uploadImg"
+                  multiple
+                  accept="image/*"
+                />
+              </LabelUpload>
+              {/* 이미지 크기 정해지면 수정하기 */}
+              <p>
+                10MB이하의 이미지 파일만 등록할 수 있습니다.
+                <br />
+                (JPG, GIF, PNG, BMP)
+              </p>
+            </FormUpload>
           </CentralModal>
         </Main>
       </Layout>
@@ -252,7 +268,7 @@ const LabelPrice = styled.label`
   }
 `;
 
-const InputStyle = css`
+const InputStyle = () => css`
   box-sizing: border-box;
   width: 200px;
   padding: ${pxToRem(5)} ${pxToRem(10)};
@@ -334,4 +350,21 @@ const BtnSubmit = styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.button.disabled};
   }
+`;
+
+const FormUpload = styled.form`
+  padding: 40px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+`;
+
+const LabelUpload = styled.label`
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 30px;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
+  cursor: pointer;
 `;
