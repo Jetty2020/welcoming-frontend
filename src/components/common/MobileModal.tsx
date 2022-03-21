@@ -1,16 +1,7 @@
 import styled from '@emotion/styled';
-import React, { ReactChild, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { pxToRem } from '@utils/pxToRem';
-
-interface ModalProps {
-  isShowModal: boolean;
-  setIsShowModal: (value: boolean) => void;
-  children: ReactChild;
-}
-
-interface IsShowModalProps {
-  isShowModal: boolean;
-}
+import { IsShowModalProps, ModalProps } from 'src/types';
 
 export const MobileModal = ({
   isShowModal,

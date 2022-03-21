@@ -1,18 +1,11 @@
 import styled from '@emotion/styled';
-import React, { ReactChild, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { pxToRem } from '@utils/pxToRem';
+import { IsShowModalProps, ModalProps } from 'src/types';
 
-interface ModalProps {
-  isShowModal: boolean;
-  setIsShowModal: (value: boolean) => void;
-  children: ReactChild;
+interface CentralModalProps extends ModalProps {
   width: string;
 }
-
-interface IsShowModalProps {
-  isShowModal: boolean;
-}
-
 interface ContainerContentProps extends IsShowModalProps {
   width: string;
 }
@@ -22,7 +15,7 @@ export const CentralModal = ({
   setIsShowModal,
   children,
   width,
-}: ModalProps) => {
+}: CentralModalProps) => {
   useEffect(() => {
     if (isShowModal) {
       document.body.style.overflow = 'hidden';
