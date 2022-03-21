@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { pxToRem } from '@utils/pxToRem';
 import ChevronRight from 'public/icons/chevron-right.svg';
 import Caret from 'public/icons/caret-down.svg';
-import { Modal } from '@components/common/Modal';
+import { MobileModal } from '@components/common/MobileModal';
 import { GRAY_900 } from '@constants/colors';
 import { gql, useQuery } from '@apollo/client';
 import {
@@ -103,7 +103,7 @@ export const Best = () => {
         {selectFilter}
         <IconCaret />
       </BtnOpenFilter>
-      <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
+      <MobileModal isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
         <>
           <TitleFilter>정렬</TitleFilter>
           <ul>
@@ -119,7 +119,7 @@ export const Best = () => {
             ))}
           </ul>
         </>
-      </Modal>
+      </MobileModal>
       <ContainerSelectFilter
         isShowModal={isShowSelect}
         onMouseEnter={() => handleSelectHover(true)}

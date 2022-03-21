@@ -12,7 +12,7 @@ interface IsShowModalProps {
   isShowModal: boolean;
 }
 
-export const Modal = ({
+export const MobileModal = ({
   isShowModal,
   setIsShowModal,
   children,
