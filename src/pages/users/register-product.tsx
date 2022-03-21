@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
@@ -124,7 +125,20 @@ const RegisterProduct: NextPage = () => {
               상품 상세 설명
               <IconQuestion />
             </TitleForm>
-            <textarea style={{ height: '300px', resize: 'none' }} />
+            <Editor
+              // onEditorChange={setPost}
+              id="tinyEditor"
+              apiKey="rx4sjzylr2h5t45sq41yf4qmjellvcs73xqlmmjlwr3boa8p"
+              init={{
+                language: 'ko',
+                menubar: false,
+                statusbar: false,
+                plugins:
+                  'autolink autosave code link media image table textcolor autoresize',
+                toolbar:
+                  'undo redo |forecolor bold italic | alignleft aligncenter alignright alignjustify ',
+              }}
+            />
             <TitleForm>
               상품 배송
               <IconQuestion />
