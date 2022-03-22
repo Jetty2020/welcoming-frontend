@@ -21,6 +21,9 @@ const RegisterProduct: NextPage = () => {
 
     if (selectedImageList) {
       for (let i = 0; i < selectedImageList?.length; i += 1) {
+        if (i + imgFile.length + 1 > 5) {
+          break;
+        }
         newImageList.push(selectedImageList[i]);
         const nowImageUrl = URL.createObjectURL(selectedImageList[i]);
         setContent(
@@ -28,7 +31,6 @@ const RegisterProduct: NextPage = () => {
         );
       }
     }
-    console.log(content);
     setImgFile(newImageList);
     setIsShowModal(false);
   };
@@ -158,6 +160,8 @@ const RegisterProduct: NextPage = () => {
                 language: 'ko',
                 menubar: false,
                 statusbar: false,
+                min_height: 400,
+                max_height: 800,
                 plugins:
                   'autolink autosave code link media image table textcolor autoresize',
                 toolbar:
@@ -235,7 +239,7 @@ const RegisterProduct: NextPage = () => {
 export default RegisterProduct;
 
 const Main = styled.main`
-  max-width: ${pxToRem(800)};
+  max-width: ${pxToRem(1200)};
   margin: ${({ theme }) => theme.margin.tabletTop} auto 0;
   padding: 50px 50px;
 `;
