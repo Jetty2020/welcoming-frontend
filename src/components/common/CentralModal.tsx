@@ -49,7 +49,7 @@ const ContainerContent = styled.div<IsShowModalProps>`
   left: 50%;
   bottom: 50%;
   visibility: ${({ isShowModal }) => (isShowModal ? 'visible' : 'hidden')};
-  border-radius: 20px;
+  border-radius: ${pxToRem(20)};
   background-color: ${({ theme }) => theme.background.default};
   transform: translate(-50%);
 `;
