@@ -1,8 +1,8 @@
-import { css, useTheme } from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
@@ -12,6 +12,27 @@ import { CentralModal } from '@components/common/CentralModal';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
+  const [content, setContent] = useState('');
+  const [imgFile, setImgFile] = useState<Array<File>>([]);
+
+  const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedImageList = e.target.files;
+    const newImageList = [...imgFile];
+
+    if (selectedImageList) {
+      for (let i = 0; i < selectedImageList?.length; i += 1) {
+        newImageList.push(selectedImageList[i]);
+        const nowImageUrl = URL.createObjectURL(selectedImageList[i]);
+        setContent(
+          (state) => `${state}<img src="${nowImageUrl}" style="width: 100%">`,
+        );
+      }
+    }
+    console.log(content);
+    setImgFile(newImageList);
+    setIsShowModal(false);
+  };
+
   return (
     <>
       <PageTitle title="상품 등록" />
@@ -129,8 +150,9 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
             </TitleForm>
             <Editor
-              // onEditorChange={setPost}
               id="tinyEditor"
+              value={content}
+              onEditorChange={setContent}
               apiKey="rx4sjzylr2h5t45sq41yf4qmjellvcs73xqlmmjlwr3boa8p"
               init={{
                 language: 'ko',
@@ -139,7 +161,7 @@ const RegisterProduct: NextPage = () => {
                 plugins:
                   'autolink autosave code link media image table textcolor autoresize',
                 toolbar:
-                  'undo redo |forecolor bold italic | alignleft aligncenter alignright alignjustify | custom_image ',
+                  'undo redo | bold italic underline strikethrough fontsizeselect forecolor | alignleft aligncenter alignright alignjustify | custom_image ',
                 setup: (editor) => {
                   editor.ui.registry.addButton('custom_image', {
                     icon: 'image',
@@ -188,11 +210,12 @@ const RegisterProduct: NextPage = () => {
               <LabelUpload htmlFor="uploadImg">
                 파일 선택
                 <input
+                  id="uploadImg"
                   className="sr-only"
                   type="file"
-                  id="uploadImg"
                   multiple
                   accept="image/*"
+                  onChange={handleImgInput}
                 />
               </LabelUpload>
               {/* 이미지 크기 정해지면 수정하기 */}
