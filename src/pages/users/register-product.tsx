@@ -18,7 +18,7 @@ const RegisterProduct: NextPage = () => {
   const [content, setContent] = useState('');
   const [imgFile, setImgFile] = useState<Array<File>>([]);
   const [previewThumbnail, setPreviewThumbnail] = useState<Array<string>>([]);
-  const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
+  // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
@@ -52,6 +52,10 @@ const RegisterProduct: NextPage = () => {
         setPreviewThumbnail((state) => [...state, nowthumbnailUrl]);
       }
     }
+  };
+
+  const deleteThumbnail = (idx: number) => {
+    setPreviewThumbnail((state) => state.filter((_, i) => i !== idx));
   };
 
   return (
@@ -204,10 +208,16 @@ const RegisterProduct: NextPage = () => {
             </TitleForm>
             <ContainerInput>
               <ListImg>
-                {previewThumbnail.map((thumnail) => {
+                {previewThumbnail.map((thumnail, idx) => {
                   return (
-                    <ItemImg key={uuidv4()}>
-                      <ImgPreview src={thumnail} alt="상품 이미지 미리보기" />
+                    <ItemImg key={`list-thumbnail-${uuidv4()}`}>
+                      <button
+                        type="button"
+                        onClick={() => deleteThumbnail(idx)}
+                      >
+                        <IconDelete />
+                        <ImgPreview src={thumnail} alt="상품 이미지 미리보기" />
+                      </button>
                     </ItemImg>
                   );
                 })}
@@ -419,7 +429,13 @@ const ListImg = styled.ul`
 `;
 
 const ItemImg = styled.li`
+  position: relative;
   margin-left: 10px;
+  cursor: pointer;
+
+  &:hover svg {
+    opacity: 1;
+  }
 `;
 
 const ImgPreview = styled.img`
@@ -427,6 +443,17 @@ const ImgPreview = styled.img`
   aspect-ratio: 1/1;
   object-fit: cover;
   background-color: ${WHITE};
+`;
+
+const IconDelete = styled(Close)`
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  fill: ${WHITE};
+  filter: drop-shadow(2px 2px 1px ${GRAY_900});
+  opacity: 0;
+  transition: opacity 0.2s;
 `;
 
 const LabelSEO = styled.label`
@@ -529,7 +556,7 @@ const BtnDeleteTag = styled.span`
   margin-left: 3px;
   line-height: 14px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: ${WHITE};
 `;
 
 const InputProductOption = styled.input`
