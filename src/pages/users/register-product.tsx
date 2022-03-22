@@ -2,38 +2,56 @@ import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
 import QuestionIcon from 'public/icons/question-circle.svg';
-import { GRAY_200, GRAY_900, WHITE } from '@constants/colors';
+import { GRAY_900, WHITE } from '@constants/colors';
 import { CentralModal } from '@components/common/CentralModal';
 import Close from 'public/icons/close.svg';
+import Image from 'public/icons/image.svg';
+import { v4 as uuidv4 } from 'uuid';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [content, setContent] = useState('');
   const [imgFile, setImgFile] = useState<Array<File>>([]);
+  const [previewThumbnail, setPreviewThumbnail] = useState<Array<string>>([]);
+  const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImageList = e.target.files;
+    const selectedImgList = e.target.files;
     const newImageList = [...imgFile];
 
-    if (selectedImageList) {
-      for (let i = 0; i < selectedImageList?.length; i += 1) {
+    if (selectedImgList) {
+      for (let i = 0; i < selectedImgList?.length; i += 1) {
         if (i + imgFile.length + 1 > 5) {
           break;
         }
-        newImageList.push(selectedImageList[i]);
-        const nowImageUrl = URL.createObjectURL(selectedImageList[i]);
+        newImageList.push(selectedImgList[i]);
+        const nowImageUrl = URL.createObjectURL(selectedImgList[i]);
         setContent(
-          (state) => `${state}<img src="${nowImageUrl}" style="width: 100%">`,
+          (state) => `${state}<img src="${nowImageUrl}" style="width: 100%" />`,
         );
       }
     }
     setImgFile(newImageList);
     setIsShowModal(false);
+  };
+
+  const handleUploadImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedThumbnailList = e.target.files;
+
+    if (selectedThumbnailList) {
+      for (let i = 0; i < selectedThumbnailList?.length; i += 1) {
+        if (i + previewThumbnail.length + 1 > 5) {
+          break;
+        }
+        const nowthumbnailUrl = URL.createObjectURL(selectedThumbnailList[i]);
+        setPreviewThumbnail((state) => [...state, nowthumbnailUrl]);
+      }
+    }
   };
 
   return (
@@ -186,10 +204,28 @@ const RegisterProduct: NextPage = () => {
             </TitleForm>
             <ContainerInput>
               <ListImg>
-                <ItemImg>
-                  {/* <ImgPreview src="/logo/logo.png" alt="상품 이미지 미리보기" /> */}
-                </ItemImg>
+                {previewThumbnail.map((thumnail) => {
+                  return (
+                    <ItemImg key={uuidv4()}>
+                      <ImgPreview src={thumnail} alt="상품 이미지 미리보기" />
+                    </ItemImg>
+                  );
+                })}
               </ListImg>
+              {previewThumbnail.length < 5 && (
+                <LabelUploadImg htmlFor="uploadImg">
+                  <input
+                    type="file"
+                    id="uploadImg"
+                    className="sr-only"
+                    multiple
+                    onChange={handleUploadImg}
+                  />
+                  <IconImage />
+                  사진 올리기
+                  <TextUploadImg>(최대 5장까지)</TextUploadImg>
+                </LabelUploadImg>
+              )}
             </ContainerInput>
             <TitleForm>
               상품 상세 설명
@@ -379,20 +415,19 @@ const Select = styled.select`
 
 const ListImg = styled.ul`
   display: flex;
+  margin-right: 10px;
 `;
 
 const ItemImg = styled.li`
-  & + & {
-    margin-left: 10px;
-  }
+  margin-left: 10px;
 `;
 
-// const ImgPreview = styled.img`
-//   width: 100px;
-//   aspect-ratio: 1/1;
-//   object-fit: cover;
-//   background-color: ${WHITE};
-// `;
+const ImgPreview = styled.img`
+  width: 120px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  background-color: ${WHITE};
+`;
 
 const LabelSEO = styled.label`
   ${LableStyle}
@@ -519,4 +554,27 @@ const BtnAddProductOption = styled.button`
   padding: 10px 0;
   background-color: ${({ theme }) => theme.text.default};
   color: ${({ theme }) => theme.background.default};
+`;
+
+const LabelUploadImg = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
+  font-size: 14px;
+  cursor: pointer;
+`;
+
+const IconImage = styled(Image)`
+  width: 30px;
+  margin-bottom: 5px;
+`;
+
+const TextUploadImg = styled.span`
+  margin-top: 5px;
+  font-size: 12px;
 `;
