@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
 import { NextPage } from 'next';
@@ -7,8 +7,9 @@ import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
 import QuestionIcon from 'public/icons/question-circle.svg';
-import { GRAY_200, WHITE } from '@constants/colors';
+import { GRAY_200, GRAY_900, WHITE } from '@constants/colors';
 import { CentralModal } from '@components/common/CentralModal';
+import Close from 'public/icons/close.svg';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -64,14 +65,73 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
             </TitleForm>
             <ContainerInput>
-              <LabelRadio htmlFor="use">
-                <InputRadio id="use" type="radio" name="option" />
-                사용함
-              </LabelRadio>
-              <LabelRadio htmlFor="none">
-                <InputRadio id="none" type="radio" name="option" />
-                사용 안함
-              </LabelRadio>
+              <div>
+                <LabelRadio htmlFor="use">
+                  <InputRadio id="use" type="radio" name="option" />
+                  사용함
+                </LabelRadio>
+                <LabelRadio htmlFor="none">
+                  <InputRadio id="none" type="radio" name="option" />
+                  사용 안함
+                </LabelRadio>
+              </div>
+              <ContainerProductOption>
+                <TitleProductOption>옵션 1</TitleProductOption>
+                <LabelProductOption htmlFor="nameOption">
+                  옵션명
+                  <InputProductOption
+                    type="text"
+                    id="nameOption"
+                    placeholder="예시: 색상"
+                  />
+                </LabelProductOption>
+                <LabelProductOption>
+                  옵션값
+                  <BoxTag>
+                    <BtnTag>
+                      <span>태그명</span>
+                      <BtnDeleteTag>
+                        <span className="sr-only">삭제</span>
+                        <IconClose />
+                      </BtnDeleteTag>
+                    </BtnTag>
+                    <InputProductOptionValue
+                      type="text"
+                      placeholder="예시: 화이트"
+                    />
+                  </BoxTag>
+                </LabelProductOption>
+              </ContainerProductOption>
+              <BtnAddProductOption type="button">
+                옵션 추가하기
+              </BtnAddProductOption>
+              <ContainerProductOption>
+                <TitleProductOption>옵션 2</TitleProductOption>
+                <LabelProductOption htmlFor="nameOption">
+                  옵션명
+                  <InputProductOption
+                    type="text"
+                    id="nameOption"
+                    placeholder="예시: 색상"
+                  />
+                </LabelProductOption>
+                <LabelProductOption>
+                  옵션값
+                  <BoxTag>
+                    <BtnTag>
+                      <span>태그명</span>
+                      <BtnDeleteTag>
+                        <span className="sr-only">삭제</span>
+                        <IconClose />
+                      </BtnDeleteTag>
+                    </BtnTag>
+                    <InputProductOptionValue
+                      type="text"
+                      placeholder="예시: 화이트"
+                    />
+                  </BoxTag>
+                </LabelProductOption>
+              </ContainerProductOption>
             </ContainerInput>
             <TitleForm>
               상품 가격
@@ -80,11 +140,11 @@ const RegisterProduct: NextPage = () => {
             <ContainerInput>
               <LabelPrice htmlFor="normalPrice">
                 판매가(원)
-                <Input id="normalPrice" type="text" />
+                <Input id="normalPrice" type="number" />
               </LabelPrice>
               <LabelPrice htmlFor="specialPrice">
                 할인 이전 가격(원)
-                <Input id="specialPrice" type="text" />
+                <Input id="specialPrice" type="number" />
               </LabelPrice>
               <LabelPrice htmlFor="event">
                 기획전에 추가하기
@@ -124,29 +184,13 @@ const RegisterProduct: NextPage = () => {
               상품 이미지
               <IconQuestion />
             </TitleForm>
-            <div>
-              <LabelImgInput htmlFor="imageInput">
-                상품 이미지 추가하기
-                <input
-                  className="sr-only"
-                  id="imageInput"
-                  type="file"
-                  accept="image/*"
-                  multiple
-                />
-              </LabelImgInput>
+            <ContainerInput>
               <ListImg>
                 <ItemImg>
-                  <ImgPreview src="/logo/logo.png" alt="상품 이미지 미리보기" />
-                </ItemImg>
-                <ItemImg>
-                  <ImgPreview src="/logo/logo.png" alt="상품 이미지 미리보기" />
-                </ItemImg>
-                <ItemImg>
-                  <ImgPreview src="/logo/logo.png" alt="상품 이미지 미리보기" />
+                  {/* <ImgPreview src="/logo/logo.png" alt="상품 이미지 미리보기" /> */}
                 </ItemImg>
               </ListImg>
-            </div>
+            </ContainerInput>
             <TitleForm>
               상품 상세 설명
               <IconQuestion />
@@ -263,9 +307,15 @@ const IconQuestion = styled(QuestionIcon)`
 
 const ContainerInput = styled.div`
   display: flex;
+
+  &:nth-of-type(1) {
+    flex-direction: column;
+  }
 `;
 
 const LabelRadio = styled.label`
+  font-size: 14px;
+
   & + & {
     margin-left: 10px;
   }
@@ -275,7 +325,7 @@ const InputRadio = styled.input`
   margin-right: 5px;
 `;
 
-const LableStyle = css`
+const LableStyle = () => css`
   display: flex;
   flex-direction: column;
   font-size: 14px;
@@ -296,11 +346,18 @@ const LabelPrice = styled.label`
 `;
 
 const InputStyle = () => css`
-  box-sizing: border-box;
   width: 200px;
-  padding: ${pxToRem(5)} ${pxToRem(10)};
+  padding: ${pxToRem(8)} ${pxToRem(10)};
+  box-sizing: border-box;
+  border: ${useTheme().input.border};
   border-radius: ${pxToRem(5)};
-  font-size: ${pxToRem(16)};
+  background-color: ${WHITE};
+  font-size: ${pxToRem(14)};
+  outline: none;
+
+  &:focus {
+    border-color: ${useTheme().text.primary};
+  }
   // TODO: 컴포넌트화 이후 border 가져오기
 `;
 
@@ -312,22 +369,12 @@ const Input = styled.input`
 const Select = styled.select`
   ${InputStyle}
   border: ${({ theme }) => theme.input.border};
+  background: url('/icons/caret-down.svg') no-repeat 95% 50% ${WHITE};
+  appearance: none;
 
   & + & {
     margin-left: 10px;
   }
-`;
-
-const LabelImgInput = styled.label`
-  display: inline-block;
-  width: 170px;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  background-color: ${GRAY_200};
-  /* color: ${WHITE}; */
-  line-height: 30px;
-  text-align: center;
-  cursor: pointer;
 `;
 
 const ListImg = styled.ul`
@@ -340,12 +387,12 @@ const ItemImg = styled.li`
   }
 `;
 
-const ImgPreview = styled.img`
-  width: 100px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  background-color: ${WHITE};
-`;
+// const ImgPreview = styled.img`
+//   width: 100px;
+//   aspect-ratio: 1/1;
+//   object-fit: cover;
+//   background-color: ${WHITE};
+// `;
 
 const LabelSEO = styled.label`
   ${LableStyle}
@@ -394,4 +441,82 @@ const LabelUpload = styled.label`
   background-color: ${({ theme }) => theme.text.default};
   color: ${({ theme }) => theme.background.default};
   cursor: pointer;
+`;
+
+const ContainerProductOption = styled.div`
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.text.lighter};
+  font-size: 14px;
+`;
+
+const TitleProductOption = styled.p`
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid ${({ theme }) => theme.text.lighter};
+`;
+
+const LabelProductOption = styled.label`
+  display: flex;
+  align-items: center;
+
+  & + & {
+    margin-top: 6px;
+  }
+`;
+
+const BoxTag = styled.span`
+  ${InputStyle}
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 90%;
+  margin-left: 10px;
+  padding: 5px 10px;
+
+  &:focus-within {
+    border-color: ${({ theme }) => theme.text.primary};
+  }
+`;
+
+const BtnTag = styled.button`
+  padding: 2px 5px 3px 10px;
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.background.primary};
+  color: ${WHITE};
+  font-size: 14px;
+  vertical-align: middle;
+`;
+
+const BtnDeleteTag = styled.span`
+  display: inline-block;
+  width: 14px;
+  margin-left: 3px;
+  line-height: 14px;
+  border-radius: 50%;
+  background-color: #fff;
+`;
+
+const InputProductOption = styled.input`
+  ${InputStyle}
+  margin-left: 10px;
+`;
+
+const InputProductOptionValue = styled.input`
+  padding-left: 10px;
+  border: 0;
+  outline: none;
+`;
+
+const IconClose = styled(Close)`
+  width: 8px;
+  margin-bottom: 1px;
+  color: ${GRAY_900};
+`;
+
+const BtnAddProductOption = styled.button`
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
 `;
