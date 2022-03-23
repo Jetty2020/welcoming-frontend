@@ -19,6 +19,8 @@ const RegisterProduct: NextPage = () => {
   const [imgFile, setImgFile] = useState<Array<File>>([]);
   const [previewThumbnail, setPreviewThumbnail] = useState<Array<string>>([]);
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
+  const [isCheckedOption, setIsCheckedOption] = useState(false);
+  const [isAddOption, setIsAddOption] = useState(false);
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
@@ -89,71 +91,101 @@ const RegisterProduct: NextPage = () => {
             <ContainerInput>
               <div>
                 <LabelRadio htmlFor="use">
-                  <InputRadio id="use" type="radio" name="option" />
+                  <InputRadio
+                    id="use"
+                    type="radio"
+                    name="option"
+                    onClick={() => setIsCheckedOption(true)}
+                  />
                   사용함
                 </LabelRadio>
                 <LabelRadio htmlFor="none">
-                  <InputRadio id="none" type="radio" name="option" />
+                  <InputRadio
+                    id="none"
+                    type="radio"
+                    name="option"
+                    onClick={() => setIsCheckedOption(false)}
+                  />
                   사용 안함
                 </LabelRadio>
               </div>
-              <ContainerProductOption>
-                <TitleProductOption>옵션 1</TitleProductOption>
-                <LabelProductOption htmlFor="nameOption">
-                  옵션명
-                  <InputProductOption
-                    type="text"
-                    id="nameOption"
-                    placeholder="예시: 색상"
-                  />
-                </LabelProductOption>
-                <LabelProductOption>
-                  옵션값
-                  <BoxTag>
-                    <BtnTag>
-                      <span>태그명</span>
-                      <BtnDeleteTag>
-                        <span className="sr-only">삭제</span>
-                        <IconClose />
-                      </BtnDeleteTag>
-                    </BtnTag>
-                    <InputProductOptionValue
-                      type="text"
-                      placeholder="예시: 화이트"
-                    />
-                  </BoxTag>
-                </LabelProductOption>
-              </ContainerProductOption>
-              <BtnAddProductOption type="button">
-                옵션 추가하기
-              </BtnAddProductOption>
-              <ContainerProductOption>
-                <TitleProductOption>옵션 2</TitleProductOption>
-                <LabelProductOption htmlFor="nameOption">
-                  옵션명
-                  <InputProductOption
-                    type="text"
-                    id="nameOption"
-                    placeholder="예시: 색상"
-                  />
-                </LabelProductOption>
-                <LabelProductOption>
-                  옵션값
-                  <BoxTag>
-                    <BtnTag>
-                      <span>태그명</span>
-                      <BtnDeleteTag>
-                        <span className="sr-only">삭제</span>
-                        <IconClose />
-                      </BtnDeleteTag>
-                    </BtnTag>
-                    <InputProductOptionValue
-                      type="text"
-                      placeholder="예시: 화이트"
-                    />
-                  </BoxTag>
-                </LabelProductOption>
-              </ContainerProductOption>
+              {isCheckedOption && (
+                <>
+                  <ContainerProductOption>
+                    <TitleProductOption>옵션 1</TitleProductOption>
+                    <LabelProductOption htmlFor="nameOption">
+                      옵션명
+                      <InputProductOption
+                        type="text"
+                        id="nameOption"
+                        placeholder="예시: 색상"
+                      />
+                    </LabelProductOption>
+                    <LabelProductOption>
+                      옵션값
+                      <BoxTag>
+                        <BtnTag>
+                          <span>태그명</span>
+                          <BtnDeleteTag>
+                            <span className="sr-only">삭제</span>
+                            <IconClose />
+                          </BtnDeleteTag>
+                        </BtnTag>
+                        <InputProductOptionValue
+                          type="text"
+                          placeholder="예시: 화이트"
+                        />
+                      </BoxTag>
+                    </LabelProductOption>
+                  </ContainerProductOption>
+                  {!isAddOption && (
+                    <BtnAddProductOption
+                      type="button"
+                      onClick={() => setIsAddOption(true)}
+                    >
+                      옵션 추가하기
+                    </BtnAddProductOption>
+                  )}
+                  {isAddOption && (
+                    <ContainerProductOption>
+                      <TitleProductOption>
+                        옵션 2
+                        <BtnDeleteProductOption
+                          type="button"
+                          onClick={() => setIsAddOption(false)}
+                        >
+                          <span className="sr-only">옵션2 삭제</span>
+                          <IconDeleteProductOption />
+                        </BtnDeleteProductOption>
+                      </TitleProductOption>
+                      <LabelProductOption htmlFor="nameOption">
+                        옵션명
+                        <InputProductOption
+                          type="text"
+                          id="nameOption"
+                          placeholder="예시: 색상"
+                        />
+                      </LabelProductOption>
+                      <LabelProductOption>
+                        옵션값
+                        <BoxTag>
+                          <BtnTag>
+                            <span>태그명</span>
+                            <BtnDeleteTag>
+                              <span className="sr-only">삭제</span>
+                              <IconClose />
+                            </BtnDeleteTag>
+                          </BtnTag>
+                          <InputProductOptionValue
+                            type="text"
+                            placeholder="예시: 화이트"
+                          />
+                        </BoxTag>
+                      </LabelProductOption>
+                    </ContainerProductOption>
+                  )}
+                </>
+              )}
             </ContainerInput>
             <TitleForm>
               상품 가격
@@ -513,9 +545,21 @@ const ContainerProductOption = styled.div`
 `;
 
 const TitleProductOption = styled.p`
+  position: relative;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid ${({ theme }) => theme.text.lighter};
+`;
+
+const BtnDeleteProductOption = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const IconDeleteProductOption = styled(Close)`
+  width: 16px;
+  height: 16px;
 `;
 
 const LabelProductOption = styled.label`
