@@ -255,10 +255,10 @@ const RegisterProduct: NextPage = () => {
                 })}
               </ListImg>
               {previewThumbnail.length < 5 && (
-                <LabelUploadImg htmlFor="uploadImg">
+                <LabelUploadImg htmlFor="uploadThumbnail">
                   <input
                     type="file"
-                    id="uploadImg"
+                    id="uploadThumbnail"
                     className="sr-only"
                     multiple
                     onChange={handleUploadImg}
