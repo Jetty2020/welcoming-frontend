@@ -19,14 +19,12 @@ declare module '@emotion/react' {
       default: string;
       primary: string;
     };
-    text: {
-      default: string;
-      lighter: string;
-      primary: string;
+    comingSoon: {
+      src: string;
     };
-    toggleMode: {
-      background: string;
-      text: string;
+    error: {
+      error404: string;
+      default: string;
     };
     header: {
       background: string;
@@ -35,12 +33,17 @@ declare module '@emotion/react' {
     logo: {
       src: string;
     };
-    error: {
-      error404: string;
-      default: string;
+    shadow: {
+      box: string;
     };
-    comingSoon: {
-      src: string;
+    text: {
+      default: string;
+      lighter: string;
+      primary: string;
+    };
+    toggleMode: {
+      background: string;
+      text: string;
     };
   }
 
@@ -94,6 +97,23 @@ const light: ThemeMode = {
     default: `${GRAY_50}`,
     primary: `${PRIMARY}`,
   },
+  comingSoon: {
+    src: '/images/coming_soon/coming_soon.png',
+  },
+  error: {
+    error404: '/error/404.png',
+    default: '/error/error.png',
+  },
+  header: {
+    background: `${WHITE}`,
+    backgroundBlur: 'rgba(255, 255, 255, 0.1)',
+  },
+  logo: {
+    src: '/logo/logo.png',
+  },
+  shadow: {
+    box: '0 0 3px rgba(0, 0, 0, 0.3)',
+  },
   text: {
     default: `${GRAY_900}`,
     lighter: `${GRAY_600}`,
@@ -103,26 +123,29 @@ const light: ThemeMode = {
     background: `${GRAY_50}`,
     text: `${GRAY_900}`,
   },
-  header: {
-    background: `${WHITE}`,
-    backgroundBlur: 'rgba(255, 255, 255, 0.1)',
-  },
-  logo: {
-    src: '/logo/logo.png',
-  },
-  error: {
-    error404: '/error/404.png',
-    default: '/error/error.png',
-  },
-  comingSoon: {
-    src: '/images/coming_soon/coming_soon.png',
-  },
 };
 
 const dark: ThemeMode = {
   background: {
     default: `${GRAY_800}`,
     primary: `${PRIMARY_LIGHT}`,
+  },
+  comingSoon: {
+    src: '/images/coming_soon/coming_soon_w.png',
+  },
+  error: {
+    error404: '/error/404_w.png',
+    default: '/error/error_w.png',
+  },
+  header: {
+    background: `${GRAY_900}`,
+    backgroundBlur: 'rgba(0, 0, 0, 0.1)',
+  },
+  logo: {
+    src: '/logo/logo_w.png',
+  },
+  shadow: {
+    box: '0 0 4px rgba(255, 255, 255, 0.4)',
   },
   text: {
     default: `${GRAY_50}`,
@@ -132,20 +155,6 @@ const dark: ThemeMode = {
   toggleMode: {
     background: `${GRAY_900}`,
     text: `${GRAY_50}`,
-  },
-  header: {
-    background: `${GRAY_900}`,
-    backgroundBlur: 'rgba(0, 0, 0, 0.1)',
-  },
-  logo: {
-    src: '/logo/logo_w.png',
-  },
-  error: {
-    error404: '/error/404_w.png',
-    default: '/error/error_w.png',
-  },
-  comingSoon: {
-    src: '/images/coming_soon/coming_soon_w.png',
   },
 };
 
