@@ -30,10 +30,17 @@ const RegisterProduct: NextPage = () => {
       mode: 'onChange',
     });
 
-  const { pressEnter, deleteProductOption, optionList } = useControllOptionList(
-    getValues,
-    setValue,
-  );
+  const {
+    pressEnter: firstPressEnter,
+    deleteProductOption: firstDeleteProductOption,
+    optionList: firstOptionList,
+  } = useControllOptionList(getValues, setValue);
+
+  const {
+    pressEnter: secondPressEnter,
+    deleteProductOption: secondDeleteProductOption,
+    optionList: secondOptionList,
+  } = useControllOptionList(getValues, setValue);
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
@@ -150,7 +157,7 @@ const RegisterProduct: NextPage = () => {
                         type="text"
                         id="nameOption"
                         placeholder="옵션명"
-                        disabled={optionList.length > 0}
+                        disabled={firstOptionList.length > 0}
                         {...register('optionName1')}
                       />
                     </LabelProductOption>
@@ -159,18 +166,18 @@ const RegisterProduct: NextPage = () => {
                       <InputProductOption
                         type="text"
                         placeholder="옵션값을 입력 후 엔터를 눌러주세요."
-                        onKeyPress={pressEnter}
+                        onKeyPress={firstPressEnter}
                         {...register('optionValue1')}
                       />
                     </LabelProductOption>
-                    {optionList.length > 0 && (
+                    {firstOptionList.length > 0 && (
                       <ListProductOption>
-                        {optionList.map((item, idx) => {
+                        {firstOptionList.map((item, idx) => {
                           return (
                             <ItemProductOption key={`option-item-${uuidv4()}`}>
                               <BtnProductOption
                                 type="button"
-                                onClick={() => deleteProductOption(idx)}
+                                onClick={() => firstDeleteProductOption(idx)}
                               >
                                 {getValues().optionName1} : {item}
                                 <DeleteProductOption />
@@ -201,12 +208,13 @@ const RegisterProduct: NextPage = () => {
                           <IconDeleteProductOption />
                         </BtnDeleteProductOption>
                       </TitleProductOption>
-                      <LabelProductOption htmlFor="nameOption">
+                      <LabelProductOption htmlFor="nameOption2">
                         옵션명
                         <InputProductOption
                           type="text"
-                          id="nameOption"
-                          placeholder="예시: 색상"
+                          id="nameOption2"
+                          placeholder="옵션명"
+                          disabled={secondOptionList.length > 0}
                           {...register('optionName2')}
                         />
                       </LabelProductOption>
@@ -214,10 +222,30 @@ const RegisterProduct: NextPage = () => {
                         옵션값
                         <InputProductOption
                           type="text"
-                          placeholder="예시: 화이트"
+                          placeholder="옵션값을 입력 후 엔터를 눌러주세요."
+                          onKeyPress={secondPressEnter}
                           {...register('optionValue2')}
                         />
                       </LabelProductOption>
+                      {secondOptionList.length > 0 && (
+                        <ListProductOption>
+                          {secondOptionList.map((item, idx) => {
+                            return (
+                              <ItemProductOption
+                                key={`option-item-${uuidv4()}`}
+                              >
+                                <BtnProductOption
+                                  type="button"
+                                  onClick={() => secondDeleteProductOption(idx)}
+                                >
+                                  {getValues().optionName2} : {item}
+                                  <DeleteProductOption />
+                                </BtnProductOption>
+                              </ItemProductOption>
+                            );
+                          })}
+                        </ListProductOption>
+                      )}
                     </ContainerProductOption>
                   )}
                 </>

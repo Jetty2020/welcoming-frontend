@@ -8,19 +8,26 @@ export const useControllOptionList = (
 ) => {
   const [optionList, setOptionList] = useState<Array<string>>([]);
 
-  const addOptionItem = () => {
+  const addOptionItem = (
+    name: 'optionValue1' | 'optionValue2',
+    value: string,
+  ) => {
     const updatedOptionList = [...optionList];
-    updatedOptionList.push(getValues().optionValue1);
+    updatedOptionList.push(value);
     setOptionList(updatedOptionList);
-    setValue('optionValue1', '');
+    setValue(name, '');
   };
 
   const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
 
-      if (getValues().optionValue1 !== '') {
-        addOptionItem();
+      if (
+        e.currentTarget.value !== '' &&
+        (e.currentTarget.name === 'optionValue1' ||
+          e.currentTarget.name === 'optionValue2')
+      ) {
+        addOptionItem(e.currentTarget.name, e.currentTarget.value);
       }
     }
   };
