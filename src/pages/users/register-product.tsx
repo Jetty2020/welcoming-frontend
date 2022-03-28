@@ -12,6 +12,24 @@ import { CentralModal } from '@components/common/CentralModal';
 import Close from 'public/icons/close.svg';
 import Image from 'public/icons/image.svg';
 import { v4 as uuidv4 } from 'uuid';
+import { useForm } from 'react-hook-form';
+
+interface FormProps {
+  brand: string;
+  name: string;
+  optionName1: string;
+  optionValue1: string;
+  optionName2: string;
+  optionValue2: string;
+  price: number;
+  beforeDiscount: number;
+  event: string;
+  firstCategory: string;
+  secondCategory: string;
+  shippingPrice: string;
+  SEOTitle: string;
+  SEODesc: string;
+}
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -21,25 +39,29 @@ const RegisterProduct: NextPage = () => {
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
-  const [optionName, setOptionName] = useState('');
-  const [optionItem, setOptionItem] = useState('');
-  const [optionList, setOptionList] = useState<Array<string>>([]);
+  const [firstOptionList, setFirstOptionList] = useState<Array<string>>([]);
+  const [secondOptionList, setSecondOptionList] = useState<Array<string>>([]);
 
-  const addOptionItem = () => {
-    const updatedOptionList = [...optionList];
-    updatedOptionList.push(optionItem);
-    setOptionList(updatedOptionList);
-    setOptionItem('');
+  const { register, getValues, setValue, handleSubmit } = useForm<FormProps>({
+    mode: 'onChange',
+  });
+
+  const addFirstOptionItem = () => {
+    const updatedOptionList = [...firstOptionList];
+    updatedOptionList.push(getValues().optionValue1);
+    setFirstOptionList(updatedOptionList);
+    setValue('optionValue1', '');
   };
 
-  const PressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      addOptionItem();
+  const firstOptionPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.key === 'Enter' && getValues().optionValue1 !== '') {
+      addFirstOptionItem();
     }
   };
 
   const deleteProductOption = (idx: number) => {
-    setOptionList((state) => state.filter((_, i) => i !== idx));
+    setFirstOptionList((state) => state.filter((_, i) => i !== idx));
   };
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,8 +102,19 @@ const RegisterProduct: NextPage = () => {
     setPreviewThumbnail((state) => state.filter((_, i) => i !== idx));
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleRegister = () => {
+    console.log(getValues().brand);
+    console.log(getValues().name);
+    console.log(getValues().optionName1);
+    console.log(getValues().optionValue1);
+    console.log(getValues().price);
+    console.log(getValues().beforeDiscount);
+    console.log(getValues().event);
+    console.log(getValues().firstCategory);
+    console.log(getValues().secondCategory);
+    console.log(getValues().shippingPrice);
+    console.log(getValues().SEOTitle);
+    console.log(getValues().SEODesc);
   };
 
   return (
@@ -90,15 +123,12 @@ const RegisterProduct: NextPage = () => {
       <Layout>
         <Main>
           <h2 className="sr-only">상품 등록 페이지</h2>
-          <Form>
+          <Form onSubmit={handleSubmit(handleRegister)}>
             <TitleForm>
               브랜드명
               <IconQuestion />
             </TitleForm>
-            <Select>
-              <option disabled selected>
-                브랜드 선택
-              </option>
+            <Select defaultValue="brand1" {...register('brand')}>
               <option value="brand1">brand1</option>
               <option value="brand2">brand2</option>
               <option value="brand3">brand3</option>
@@ -107,7 +137,12 @@ const RegisterProduct: NextPage = () => {
               상품명
               <IconQuestion />
             </TitleForm>
-            <Input type="text" />
+            <Input
+              type="text"
+              {...register('name', {
+                required: true,
+              })}
+            />
             <TitleForm>
               상품 옵션
               <IconQuestion />
@@ -128,6 +163,7 @@ const RegisterProduct: NextPage = () => {
                     id="none"
                     type="radio"
                     name="option"
+                    defaultChecked={true}
                     onClick={() => setIsCheckedOption(false)}
                   />
                   사용 안함
@@ -143,8 +179,8 @@ const RegisterProduct: NextPage = () => {
                         type="text"
                         id="nameOption"
                         placeholder="옵션명"
-                        onChange={(e) => setOptionName(e.target.value)}
-                        disabled={optionList.length > 0}
+                        disabled={firstOptionList.length > 0}
+                        {...register('optionName1')}
                       />
                     </LabelProductOption>
                     <LabelProductOption>
@@ -152,21 +188,20 @@ const RegisterProduct: NextPage = () => {
                       <InputProductOption
                         type="text"
                         placeholder="옵션값을 입력 후 엔터를 눌러주세요."
-                        onChange={(e) => setOptionItem(e.target.value)}
-                        onKeyPress={PressEnter}
-                        value={optionItem}
+                        onKeyPress={firstOptionPressEnter}
+                        {...register('optionValue1')}
                       />
                     </LabelProductOption>
-                    {optionList.length > 0 && (
+                    {firstOptionList.length > 0 && (
                       <ListProductOption>
-                        {optionList.map((item, idx) => {
+                        {firstOptionList.map((item, idx) => {
                           return (
                             <ItemProductOption key={`option-item-${uuidv4}`}>
                               <BtnProductOption
                                 type="button"
                                 onClick={() => deleteProductOption(idx)}
                               >
-                                {optionName} : {item}
+                                {getValues().optionName1} : {item}
                                 <DeleteProductOption />
                               </BtnProductOption>
                             </ItemProductOption>
@@ -201,6 +236,7 @@ const RegisterProduct: NextPage = () => {
                           type="text"
                           id="nameOption"
                           placeholder="예시: 색상"
+                          {...register('optionName2')}
                         />
                       </LabelProductOption>
                       <LabelProductOption>
@@ -208,6 +244,7 @@ const RegisterProduct: NextPage = () => {
                         <InputProductOption
                           type="text"
                           placeholder="예시: 화이트"
+                          {...register('optionValue2')}
                         />
                       </LabelProductOption>
                     </ContainerProductOption>
@@ -222,18 +259,24 @@ const RegisterProduct: NextPage = () => {
             <ContainerInput>
               <LabelPrice htmlFor="normalPrice">
                 판매가(원)
-                <Input id="normalPrice" type="number" />
+                <Input
+                  id="normalPrice"
+                  type="number"
+                  {...register('price', { required: true })}
+                />
               </LabelPrice>
               <LabelPrice htmlFor="specialPrice">
                 할인 이전 가격(원)
-                <Input id="specialPrice" type="number" />
+                <Input
+                  id="specialPrice"
+                  type="number"
+                  {...register('beforeDiscount')}
+                />
               </LabelPrice>
               <LabelPrice htmlFor="event">
                 기획전에 추가하기
-                <Select id="event">
-                  <option disabled selected>
-                    기획전
-                  </option>
+                <Select id="event" defaultValue="none" {...register('event')}>
+                  <option value="none">기획전</option>
                   <option value="event1">event1</option>
                   <option value="event2">event2</option>
                   <option value="event3">event3</option>
@@ -245,16 +288,16 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
             </TitleForm>
             <ContainerInput>
-              <Select>
-                <option disabled selected>
+              <Select defaultValue="none" {...register('firstCategory')}>
+                <option disabled value="none">
                   1차 분류
                 </option>
                 <option value="category1">category1</option>
                 <option value="category2">category2</option>
                 <option value="category3">category3</option>
               </Select>
-              <Select>
-                <option disabled selected>
+              <Select defaultValue="none" {...register('secondCategory')}>
+                <option disabled value="none">
                   2차 분류
                 </option>
                 <option value="category1">category1</option>
@@ -331,11 +374,22 @@ const RegisterProduct: NextPage = () => {
             </TitleForm>
             <ContainerInput>
               <LabelRadio htmlFor="free">
-                <InputRadio id="free" type="radio" name="shippingPrice" />
+                <InputRadio
+                  id="free"
+                  type="radio"
+                  value="free"
+                  defaultChecked={true}
+                  {...register('shippingPrice')}
+                />
                 무료배송
               </LabelRadio>
               <LabelRadio htmlFor="standard">
-                <InputRadio id="standard" type="radio" name="shippingPrice" />
+                <InputRadio
+                  id="standard"
+                  type="radio"
+                  value="paid"
+                  {...register('shippingPrice')}
+                />
                 기본 배송비 적용
               </LabelRadio>
             </ContainerInput>
@@ -346,18 +400,16 @@ const RegisterProduct: NextPage = () => {
               (SEO)
             </TitleForm>
             <div>
-              <LabelSEO htmlFor="seoTitle">
+              <LabelSEO htmlFor="SEOTitle">
                 제목
-                <Input id="seoTitle" type="text" />
+                <Input id="SEOTitle" type="text" {...register('SEOTitle')} />
               </LabelSEO>
-              <LabelSEO htmlFor="seoDesc">
+              <LabelSEO htmlFor="SEODesc">
                 메타 설명
-                <Textarea id="seoDesc" />
+                <Textarea id="SEODesc" {...register('SEODesc')} />
               </LabelSEO>
             </div>
-            <BtnSubmit type="submit" onClick={handleSubmit}>
-              상품 등록하기
-            </BtnSubmit>
+            <BtnSubmit type="submit">상품 등록하기</BtnSubmit>
           </Form>
           <CentralModal
             isShowModal={isShowModal}
