@@ -21,6 +21,26 @@ const RegisterProduct: NextPage = () => {
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
+  const [optionName, setOptionName] = useState('');
+  const [optionItem, setOptionItem] = useState('');
+  const [optionList, setOptionList] = useState<Array<string>>([]);
+
+  const addOptionItem = () => {
+    const updatedOptionList = [...optionList];
+    updatedOptionList.push(optionItem);
+    setOptionList(updatedOptionList);
+    setOptionItem('');
+  };
+
+  const PressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addOptionItem();
+    }
+  };
+
+  const deleteProductOption = (idx: number) => {
+    setOptionList((state) => state.filter((_, i) => i !== idx));
+  };
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
@@ -42,7 +62,7 @@ const RegisterProduct: NextPage = () => {
     setIsShowModal(false);
   };
 
-  const handleUploadImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUploadThumbnail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedThumbnailList = e.target.files;
 
     if (selectedThumbnailList) {
@@ -58,6 +78,10 @@ const RegisterProduct: NextPage = () => {
 
   const deleteThumbnail = (idx: number) => {
     setPreviewThumbnail((state) => state.filter((_, i) => i !== idx));
+  };
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -118,25 +142,38 @@ const RegisterProduct: NextPage = () => {
                       <InputProductOption
                         type="text"
                         id="nameOption"
-                        placeholder="예시: 색상"
+                        placeholder="옵션명"
+                        onChange={(e) => setOptionName(e.target.value)}
+                        disabled={optionList.length > 0}
                       />
                     </LabelProductOption>
                     <LabelProductOption>
                       옵션값
-                      <BoxTag>
-                        <BtnTag>
-                          <span>태그명</span>
-                          <BtnDeleteTag>
-                            <span className="sr-only">삭제</span>
-                            <IconClose />
-                          </BtnDeleteTag>
-                        </BtnTag>
-                        <InputProductOptionValue
-                          type="text"
-                          placeholder="예시: 화이트"
-                        />
-                      </BoxTag>
+                      <InputProductOption
+                        type="text"
+                        placeholder="옵션값을 입력 후 엔터를 눌러주세요."
+                        onChange={(e) => setOptionItem(e.target.value)}
+                        onKeyPress={PressEnter}
+                        value={optionItem}
+                      />
                     </LabelProductOption>
+                    {optionList.length > 0 && (
+                      <ListProductOption>
+                        {optionList.map((item, idx) => {
+                          return (
+                            <ItemProductOption key={`option-item-${uuidv4}`}>
+                              <BtnProductOption
+                                type="button"
+                                onClick={() => deleteProductOption(idx)}
+                              >
+                                {optionName} : {item}
+                                <DeleteProductOption />
+                              </BtnProductOption>
+                            </ItemProductOption>
+                          );
+                        })}
+                      </ListProductOption>
+                    )}
                   </ContainerProductOption>
                   {!isAddOption && (
                     <BtnAddProductOption
@@ -168,19 +205,10 @@ const RegisterProduct: NextPage = () => {
                       </LabelProductOption>
                       <LabelProductOption>
                         옵션값
-                        <BoxTag>
-                          <BtnTag>
-                            <span>태그명</span>
-                            <BtnDeleteTag>
-                              <span className="sr-only">삭제</span>
-                              <IconClose />
-                            </BtnDeleteTag>
-                          </BtnTag>
-                          <InputProductOptionValue
-                            type="text"
-                            placeholder="예시: 화이트"
-                          />
-                        </BoxTag>
+                        <InputProductOption
+                          type="text"
+                          placeholder="예시: 화이트"
+                        />
                       </LabelProductOption>
                     </ContainerProductOption>
                   )}
@@ -255,18 +283,18 @@ const RegisterProduct: NextPage = () => {
                 })}
               </ListImg>
               {previewThumbnail.length < 5 && (
-                <LabelUploadImg htmlFor="uploadThumbnail">
+                <LabelUploadThumbnail htmlFor="uploadThumbnail">
                   <input
                     type="file"
                     id="uploadThumbnail"
                     className="sr-only"
                     multiple
-                    onChange={handleUploadImg}
+                    onChange={handleUploadThumbnail}
                   />
                   <IconImage />
                   사진 올리기
                   <TextUploadImg>(최대 5장까지)</TextUploadImg>
-                </LabelUploadImg>
+                </LabelUploadThumbnail>
               )}
             </ContainerInput>
             <TitleForm>
@@ -326,14 +354,16 @@ const RegisterProduct: NextPage = () => {
                 <Textarea id="seoDesc" />
               </LabelSEO>
             </div>
-            <BtnSubmit type="submit">상품 등록하기</BtnSubmit>
+            <BtnSubmit type="submit" onClick={handleSubmit}>
+              상품 등록하기
+            </BtnSubmit>
           </Form>
           <CentralModal
             isShowModal={isShowModal}
             setIsShowModal={setIsShowModal}
           >
-            <FormUpload>
-              <LabelUpload htmlFor="uploadImg">
+            <FormUploadImg>
+              <LabelUploadImg htmlFor="uploadImg">
                 파일 선택
                 <input
                   id="uploadImg"
@@ -343,14 +373,14 @@ const RegisterProduct: NextPage = () => {
                   accept="image/*"
                   onChange={handleImgInput}
                 />
-              </LabelUpload>
+              </LabelUploadImg>
               {/* 이미지 크기 정해지면 수정하기 */}
               <p>
                 10MB이하의 이미지 파일만 등록할 수 있습니다.
                 <br />
                 (JPG, GIF, PNG, BMP)
               </p>
-            </FormUpload>
+            </FormUploadImg>
           </CentralModal>
         </Main>
       </Layout>
@@ -364,6 +394,7 @@ const Main = styled.main`
   max-width: ${pxToRem(1200)};
   margin: ${({ theme }) => theme.margin.tabletTop} auto 0;
   padding: 50px 50px;
+  font-size: 14px;
 `;
 
 const Form = styled.form`
@@ -374,13 +405,15 @@ const Form = styled.form`
 
 const TitleForm = styled.em`
   display: inline-block;
+  font-size: 15px;
   font-weight: 600;
 `;
 
 const IconQuestion = styled(QuestionIcon)`
-  width: 10px;
-  height: 10px;
-  margin-left: 5px;
+  width: 12px;
+  height: 12px;
+  margin: 1px 0 0 5px;
+  vertical-align: top;
 `;
 
 const ContainerInput = styled.div`
@@ -392,8 +425,6 @@ const ContainerInput = styled.div`
 `;
 
 const LabelRadio = styled.label`
-  font-size: 14px;
-
   & + & {
     margin-left: 10px;
   }
@@ -406,7 +437,6 @@ const InputRadio = styled.input`
 const LableStyle = () => css`
   display: flex;
   flex-direction: column;
-  font-size: 14px;
 
   & input,
   & textarea,
@@ -430,7 +460,6 @@ const InputStyle = () => css`
   border: ${useTheme().input.border};
   border-radius: ${pxToRem(5)};
   background-color: ${WHITE};
-  font-size: ${pxToRem(14)};
   outline: none;
 
   &:focus {
@@ -441,18 +470,127 @@ const InputStyle = () => css`
 
 const Input = styled.input`
   ${InputStyle}
-  border: ${({ theme }) => theme.input.border};
 `;
 
 const Select = styled.select`
   ${InputStyle}
-  border: ${({ theme }) => theme.input.border};
   background: url('/icons/caret-down.svg') no-repeat 95% 50% ${WHITE};
   appearance: none;
 
   & + & {
     margin-left: 10px;
   }
+`;
+
+// 싱픔 싱세 설명: 이미지 파일 선택
+const FormUploadImg = styled.form`
+  padding: 40px;
+  line-height: 1.2;
+  text-align: center;
+`;
+
+const LabelUploadImg = styled.label`
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 30px;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
+  cursor: pointer;
+`;
+
+// 상품 옵션
+const ContainerProductOption = styled.div`
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.text.lighter};
+`;
+
+const TitleProductOption = styled.p`
+  position: relative;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid ${({ theme }) => theme.text.lighter};
+`;
+
+const BtnDeleteProductOption = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const IconDeleteProductOption = styled(Close)`
+  width: 16px;
+  height: 16px;
+`;
+
+const LabelProductOption = styled.label`
+  display: flex;
+  align-items: center;
+
+  & + & {
+    margin-top: 6px;
+  }
+`;
+
+const InputProductOption = styled.input`
+  ${InputStyle}
+  flex: 1;
+  margin-left: 10px;
+`;
+
+const ListProductOption = styled.ul`
+  padding-left: 46px;
+`;
+
+const ItemProductOption = styled.li`
+  margin-top: 5px;
+`;
+
+const BtnProductOption = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.header.background};
+  box-shadow: ${({ theme }) => theme.shadow.box};
+`;
+
+const DeleteProductOption = styled(Close)`
+  width: 14px;
+  height: 14px;
+`;
+
+const BtnAddProductOption = styled.button`
+  margin-top: 10px;
+  padding: 10px 0;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
+`;
+
+// 상품 이미지
+const LabelUploadThumbnail = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-color: ${({ theme }) => theme.text.default};
+  color: ${({ theme }) => theme.background.default};
+  cursor: pointer;
+`;
+
+const IconImage = styled(Image)`
+  width: 30px;
+  margin-bottom: 5px;
+`;
+
+const TextUploadImg = styled.span`
+  margin-top: 5px;
+  font-size: 12px;
 `;
 
 const ListImg = styled.ul`
@@ -488,8 +626,10 @@ const IconDelete = styled(Close)`
   transition: opacity 0.2s;
 `;
 
+// 검색 엔진 최적화
 const LabelSEO = styled.label`
   ${LableStyle}
+
   & + & {
     margin-top: 20px;
   }
@@ -498,7 +638,7 @@ const LabelSEO = styled.label`
 const Textarea = styled.textarea`
   ${InputStyle}
   width: 100%;
-  border: ${({ theme }) => theme.input.border};
+  font-family: inherit;
   resize: none;
 `;
 
@@ -518,134 +658,4 @@ const BtnSubmit = styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.button.disabled};
   }
-`;
-
-const FormUpload = styled.form`
-  padding: 40px;
-  font-size: 14px;
-  line-height: 1.2;
-  text-align: center;
-`;
-
-const LabelUpload = styled.label`
-  display: block;
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  border-radius: 30px;
-  background-color: ${({ theme }) => theme.text.default};
-  color: ${({ theme }) => theme.background.default};
-  cursor: pointer;
-`;
-
-const ContainerProductOption = styled.div`
-  margin-top: 15px;
-  padding: 10px;
-  border: 1px solid ${({ theme }) => theme.text.lighter};
-  font-size: 14px;
-`;
-
-const TitleProductOption = styled.p`
-  position: relative;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.text.lighter};
-`;
-
-const BtnDeleteProductOption = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
-
-const IconDeleteProductOption = styled(Close)`
-  width: 16px;
-  height: 16px;
-`;
-
-const LabelProductOption = styled.label`
-  display: flex;
-  align-items: center;
-
-  & + & {
-    margin-top: 6px;
-  }
-`;
-
-const BoxTag = styled.span`
-  ${InputStyle}
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 90%;
-  margin-left: 10px;
-  padding: 5px 10px;
-
-  &:focus-within {
-    border-color: ${({ theme }) => theme.text.primary};
-  }
-`;
-
-const BtnTag = styled.button`
-  padding: 2px 5px 3px 10px;
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.background.primary};
-  color: ${WHITE};
-  font-size: 14px;
-  vertical-align: middle;
-`;
-
-const BtnDeleteTag = styled.span`
-  display: inline-block;
-  width: 14px;
-  margin-left: 3px;
-  line-height: 14px;
-  border-radius: 50%;
-  background-color: ${WHITE};
-`;
-
-const InputProductOption = styled.input`
-  ${InputStyle}
-  margin-left: 10px;
-`;
-
-const InputProductOptionValue = styled.input`
-  padding-left: 10px;
-  border: 0;
-  outline: none;
-`;
-
-const IconClose = styled(Close)`
-  width: 8px;
-  margin-bottom: 1px;
-  color: ${GRAY_900};
-`;
-
-const BtnAddProductOption = styled.button`
-  margin-top: 10px;
-  padding: 10px 0;
-  background-color: ${({ theme }) => theme.text.default};
-  color: ${({ theme }) => theme.background.default};
-`;
-
-const LabelUploadImg = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
-  background-color: ${({ theme }) => theme.text.default};
-  color: ${({ theme }) => theme.background.default};
-  font-size: 14px;
-  cursor: pointer;
-`;
-
-const IconImage = styled(Image)`
-  width: 30px;
-  margin-bottom: 5px;
-`;
-
-const TextUploadImg = styled.span`
-  margin-top: 5px;
-  font-size: 12px;
 `;
