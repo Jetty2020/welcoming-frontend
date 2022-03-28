@@ -13,23 +13,8 @@ import Close from 'public/icons/close.svg';
 import Image from 'public/icons/image.svg';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
-
-interface FormProps {
-  brand: string;
-  name: string;
-  optionName1: string;
-  optionValue1: string;
-  optionName2: string;
-  optionValue2: string;
-  price: number;
-  beforeDiscount: number;
-  event: string;
-  firstCategory: string;
-  secondCategory: string;
-  shippingPrice: string;
-  SEOTitle: string;
-  SEODesc: string;
-}
+import { useControllOptionList } from '@hooks/useControllOptionList';
+import { RegisterFormProps } from 'src/types';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -39,30 +24,16 @@ const RegisterProduct: NextPage = () => {
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
-  const [firstOptionList, setFirstOptionList] = useState<Array<string>>([]);
-  const [secondOptionList, setSecondOptionList] = useState<Array<string>>([]);
 
-  const { register, getValues, setValue, handleSubmit } = useForm<FormProps>({
-    mode: 'onChange',
-  });
+  const { register, getValues, setValue, handleSubmit } =
+    useForm<RegisterFormProps>({
+      mode: 'onChange',
+    });
 
-  const addFirstOptionItem = () => {
-    const updatedOptionList = [...firstOptionList];
-    updatedOptionList.push(getValues().optionValue1);
-    setFirstOptionList(updatedOptionList);
-    setValue('optionValue1', '');
-  };
-
-  const firstOptionPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.key === 'Enter' && getValues().optionValue1 !== '') {
-      addFirstOptionItem();
-    }
-  };
-
-  const deleteProductOption = (idx: number) => {
-    setFirstOptionList((state) => state.filter((_, i) => i !== idx));
-  };
+  const { pressEnter, deleteProductOption, optionList } = useControllOptionList(
+    getValues,
+    setValue,
+  );
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
@@ -179,7 +150,7 @@ const RegisterProduct: NextPage = () => {
                         type="text"
                         id="nameOption"
                         placeholder="옵션명"
-                        disabled={firstOptionList.length > 0}
+                        disabled={optionList.length > 0}
                         {...register('optionName1')}
                       />
                     </LabelProductOption>
@@ -188,15 +159,15 @@ const RegisterProduct: NextPage = () => {
                       <InputProductOption
                         type="text"
                         placeholder="옵션값을 입력 후 엔터를 눌러주세요."
-                        onKeyPress={firstOptionPressEnter}
+                        onKeyPress={pressEnter}
                         {...register('optionValue1')}
                       />
                     </LabelProductOption>
-                    {firstOptionList.length > 0 && (
+                    {optionList.length > 0 && (
                       <ListProductOption>
-                        {firstOptionList.map((item, idx) => {
+                        {optionList.map((item, idx) => {
                           return (
-                            <ItemProductOption key={`option-item-${uuidv4}`}>
+                            <ItemProductOption key={`option-item-${uuidv4()}`}>
                               <BtnProductOption
                                 type="button"
                                 onClick={() => deleteProductOption(idx)}
