@@ -16,9 +16,12 @@ export const useControllOptionList = (
   };
 
   const pressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.key === 'Enter' && getValues().optionValue1 !== '') {
-      addOptionItem();
+    if (e.key === 'Enter') {
+      e.preventDefault();
+
+      if (getValues().optionValue1 !== '') {
+        addOptionItem();
+      }
     }
   };
 
