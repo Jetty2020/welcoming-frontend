@@ -307,7 +307,8 @@ const RegisterProduct: NextPage = () => {
               onEditorChange={setContent}
               apiKey="rx4sjzylr2h5t45sq41yf4qmjellvcs73xqlmmjlwr3boa8p"
               init={{
-                language: 'ko',
+                language: 'ko_KR',
+                deprecation_warnings: false,
                 menubar: false,
                 statusbar: false,
                 min_height: 400,
