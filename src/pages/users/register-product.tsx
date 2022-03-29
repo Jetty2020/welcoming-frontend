@@ -1,6 +1,8 @@
 import { css, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Editor } from '@tinymce/tinymce-react';
+import { v4 as uuidv4 } from 'uuid';
+import { useForm } from 'react-hook-form';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
@@ -11,11 +13,10 @@ import { GRAY_900, WHITE } from '@constants/colors';
 import { CentralModal } from '@components/common/CentralModal';
 import Close from 'public/icons/close.svg';
 import Image from 'public/icons/image.svg';
-import { v4 as uuidv4 } from 'uuid';
-import { useForm } from 'react-hook-form';
 import { useControllOptionList } from '@hooks/useControllOptionList';
 import { RegisterFormProps } from 'src/types';
 import { priceFormat } from '@utils/priceFormat';
+import { CATEGORY } from '@constants/category';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -26,6 +27,7 @@ const RegisterProduct: NextPage = () => {
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
   const [isPriceErr, setIsPriceErr] = useState(false);
+  const [selectCategory, setSelectCategory] = useState(-1);
 
   const { register, getValues, setValue, handleSubmit } =
     useForm<RegisterFormProps>({
@@ -324,21 +326,35 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
             </TitleForm>
             <ContainerInput>
-              <Select defaultValue="none" {...register('firstCategory')}>
-                <option disabled value="none">
+              <Select
+                value={selectCategory}
+                {...register('firstCategory', {
+                  onChange: (e) => setSelectCategory(e.target.value),
+                })}
+              >
+                <option disabled value={-1}>
                   1차 분류
                 </option>
-                <option value="category1">category1</option>
-                <option value="category2">category2</option>
-                <option value="category3">category3</option>
+                {CATEGORY.map((ele) => (
+                  <option value={ele.order} key={`category-first-${uuidv4()}`}>
+                    {ele.title}
+                  </option>
+                ))}
               </Select>
               <Select defaultValue="none" {...register('secondCategory')}>
                 <option disabled value="none">
                   2차 분류
                 </option>
-                <option value="category1">category1</option>
-                <option value="category2">category2</option>
-                <option value="category3">category3</option>
+                {selectCategory > -1
+                  ? CATEGORY[selectCategory].subCategory.map((ele) => (
+                      <option
+                        value={ele.value}
+                        key={`category-second-${uuidv4()}`}
+                      >
+                        {ele.title}
+                      </option>
+                    ))
+                  : null}
               </Select>
             </ContainerInput>
             <TitleForm>
