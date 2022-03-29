@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { useControllOptionList } from '@hooks/useControllOptionList';
 import { RegisterFormProps } from 'src/types';
+import { priceFormat } from '@utils/priceFormat';
 
 const RegisterProduct: NextPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -42,16 +43,20 @@ const RegisterProduct: NextPage = () => {
     optionList: secondOptionList,
   } = useControllOptionList(getValues, setValue);
 
-  const numberFormat = () => {
-    const numberPrice = +getValues()
-      .price.toString()
-      .replace(/[^0-9]/g, '');
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const stringPrice = e.target.value;
+    const formattedPrice = priceFormat(stringPrice);
 
-    const formattedPrice = numberPrice
-      .toString()
-      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+    if (
+      e.target.value !== '' &&
+      (e.target.name === 'price' || e.target.name === 'beforeDiscount')
+    ) {
+      setValue(e.target.name, formattedPrice);
+    }
+  };
 
-    setValue('price', formattedPrice);
+  const handelOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(/,/g, '');
   };
 
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -273,9 +278,10 @@ const RegisterProduct: NextPage = () => {
                 <Input
                   id="normalPrice"
                   type="text"
+                  onFocus={(e) => handelOnFocus(e)}
                   {...register('price', {
                     required: true,
-                    onBlur: numberFormat,
+                    onBlur: (e) => handleOnBlur(e),
                   })}
                 />
               </LabelPrice>
@@ -283,8 +289,12 @@ const RegisterProduct: NextPage = () => {
                 할인 이전 가격(원)
                 <Input
                   id="specialPrice"
-                  type="number"
-                  {...register('beforeDiscount')}
+                  type="text"
+                  onFocus={(e) => handelOnFocus(e)}
+                  {...register('beforeDiscount', {
+                    // pattern: getValues().price < getValues().beforeDiscount,
+                    onBlur: (e) => handleOnBlur(e),
+                  })}
                 />
               </LabelPrice>
               <LabelPrice htmlFor="event">
