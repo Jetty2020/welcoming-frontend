@@ -25,6 +25,7 @@ const RegisterProduct: NextPage = () => {
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
+  const [isPriceErr, setIsPriceErr] = useState(false);
 
   const { register, getValues, setValue, handleSubmit } =
     useForm<RegisterFormProps>({
@@ -52,6 +53,15 @@ const RegisterProduct: NextPage = () => {
       (e.target.name === 'price' || e.target.name === 'beforeDiscount')
     ) {
       setValue(e.target.name, formattedPrice);
+    }
+
+    if (
+      +getValues().price.replace(/,/g, '') >
+      +getValues().beforeDiscount.replace(/,/g, '')
+    ) {
+      setIsPriceErr(true);
+    } else {
+      setIsPriceErr(false);
     }
   };
 
@@ -292,7 +302,6 @@ const RegisterProduct: NextPage = () => {
                   type="text"
                   onFocus={(e) => handelOnFocus(e)}
                   {...register('beforeDiscount', {
-                    // pattern: getValues().price < getValues().beforeDiscount,
                     onBlur: (e) => handleOnBlur(e),
                   })}
                 />
@@ -306,6 +315,9 @@ const RegisterProduct: NextPage = () => {
                   <option value="event3">event3</option>
                 </Select>
               </LabelPrice>
+              {isPriceErr ? (
+                <TextError>할인 이전 가격은 판매가보다 높아야합니다.</TextError>
+              ) : null}
             </ContainerInput>
             <TitleForm>
               카테고리
@@ -495,6 +507,7 @@ const IconQuestion = styled(QuestionIcon)`
 
 const ContainerInput = styled.div`
   display: flex;
+  flex-wrap: wrap;
 
   &:nth-of-type(1) {
     flex-direction: column;
@@ -734,5 +747,23 @@ const BtnSubmit = styled.button`
 
   &:disabled {
     background-color: ${({ theme }) => theme.button.disabled};
+  }
+`;
+
+const TextError = styled.p`
+  width: 100%;
+  margin-top: ${pxToRem(10)};
+  color: ${({ theme }) => theme.input.error};
+  font-size: ${pxToRem(14)};
+  line-height: 1.4;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    min-width: ${pxToRem(14)};
+    height: ${pxToRem(14)};
+    margin: 0 ${pxToRem(5)} ${pxToRem(-2)} 0;
+    background: url('/icons/emoji-frown.svg') no-repeat;
+    background-size: 100%;
   }
 `;
