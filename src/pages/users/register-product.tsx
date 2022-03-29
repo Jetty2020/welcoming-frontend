@@ -42,6 +42,18 @@ const RegisterProduct: NextPage = () => {
     optionList: secondOptionList,
   } = useControllOptionList(getValues, setValue);
 
+  const numberFormat = () => {
+    const numberPrice = +getValues()
+      .price.toString()
+      .replace(/[^0-9]/g, '');
+
+    const formattedPrice = numberPrice
+      .toString()
+      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+
+    setValue('price', formattedPrice);
+  };
+
   const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
     const newImageList = [...imgFile];
@@ -260,8 +272,11 @@ const RegisterProduct: NextPage = () => {
                 판매가(원)
                 <Input
                   id="normalPrice"
-                  type="number"
-                  {...register('price', { required: true })}
+                  type="text"
+                  {...register('price', {
+                    required: true,
+                    onBlur: numberFormat,
+                  })}
                 />
               </LabelPrice>
               <LabelPrice htmlFor="specialPrice">

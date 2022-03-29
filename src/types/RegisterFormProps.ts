@@ -5,8 +5,8 @@ export interface RegisterFormProps {
   optionValue1: string;
   optionName2: string;
   optionValue2: string;
-  price: number;
-  beforeDiscount: number;
+  price: string;
+  beforeDiscount: string;
   event: string;
   firstCategory: string;
   secondCategory: string;
