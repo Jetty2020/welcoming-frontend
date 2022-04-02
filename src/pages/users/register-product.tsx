@@ -56,8 +56,9 @@ const RegisterProduct: NextPage = () => {
     }
 
     if (
+      +getValues().beforeDiscount > 0 &&
       +getValues().price.replace(/,/g, '') >
-      +getValues().beforeDiscount.replace(/,/g, '')
+        +getValues().beforeDiscount.replace(/,/g, '')
     ) {
       setIsPriceErr(true);
     } else {
