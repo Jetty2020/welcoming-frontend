@@ -9,6 +9,7 @@ export const AuthFooter = () => {
       <Link href={ROUTES.home} passHref>
         <a>© &nbsp;welcoming, Co., Ltd.</a>
       </Link>
+      테스트 2
     </FooterPasswordReset>
   );
 };
