@@ -9,7 +9,6 @@ export const AuthFooter = () => {
       <Link href={ROUTES.home} passHref>
         <a>© &nbsp;welcoming, Co., Ltd.</a>
       </Link>
-      . All Rights Reserved
     </FooterPasswordReset>
   );
 };
