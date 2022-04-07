@@ -18,6 +18,7 @@ declare module '@emotion/react' {
     background: {
       default: string;
       primary: string;
+      transparency: string;
     };
     comingSoon: {
       src: string;
@@ -96,6 +97,7 @@ const light: ThemeMode = {
   background: {
     default: `${GRAY_50}`,
     primary: `${PRIMARY}`,
+    transparency: 'rgba(0, 0, 0, 0.85)',
   },
   comingSoon: {
     src: '/images/coming_soon/coming_soon.png',
@@ -129,6 +131,7 @@ const dark: ThemeMode = {
   background: {
     default: `${GRAY_800}`,
     primary: `${PRIMARY_LIGHT}`,
+    transparency: 'rgba(255,255,255, 0.85)',
   },
   comingSoon: {
     src: '/images/coming_soon/coming_soon_w.png',
