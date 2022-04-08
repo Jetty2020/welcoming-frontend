@@ -76,23 +76,36 @@ const RegisterProduct: NextPage = () => {
     e.target.value = e.target.value.replace(/,/g, '');
   };
 
-  const handleImgInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImgInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImgList = e.target.files;
-    const newImageList = [...imgFile];
 
     if (selectedImgList) {
-      for (let i = 0; i < selectedImgList?.length; i += 1) {
-        if (i + imgFile.length + 1 > 5) {
-          break;
-        }
-        newImageList.push(selectedImgList[i]);
-        const nowImageUrl = URL.createObjectURL(selectedImgList[i]);
-        setContent(
-          (state) => `${state}<img src="${nowImageUrl}" style="width: 100%" />`,
-        );
-      }
+      const imgArr = Array.from(selectedImgList);
+      // imgArr.forEach(async (ele, idx) => {
+      //   if (idx + imgFile.length + 1 > 5) {
+      //     return null;
+      //   }
+      // });
+      // for await(let i = 0; i < selectedImgList?.length; i += 1) {
+      //   if (i + imgFile.length + 1 > 5) {
+      //     break;
+      //   }
+
+      //   const formBody = new FormData();
+      //   formBody.append('file', selectedImgList[i]);
+
+      //   const { url } = await (
+      //     await fetch('http://localhost:5050/uploads/', {
+      //       method: 'POST',
+      //       body: formBody,
+      //     })
+      //   ).json();
+
+      //   setContent(
+      //     (state) => `${state}<img src="${url}" style="width: 100%" />`,
+      //   );
+      // }
     }
-    setImgFile(newImageList);
     setIsShowModal(false);
   };
 
