@@ -24,6 +24,7 @@ const RegisterProduct: NextPage = () => {
   const [content, setContent] = useState('');
   const [imgFile, setImgFile] = useState<Array<File>>([]);
   const [previewThumbnail, setPreviewThumbnail] = useState<Array<string>>([]);
+  const [imgLimitErr, setImgLimitErr] = useState(false);
   // const [thumbnailFile, setThumbnailFile] = useState<Array<File>>([]);
   const [isCheckedOption, setIsCheckedOption] = useState(false);
   const [isAddOption, setIsAddOption] = useState(false);
@@ -97,9 +98,14 @@ const RegisterProduct: NextPage = () => {
 
   const handleUploadThumbnail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedThumbnailList = e.target.files;
-
+    let checkImgSize = false;
     if (selectedThumbnailList) {
       for (let i = 0; i < selectedThumbnailList?.length; i += 1) {
+        if (selectedThumbnailList[i].size > 10 * 1024 * 1024) {
+          checkImgSize = true;
+          // eslint-disable-next-line no-continue
+          continue;
+        }
         if (i + previewThumbnail.length + 1 > 5) {
           break;
         }
@@ -107,10 +113,16 @@ const RegisterProduct: NextPage = () => {
         setPreviewThumbnail((state) => [...state, nowthumbnailUrl]);
       }
     }
+    if (checkImgSize) {
+      setImgLimitErr(true);
+    } else if (imgLimitErr) {
+      setImgLimitErr(false);
+    }
   };
 
   const deleteThumbnail = (idx: number) => {
     setPreviewThumbnail((state) => state.filter((_, i) => i !== idx));
+    setImgLimitErr(false);
   };
 
   const autoResizeTextarea = () => {
@@ -419,6 +431,9 @@ const RegisterProduct: NextPage = () => {
                   <TextUploadImg>(최대 5장까지)</TextUploadImg>
                 </LabelUploadThumbnail>
               )}
+              {imgLimitErr ? (
+                <TextError>최대 이미지 크기는 10MB입니다.</TextError>
+              ) : null}
             </ContainerInner>
             <TitleForm>상품 상세 설명</TitleForm>
             <Editor
