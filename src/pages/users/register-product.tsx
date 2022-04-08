@@ -58,8 +58,9 @@ const RegisterProduct: NextPage = () => {
     }
 
     if (
+      +getValues().beforeDiscount > 0 &&
       +getValues().price.replace(/,/g, '') >
-      +getValues().beforeDiscount.replace(/,/g, '')
+        +getValues().beforeDiscount.replace(/,/g, '')
     ) {
       setIsPriceErr(true);
     } else {
@@ -134,18 +135,19 @@ const RegisterProduct: NextPage = () => {
             <TitleForm>
               브랜드명
               <IconQuestion />
+              <Tooltips>상품을 등록할 브랜드를 선택해주세요.</Tooltips>
             </TitleForm>
-            <Select defaultValue="brand1" {...register('brand')}>
-              <option value="brand1">brand1</option>
-              <option value="brand2">brand2</option>
-              <option value="brand3">brand3</option>
-            </Select>
-            <TitleForm>
-              상품명
-              <IconQuestion />
-            </TitleForm>
+            <InnerContainer>
+              <Select defaultValue="brand1" {...register('brand')}>
+                <option value="brand1">brand1</option>
+                <option value="brand2">brand2</option>
+                <option value="brand3">brand3</option>
+              </Select>
+            </InnerContainer>
+            <TitleForm>상품명</TitleForm>
             <Input
               type="text"
+              placeholder="상품명을 입력해주세요."
               {...register('name', {
                 required: true,
               })}
@@ -153,29 +155,28 @@ const RegisterProduct: NextPage = () => {
             <TitleForm>
               상품 옵션
               <IconQuestion />
+              <Tooltips>상품 옵션은 최대 2개까지 설정할 수 있습니다.</Tooltips>
             </TitleForm>
-            <ContainerInput>
-              <div>
-                <LabelRadio htmlFor="use">
-                  <InputRadio
-                    id="use"
-                    type="radio"
-                    name="option"
-                    onClick={() => setIsCheckedOption(true)}
-                  />
-                  사용함
-                </LabelRadio>
-                <LabelRadio htmlFor="none">
-                  <InputRadio
-                    id="none"
-                    type="radio"
-                    name="option"
-                    defaultChecked={true}
-                    onClick={() => setIsCheckedOption(false)}
-                  />
-                  사용 안함
-                </LabelRadio>
-              </div>
+            <div>
+              <LabelRadio htmlFor="use">
+                <InputRadio
+                  id="use"
+                  type="radio"
+                  name="option"
+                  onClick={() => setIsCheckedOption(true)}
+                />
+                사용함
+              </LabelRadio>
+              <LabelRadio htmlFor="none">
+                <InputRadio
+                  id="none"
+                  type="radio"
+                  name="option"
+                  defaultChecked={true}
+                  onClick={() => setIsCheckedOption(false)}
+                />
+                사용 안함
+              </LabelRadio>
               {isCheckedOption && (
                 <>
                   <ContainerProductOption>
@@ -279,12 +280,19 @@ const RegisterProduct: NextPage = () => {
                   )}
                 </>
               )}
-            </ContainerInput>
+            </div>
             <TitleForm>
               상품 가격
               <IconQuestion />
+              <Tooltips>
+                판매가를 입력하지 않으면 할인 이전 가격이 판매가로 등록됩니다.
+              </Tooltips>
             </TitleForm>
-            <ContainerInput>
+            <InnerContainer>
+              <Tooltips>
+                판매가를 입력하지 않으면 할인 이전 가격이 실제 판매가로
+                등록됩니다.
+              </Tooltips>
               <LabelPrice htmlFor="normalPrice">
                 판매가(원)
                 <Input
@@ -320,12 +328,12 @@ const RegisterProduct: NextPage = () => {
               {isPriceErr ? (
                 <TextError>할인 이전 가격은 판매가보다 높아야합니다.</TextError>
               ) : null}
-            </ContainerInput>
+            </InnerContainer>
             <TitleForm>
               카테고리
               <IconQuestion />
             </TitleForm>
-            <ContainerInput>
+            <InnerContainer>
               <Select
                 value={selectCategory}
                 {...register('firstCategory', {
@@ -356,12 +364,17 @@ const RegisterProduct: NextPage = () => {
                     ))
                   : null}
               </Select>
-            </ContainerInput>
+            </InnerContainer>
             <TitleForm>
               상품 이미지
               <IconQuestion />
+              <Tooltips>
+                상품 상세 페이지의 최상단에 보여지는 이미지입니다.
+                <br />첫 번째 이미지는 대표 이미지로 상품 목록에서 썸네일로
+                보여지는 이미지로 등록욉니다.
+              </Tooltips>
             </TitleForm>
-            <ContainerInput>
+            <InnerContainer>
               <ListImg>
                 {previewThumbnail.map((thumnail, idx) => {
                   return (
@@ -391,11 +404,8 @@ const RegisterProduct: NextPage = () => {
                   <TextUploadImg>(최대 5장까지)</TextUploadImg>
                 </LabelUploadThumbnail>
               )}
-            </ContainerInput>
-            <TitleForm>
-              상품 상세 설명
-              <IconQuestion />
-            </TitleForm>
+            </InnerContainer>
+            <TitleForm>상품 상세 설명</TitleForm>
             <Editor
               id="tinyEditor"
               value={content}
@@ -423,8 +433,9 @@ const RegisterProduct: NextPage = () => {
             <TitleForm>
               상품 배송
               <IconQuestion />
+              <Tooltips>베송비 적용 여부를 선택하세요.</Tooltips>
             </TitleForm>
-            <ContainerInput>
+            <InnerContainer>
               <LabelRadio htmlFor="free">
                 <InputRadio
                   id="free"
@@ -442,12 +453,24 @@ const RegisterProduct: NextPage = () => {
                   value="paid"
                   {...register('shippingPrice')}
                 />
-                기본 배송비 적용
+                배송비 적용
               </LabelRadio>
-            </ContainerInput>
+              <TextDescription>
+                - 일반 배송비는 2,500원, 도서산간지방 (제주, 울릉도)은
+                10,000원이 적용됩니다.
+                <br />- 총 상품 주문 금액이 50,000원을 넘어서는 경우 무료 배송이
+                적용됩니다.
+              </TextDescription>
+            </InnerContainer>
             <TitleForm>
               검색 엔진 최적화
               <IconQuestion />
+              <Tooltips>
+                검색 포털 사이트에 내 상품이 더 잘 노출될 수 있도록 상품별로
+                제목과 메타 설명을 작성해주세요.
+                <br />
+                미입력 시 상품 제목과 상품 상세 텍스트가 적용됩니다.
+              </Tooltips>
               <br />
               (SEO)
             </TitleForm>
@@ -509,19 +532,13 @@ const Form = styled.form`
 `;
 
 const TitleForm = styled.em`
-  display: inline-block;
+  position: relative;
+  padding-top: 4px;
   font-size: 15px;
   font-weight: 600;
 `;
 
-const IconQuestion = styled(QuestionIcon)`
-  width: 12px;
-  height: 12px;
-  margin: 1px 0 0 5px;
-  vertical-align: top;
-`;
-
-const ContainerInput = styled.div`
+const InnerContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 
@@ -530,16 +547,56 @@ const ContainerInput = styled.div`
   }
 `;
 
-const LabelRadio = styled.label`
-  & + & {
-    margin-left: 10px;
+const IconQuestion = styled(QuestionIcon)`
+  width: 12px;
+  height: 12px;
+  position: relative;
+  margin: 1px 0 0 5px;
+  vertical-align: top;
+
+  &:hover + span {
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
-const InputRadio = styled.input`
-  margin-right: 5px;
+const Tooltips = styled.span`
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.background.transparency};
+  color: ${({ theme }) => theme.background.default};
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  transform: translateY(-130%);
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    border: 6px solid;
+    border-color: ${({ theme }) => theme.background.transparency} transparent
+      transparent transparent;
+  }
 `;
 
+const TextDescription = styled.p`
+  width: 100%;
+  margin-top: 10px;
+  color: ${({ theme }) => theme.text.primary};
+  font-size: 13px;
+  line-height: 1.3;
+`;
+
+// 공통 스타일
 const LableStyle = () => css`
   display: flex;
   flex-direction: column;
@@ -548,14 +605,6 @@ const LableStyle = () => css`
   & textarea,
   & select {
     margin-top: 10px;
-  }
-`;
-
-const LabelPrice = styled.label`
-  ${LableStyle}
-
-  & + & {
-    margin-left: 10px;
   }
 `;
 
@@ -572,6 +621,24 @@ const InputStyle = () => css`
     border-color: ${useTheme().text.primary};
   }
   // TODO: 컴포넌트화 이후 border 가져오기
+`;
+
+const LabelRadio = styled.label`
+  & + & {
+    margin-left: 10px;
+  }
+`;
+
+const InputRadio = styled.input`
+  margin-right: 5px;
+`;
+
+const LabelPrice = styled.label`
+  ${LableStyle}
+
+  & + & {
+    margin-left: 10px;
+  }
 `;
 
 const Input = styled.input`
@@ -670,6 +737,7 @@ const DeleteProductOption = styled(Close)`
 `;
 
 const BtnAddProductOption = styled.button`
+  width: 100%;
   margin-top: 10px;
   padding: 10px 0;
   background-color: ${({ theme }) => theme.text.default};
@@ -751,9 +819,9 @@ const Textarea = styled.textarea`
 const BtnSubmit = styled.button`
   grid-column: 2;
   grid-row: 10;
-  width: 150px;
+  width: 100%;
   line-height: 30px;
-  padding: 0 ${pxToRem(15)};
+  padding: ${pxToRem(10)} 0;
   border-radius: ${pxToRem(5)};
   background-color: ${({ theme }) => theme.button.background};
   font-size: ${({ theme }) => pxToRem(theme.button.fontSize)};
