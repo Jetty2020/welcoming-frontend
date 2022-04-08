@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PageTitle from '@components/common/PageTitle';
 import { Layout } from '@components/layouts/Layout';
 import { pxToRem } from '@utils/pxToRem';
@@ -19,6 +19,7 @@ import { priceFormat } from '@utils/priceFormat';
 import { CATEGORY } from '@constants/category';
 
 const RegisterProduct: NextPage = () => {
+  const metaDescRef = useRef<HTMLTextAreaElement | null>(null);
   const [isShowModal, setIsShowModal] = useState(false);
   const [content, setContent] = useState('');
   const [imgFile, setImgFile] = useState<Array<File>>([]);
@@ -33,6 +34,8 @@ const RegisterProduct: NextPage = () => {
     useForm<RegisterFormProps>({
       mode: 'onChange',
     });
+
+  const { ref, ...rest } = register('SEODesc');
 
   const {
     pressEnter: firstPressEnter,
@@ -108,6 +111,18 @@ const RegisterProduct: NextPage = () => {
 
   const deleteThumbnail = (idx: number) => {
     setPreviewThumbnail((state) => state.filter((_, i) => i !== idx));
+  };
+
+  const autoResizeTextarea = () => {
+    if (metaDescRef.current) {
+      metaDescRef.current.style.height = 'auto';
+      const height = metaDescRef.current.scrollHeight;
+      metaDescRef.current.style.height = `${height}px`;
+      // if (height <= 78) {
+      // } else {
+      //   metaDescRef.current.style.height = '78px';
+      // }
+    }
   };
 
   const handleRegister = () => {
@@ -481,7 +496,17 @@ const RegisterProduct: NextPage = () => {
               </LabelSEO>
               <LabelSEO htmlFor="SEODesc">
                 메타 설명
-                <Textarea id="SEODesc" {...register('SEODesc')} />
+                <Textarea
+                  id="SEODesc"
+                  // rows={2}
+                  onInput={autoResizeTextarea}
+                  {...rest}
+                  name="SEODesc"
+                  ref={(e) => {
+                    ref(e);
+                    metaDescRef.current = e;
+                  }}
+                />
               </LabelSEO>
             </div>
             <BtnSubmit type="submit">상품 등록하기</BtnSubmit>
@@ -812,7 +837,9 @@ const LabelSEO = styled.label`
 const Textarea = styled.textarea`
   ${InputStyle}
   width: 100%;
+  height: 53px;
   font-family: inherit;
+  line-height: 1.4;
   resize: none;
 `;
 
