@@ -137,13 +137,13 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
               <Tooltips>상품을 등록할 브랜드를 선택해주세요.</Tooltips>
             </TitleForm>
-            <InnerContainer>
+            <ContainerInner>
               <Select defaultValue="brand1" {...register('brand')}>
                 <option value="brand1">brand1</option>
                 <option value="brand2">brand2</option>
                 <option value="brand3">brand3</option>
               </Select>
-            </InnerContainer>
+            </ContainerInner>
             <TitleForm>상품명</TitleForm>
             <Input
               type="text"
@@ -288,7 +288,7 @@ const RegisterProduct: NextPage = () => {
                 판매가를 입력하지 않으면 할인 이전 가격이 판매가로 등록됩니다.
               </Tooltips>
             </TitleForm>
-            <InnerContainer>
+            <ContainerInner>
               <Tooltips>
                 판매가를 입력하지 않으면 할인 이전 가격이 실제 판매가로
                 등록됩니다.
@@ -328,12 +328,12 @@ const RegisterProduct: NextPage = () => {
               {isPriceErr ? (
                 <TextError>할인 이전 가격은 판매가보다 높아야합니다.</TextError>
               ) : null}
-            </InnerContainer>
+            </ContainerInner>
             <TitleForm>
               카테고리
               <IconQuestion />
             </TitleForm>
-            <InnerContainer>
+            <ContainerInner>
               <Select
                 value={selectCategory}
                 {...register('firstCategory', {
@@ -364,7 +364,7 @@ const RegisterProduct: NextPage = () => {
                     ))
                   : null}
               </Select>
-            </InnerContainer>
+            </ContainerInner>
             <TitleForm>
               상품 이미지
               <IconQuestion />
@@ -374,7 +374,7 @@ const RegisterProduct: NextPage = () => {
                 보여지는 이미지로 등록욉니다.
               </Tooltips>
             </TitleForm>
-            <InnerContainer>
+            <ContainerInner>
               <ListImg>
                 {previewThumbnail.map((thumnail, idx) => {
                   return (
@@ -404,7 +404,7 @@ const RegisterProduct: NextPage = () => {
                   <TextUploadImg>(최대 5장까지)</TextUploadImg>
                 </LabelUploadThumbnail>
               )}
-            </InnerContainer>
+            </ContainerInner>
             <TitleForm>상품 상세 설명</TitleForm>
             <Editor
               id="tinyEditor"
@@ -435,7 +435,7 @@ const RegisterProduct: NextPage = () => {
               <IconQuestion />
               <Tooltips>베송비 적용 여부를 선택하세요.</Tooltips>
             </TitleForm>
-            <InnerContainer>
+            <ContainerInner>
               <LabelRadio htmlFor="free">
                 <InputRadio
                   id="free"
@@ -461,7 +461,7 @@ const RegisterProduct: NextPage = () => {
                 <br />- 총 상품 주문 금액이 50,000원을 넘어서는 경우 무료 배송이
                 적용됩니다.
               </TextDescription>
-            </InnerContainer>
+            </ContainerInner>
             <TitleForm>
               검색 엔진 최적화
               <IconQuestion />
@@ -538,7 +538,7 @@ const TitleForm = styled.em`
   font-weight: 600;
 `;
 
-const InnerContainer = styled.div`
+const ContainerInner = styled.div`
   display: flex;
   flex-wrap: wrap;
 
