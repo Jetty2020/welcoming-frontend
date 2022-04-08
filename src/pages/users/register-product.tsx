@@ -130,10 +130,6 @@ const RegisterProduct: NextPage = () => {
       metaDescRef.current.style.height = 'auto';
       const height = metaDescRef.current.scrollHeight;
       metaDescRef.current.style.height = `${height}px`;
-      // if (height <= 78) {
-      // } else {
-      //   metaDescRef.current.style.height = '78px';
-      // }
     }
   };
 
@@ -432,7 +428,9 @@ const RegisterProduct: NextPage = () => {
                 </LabelUploadThumbnail>
               )}
               {imgLimitErr ? (
-                <TextError>최대 이미지 크기는 10MB입니다.</TextError>
+                <TextError>
+                  10MB이하의 이미지 파일만 등록할 수 있습니다.
+                </TextError>
               ) : null}
             </ContainerInner>
             <TitleForm>상품 상세 설명</TitleForm>
@@ -542,7 +540,6 @@ const RegisterProduct: NextPage = () => {
                   onChange={handleImgInput}
                 />
               </LabelUploadImg>
-              {/* 이미지 크기 정해지면 수정하기 */}
               <p>
                 10MB이하의 이미지 파일만 등록할 수 있습니다.
                 <br />
